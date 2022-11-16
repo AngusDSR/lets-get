@@ -1,11 +1,18 @@
 // Specific CSS for your home-page
 body {
-  background-color: #499DC5;
+  background-color: rgb(224, 220, 220);
   color: #303134;
 }
 
 .container-nav {
   margin-inline: 0;
+}
+
+.icon-nav {
+  font-size: 2.2rem;
+  &:hover {
+    color: red !important;
+  }
 }
 
 .btn-account {
