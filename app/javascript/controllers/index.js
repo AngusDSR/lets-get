@@ -4,5 +4,8 @@
 
 import { application } from "./application"
 
+import EnterLocationsController from "./enter_locations_controller"
+application.register("enter-locations", EnterLocationsController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
