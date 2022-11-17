@@ -4,15 +4,13 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["location1"]
   connect() {
-    console.log("IT's alive")
-    console.log(this.location1Target)
-    // console.log(this.itemsTarget)
-    // console.log(this.formTarget)
+    // console.log("IT's alive")
   }
 
   getUserLoc(e) {
-    console.log(e);
-    console.log("clicked");
-    // this.location1Target
+    navigator.geolocation.getCurrentPosition((data) => {
+      console.log(data.coords.latitude)
+      console.log(data.coords.longitude)
+    })
   }
 }
