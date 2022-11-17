@@ -1,8 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
+// Connects to data-controller="enter-locations"
 export default class extends Controller {
   connect() {
-    console.log("dfgdfg");
-    this.element.textContent = "Hello World!"
   }
 }
