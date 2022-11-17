@@ -1,6 +1,7 @@
 require_relative "boot"
-
 require "rails/all"
+
+GM_API = ENV['GOOGLE_MAPS_API']
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

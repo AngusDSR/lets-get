@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LetsGet</title>
+    <title>Let's Get</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%# FOR GOOGLE MAPS %>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
+  <body>
+    <%= render "shared/navbar" %>
+    <%= render "shared/flashes" %>
 
     <%= yield %>
-     <script
-      src=`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API}&callback=initMap&v=weekly`
-      //Above does not work, need to review .env reference
-      defer
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API'] %>&callback=initMap" type="text/javascript"
+      <%# Above does not work, need to review .env reference %>
+    defer
     ></script>
   </body>
 </html>
