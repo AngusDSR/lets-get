@@ -20,7 +20,8 @@
     <%= yield %>
 
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API'] %>&callback=initMap" type="text/javascript"
+      src= <%= ENV['INITIAL_MAP'] %>
+      <%# src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API'] %>&callback=initMap" type="text/javascript" %>
       <%# Above does not work, need to review .env reference %>
     defer
     ></script>
