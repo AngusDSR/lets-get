@@ -1,8 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400&display=swap');
+// fonts up here
+
+.app-title {
+  font-family: Alexandria;
+  font-weight: 400;
+  font-size: 3.2rem;
+  color: #000;
+}
+
 .navbar-lewagon {
   padding-left: 0;
   padding-right: 0.5rem;
   justify-content: flex-end;
-  background: white;
+  background: #fff;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -13,18 +23,22 @@
   margin-inline: 0;
 }
 
-.icon-nav {
+// change this
+.icon-nav:hover {
+  color: red !important;
+}
+.icon-login {
   font-size: 2.2rem;
-  &:hover {
-    color: red !important;
-  }
+}
+.icon-arrow {
+  font-size: 2.4rem;
+  max-width: 1rem;
 }
 
 .btn-account {
   padding: 0;
   border: 0;
 }
-
 
 .item-logout {
   text-align: center;

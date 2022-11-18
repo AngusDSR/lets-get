@@ -1,6 +1,23 @@
 <div class="d-flex flex-column">
-
   <%= render "shared/location_buttons" %>
-  <div class="bg-primary flex-grow-1">middle</div>
+
+  <div class="container bg-light flex-grow-1">
+    <h5>Delete after: just a sample</h5>
+    <p><%= Business.last.name %></p>
+    <p><%= Business.last.street_address %></p>
+    <p><%= Business.last.latitude %>, <%= Business.last.longitude %></p>
+  </div>
+
+  <%# should this be moved somewhere else? %>
+  <%# init map (defined in application.js but not recognised here) %>
+  <% provide :head_tags do %>
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        initMap(<%= Business.last.latitude %>, <%= Business.last.longitude %>)
+    });
+    </script>
+<% end %>
+
+
   <%= render "shared/map_initial" %>
 </div>
