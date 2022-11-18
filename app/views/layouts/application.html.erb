@@ -8,6 +8,7 @@
 
     <%# FOR GOOGLE MAPS %>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <%# <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API']}" %> %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
@@ -18,12 +19,7 @@
     <%= render "shared/flashes" %>
 
     <%= yield %>
+    <%= yield(:head_tags) %>
 
-    <script
-      src= <%= ENV['INITIAL_MAP'] %>
-      <%# src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API'] %>&callback=initMap" type="text/javascript" %>
-      <%# Above does not work, need to review .env reference %>
-    defer
-    ></script>
   </body>
 </html>
