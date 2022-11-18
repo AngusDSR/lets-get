@@ -5,10 +5,21 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-  puts "Destroying records"
-  Businesses.destroy_all
+puts "Destroying records"
+Businesses.destroy_all
 
-  User.create(
-    email: "email@email.com",
-    password: "password" )
-    puts "Dummy user created"
+User.create(
+  email: "email@email.com",
+  password: "password"
+)
+
+puts "Dummy user created"
+
+Business.create(
+  name:"Assembly House",
+  description: "Greene King company`s lovely pub",
+  category: "Pub",
+  street_address: "292-294 Kentish Town Road",
+  image_url: "Assemblyhouse.jpg"
+)
+puts "Assembly house created"
