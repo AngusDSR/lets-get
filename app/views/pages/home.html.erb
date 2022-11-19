@@ -8,6 +8,8 @@
     <p><%= Business.last.latitude %>, <%= Business.last.longitude %></p>
   </div>
 
+  <%=  route = Google::Maps.route("Science Park, Amsterdam", "Deventer") %>
+
   <%# should this be moved somewhere else? %>
   <%# init map (defined in application.js but not recognised here) %>
   <% provide :head_tags do %>

@@ -1,7 +1,6 @@
 require_relative "boot"
 require "rails/all"
-
-GM_API = ENV['GOOGLE_MAPS_API']
+require "google-maps"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -18,7 +17,12 @@ module LetsGet
     config.load_defaults 7.0
 
     # Configuration for the application, engines, and railties goes here.
-    #
+    Google::Maps.configure do |config|
+      config.authentication_mode = Google::Maps::Configuration::API_KEY
+      config.api_key = GM_API = ENV.fetch('GOOGLE_MAPS_API')
+      # config.default_language = :en
+    end
+
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
