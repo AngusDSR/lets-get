@@ -9,10 +9,10 @@ export default class extends Controller {
     function initMap() {
 
       // The location of Charing Cross: change this later once we have location from user
-      const area = { lat: 51.507221, lng: -0.127600 };
+      // const area = { lat: 51.507221, lng: -0.127600 };
 
       // incommenting this map the maps work
-
+      console.log("controller")
       // The map, centered at Charing Cross
       // let map = new google.maps.Map(document.getElementById("map"), {
       //   zoom: 12,
@@ -339,7 +339,7 @@ export default class extends Controller {
       //   ]
       // });
 
-      // NO MARKERS YET
+      // // NO MARKERS YET
       // const marker = new google.maps.Marker({
       //   position: area,
       //   map: map,
