@@ -9,3 +9,34 @@ application.register("enter-locations", EnterLocationsController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+// const input = document.querySelector('#search');
+// const results = document.querySelector('#results');
+
+// const drawResponseList = (data) => {
+//   results.innerHTML = '';
+//   data.words.forEach((word) => {
+//     results.insertAdjacentHTML('beforeend', `<li>${word}</li>`);
+//   });
+// };
+
+// const autocomplete = (e) => {
+//     fetch['https://api.mapbox.com/geocoding/v5/mapbox.places/2%20Lincoln%20Memorial%20Cir%20NW.json?access_token=pk.eyJ1IjoiY29uYW5sZG0iLCJhIjoiY2xhM3FzYzVqMHJ3NzNwbXpxODQ5a3IxZiJ9.sH-dNRJkYjqTzyRCHYfFQg/${e.target.value}']
+//     .then(response => response.json())
+//     .then(data => drawResponseList(data));
+// };
+
+// input.addEventListener('keyup', autocomplete);
+
+
+
+// map.addControl(
+//   new MapboxGeocoder({
+//     accessToken: mapboxgl.accessToken,
+//     mapboxgl,
+//   }).on('result', (selected) => {
+//     console.log('Selected geo: ', selected)
+//   })
+// )
+
+// ENV.fetch(`ENV['MAPBOX_API_KEY']/${e.target.value}`)

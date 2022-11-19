@@ -5,6 +5,8 @@ export default class extends Controller {
   static targets = ["location1"]
   connect() {
 
+    console.log("places")
+
     // Initialize and add the map
     function initMap() {
 
