@@ -2,13 +2,14 @@
 <html>
   <head>
     <title>Let's Get</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%# FOR GOOGLE MAPS %>
-    <% <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> %>
-    <% <% <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API']}" %> %> %>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <%# <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API']}" %>
+
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
