@@ -1,15 +1,36 @@
 <div class="d-flex flex-column">
   <%= render "shared/form" %>
 
-  <%# Hardcoded for testing`` %>
-  <% user_location = "123 Kingsland Road" %>
-  <% friend_location = "Bond Street Station" %>
-  <% route_steps = Google::Maps.route(user_location, friend_location).steps %>
-  <%= route_steps.size %> steps:
-  <% route_steps.each do |step| %>
-    <p style="font-size: small;"><%= step["html_instructions"] %>: </p>
-    <p style="font-size: small;"><%= step["end_location"]["lat"] %>, <%= step["end_location"]["lng"] %></p>
-  <% end %>
+
+<%# THIS MUST BE MOVED TO A JOB/PAGES CONTROLLER %>
+<% require "uri" %>
+<% require "net/http" %>
+<% category = ["park","cafe","bar", "restaurant"].sample %>
+<% radius = "250" %>
+<% coords = [-33.8670522, 151.1957362].join("%2C") %>
+<% url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{coords}&radius=#{radius}&type=#{category}&key=#{ENV['GOOGLE_MAPS_API']}") %>
+
+<% https = Net::HTTP.new(url.host, url.port) %>
+<% https.use_ssl = true %>
+
+<% request = Net::HTTP::Get.new(url) %>
+
+<% response = https.request(request) %>
+<%  response.read_body %>
+<% places = JSON.parse(response.read_body) %>
+<% places["results"].each do |place| %>
+  <p><%= place["name"] %></p>
+<% end %>
+
+
+<%# NOTE parsing etc in home page controler %>
+
+
+
+
+
+
+
 
   <%# should this be moved somewhere else? %>
   <%# init map (defined in application.js but not recognised here) %>

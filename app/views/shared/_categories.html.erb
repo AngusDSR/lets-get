@@ -1,0 +1,7 @@
+<%# this should be a global variable that can be changed in user settings %>
+<% categories = ["park", "cafe", "bar", "restaurant"]  %>
+<div class="d-flex flex-wrap"></div>
+<% categories.each do |category| %>
+  <%# based on button pressed, save corresponding variable to..somewhere? %>
+  <%= button_to category.capitalize, root_path, class: "btn btn-lg btn-dark bg-black mx-5 mb-3 fs-2 rounded-pill" %>
+<% end %>

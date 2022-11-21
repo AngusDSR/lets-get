@@ -27,7 +27,7 @@ module LetsGet
           transit_routing_preference: 'fewer_transfers' # this can be changed by user
         }
       }
-      # config.default_language = :en
+      config.default_language = :en
     end
 
     # These settings can be overridden in specific environments using the files
