@@ -6,7 +6,7 @@
   border-radius: 4px;
   outline: 0;
   border: 0;
-  color: #5A5A5A;
+  color: #484848;
   text-align: center;
   font-size: large;
 
@@ -21,6 +21,6 @@
   }
   // once text is entered and it's no longer selected
   &:valid:not(:empty) {
-    background-color: red;
+    box-shadow: 1px 2px 1px 1px #0000004e;
   }
 }
