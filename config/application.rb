@@ -20,6 +20,13 @@ module LetsGet
     Google::Maps.configure do |config|
       config.authentication_mode = Google::Maps::Configuration::API_KEY
       config.api_key = GM_API = ENV.fetch('GOOGLE_MAPS_API')
+      config.default_language = :en
+      config.default_params = {
+        directions_service: {
+          mode: 'transit',
+          transit_routing_preference: 'fewer_transfers' # this can be changed by user
+        }
+      }
       # config.default_language = :en
     end
 
