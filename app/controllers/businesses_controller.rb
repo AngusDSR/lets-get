@@ -1,5 +1,6 @@
 class BusinessesController < ApplicationController
   # before_action :set_business, only: %i[show]
+  # Move this down to the show action
   respond_to :html
 
   def index
@@ -13,7 +14,6 @@ class BusinessesController < ApplicationController
 
   def show
     @business = Business.find(params[:id])
-
   end
 
   def create

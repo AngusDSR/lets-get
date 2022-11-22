@@ -1,0 +1,17 @@
+<div class="d-flex flex-column">
+  <%= render "form" %>
+
+
+    <%# set this as a job / action in the controller only one location is validated %>
+  <% provide :head_tags do %>
+    <script>
+    // document.addEventListener("DOMContentLoaded", function(){
+    //     initMap(<%= Business.last.latitude %>, <%= Business.last.longitude %>)
+    // });
+    </script>
+<% end %>
+
+  [map hidden for now]
+
+  <%# <%= render "map_initial" %>
+</div>
