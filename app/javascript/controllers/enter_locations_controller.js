@@ -2,10 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="enter-locations"
 export default class extends Controller {
-  static targets = ["location1"]
+  static targets = ["userlocation"]
+  // static values = { railsenv: String }
+
   connect() {
 
-    console.log("places")
+    console.log("enter-locations controller connected")
 
     // Initialize and add the map
     function initMap() {
@@ -364,6 +366,34 @@ export default class extends Controller {
       }
       console.log(area);
     })
+
+
+
+
+  }
+
+  suggestions(e){
+    // for now, run on space
+    if (e.data == " ") {
+      this.userlocationTarget.insertAdjacentHTML('afterend', '<p>API call</p>');
+
+
+      let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&proximity=ip&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2w4YWx4NzQ2MGk0bDN2bzVwaHhxd29oYyJ9.Z4bjeDcKK0NuYgsDI8izcQ`
+
+      fetch(mapbox_call, {
+        method: "GET",
+        headers: { "Accept": "application/json" }
+      })
+        .then(response => response.json())
+        .then((data) => {
+          this.userlocationTarget.insertAdjacentHTML('afterend', '<p>API call</p>')
+          // console.log(data)
+          for (let results of data.features) {
+            console.log(results.place_name)
+          }
+        })
+
+    }
 
 
 
