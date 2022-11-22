@@ -2,8 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="enter-locations"
 export default class extends Controller {
-  static targets = ["userlocation"]
-  // static values = { railsenv: String }
+  static targets = ["userlocation", "locateicon", "cleartext"]
 
   connect() {
 
@@ -13,7 +12,7 @@ export default class extends Controller {
     function initMap() {
 
       // The location of Charing Cross: change this later once we have location from user
-      const area = { lat: 51.507221, lng: -0.127600 };
+      const area = { lat: 51.507221, long: -0.127600 };
 
       // incommenting this map the maps work
       console.log("controller")
@@ -355,48 +354,47 @@ export default class extends Controller {
 
   }
 
+  clearInput() {
+    console.log("clear field")
+    this.userlocationTarget.value = null
+  }
+
   getUserLoc(e) {
-
-    console.log("clicked")
-
     navigator.geolocation.getCurrentPosition((data) => {
       const area = {
         lat: data.coords.latitude,
-        lng: data.coords.longitude
+        long: data.coords.longitude
       }
-      console.log(area);
+      this.userlocationTarget.value = `${area.lat}, ${area.long}`
+      // INJECT THIS INTO THE HIDDEN FORM
     })
-
-
-
-
   }
 
   suggestions(e){
-    // for now, run on space
-    if (e.data == " ") {
-      this.userlocationTarget.insertAdjacentHTML('afterend', '<p>API call</p>');
-
-
-      let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&proximity=ip&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2w4YWx4NzQ2MGk0bDN2bzVwaHhxd29oYyJ9.Z4bjeDcKK0NuYgsDI8izcQ`
-
-      fetch(mapbox_call, {
-        method: "GET",
-        headers: { "Accept": "application/json" }
-      })
-        .then(response => response.json())
-        .then((data) => {
-          this.userlocationTarget.insertAdjacentHTML('afterend', '<p>API call</p>')
-          // console.log(data)
-          for (let results of data.features) {
-            console.log(results.place_name)
-          }
-        })
-
+    const suggestionsContainer = document.querySelector(".results-container");
+    while (suggestionsContainer.firstChild) {
+      suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
 
 
-
-
+    // this needs to be TUBOED
+    // USE DIFFERENT METHOD
+    const suggestions = document.createElement("DIV");
+    suggestions.classList.add("results-container");
+    let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&proximity=ip&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2w4YWx4NzQ2MGk0bDN2bzVwaHhxd29oYyJ9.Z4bjeDcKK0NuYgsDI8izcQ`
+    fetch(mapbox_call, {
+      method: "GET",
+      headers: { "Accept": "application/json" }
+    })
+    .then(response => response.json())
+    .then((data) => {
+      this.userlocationTarget.after(suggestions)
+      for (let results of data.features) {
+      let suggested_address = document.createElement("P");
+        suggested_address.classList.add("suggested-address")
+        suggested_address.innerText = results.place_name.replace(', United Kingdom','');
+        suggestions.append(suggested_address)
+      }
+    });
   }
 }

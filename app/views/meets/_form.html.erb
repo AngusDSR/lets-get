@@ -16,19 +16,15 @@
     <% end %>
 
     <div class="align-items-center">
+      <%= render "locate_icon" %>
       <input required type="text"
         id=userlocation name="userlocation" aria-label="userlocation" placeholder="Where are you?"
         class="input-location" required
         data-enter-locations-target="userlocation"
-        data-action="click->enter-locations#getUserLoc input->enter-locations#suggestions"
+        data-action="input->enter-locations#suggestions"
       >
-      <%= render "locate_icon" %>
-      <div class="results-container results-user">
-        <% "run-mapbox-api on each space key down " %>
-        <% "for each mapbox api call..." %>
-        <% "each one has a clash of link cursor style and is a target fpr the controller so that when clicked..." %>
-        <%# return a row %>
-        <% "end" %>
+      <%= render "cross_icon" %>
+      <div class="results-container">
       </div>
 
       <input required type="text"
