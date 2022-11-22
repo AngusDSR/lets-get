@@ -1,1 +1,20 @@
-<h2>Hello</h2>
+
+
+
+<div class="container">
+  <div class="row">
+    <h2><strong><%= @business.name %></strong></h2>
+    <div class="#">
+    <h2><%= @business.street_address %></h2>
+    <h2><%= @business.category %></h2>
+    </div>
+
+    <%= link_to business_path(business) do %>
+        <div class="business-card">
+
+        <% unless business.image_url.nil? %>
+              <%=image_tag business.image_url, alt: business.name, class: "business-images" %>
+            <% end %>
+            <% end %>
+  </div>
+</div>

@@ -16,6 +16,10 @@ class BusinessesController < ApplicationController
 
   end
 
+  def destroy
+
+  end
+
   def create
     # @business = Business.new(business_params)
     # @business.user = current_user
@@ -33,7 +37,7 @@ class BusinessesController < ApplicationController
   private
 
   # def set_business
-  #   @business = Business.find(params[:id])
+  # @business = Business.find(params[:id])
   # end
 
   def business_params
