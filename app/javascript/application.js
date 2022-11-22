@@ -3,6 +3,7 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import "bootstrap"
 
+
 function initMap(lat, lng) {
   // change to let / const?
   var myCoords = new google.maps.LatLng(lat, lng);
