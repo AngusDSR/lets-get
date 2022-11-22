@@ -3,13 +3,13 @@
     <a class="nav-link text-center text-dark" aria-current="page" href="sign_in">Log in</a>
   </li>
   <li class="nav-item w-50 bg-dark">
-    <a class="nav-link text-center text-light fw-bold" href="">Sign up</a>
+    <a class="nav-link text-center text-light fw-bold" href="">Register</a>
   </li>
 </ul>
 
 <div class="container">
   <hr>
-  <h4 class="text-center text-dark">Enter your details</h4>
+  <h4 class="text-center text-dark"><strong>Enter your details</strong></h4>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
     <%= f.error_notification %>
 
@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Sign up", class: "w-100 mt-3 bg-dark text-light" %>
+      <%= f.button :submit, "Sign up", class: "w-500 mt-3 bg-dark text-light" %>
     </div>
   <% end %>
 
