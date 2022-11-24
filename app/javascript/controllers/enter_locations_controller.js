@@ -1,9 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
-
 // Connects to data-controller="enter-locations"
 export default class extends Controller {
-  static targets = ["userlocation", "locateicon", "cleartext"]
-
+  static targets = ["userlocation", "locateicon", "cleartext", "suggestionscontainer", "suggestedaddress"]
   connect() {
 
     console.log("enter-locations controller connected")
@@ -371,17 +369,26 @@ export default class extends Controller {
   }
 
   suggestions(e){
+    // needs to be more stimulus - later
     const suggestionsContainer = document.querySelector(".results-container");
     while (suggestionsContainer.firstChild) {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
+
+  //   clearSuggestions() {
+  //   console.log('clearing')
+  //   constsuggestionsContainer = this.suggestionscontainerTarget;
+  //   while (suggestionsContainer.firstChild) {
+  //     suggestionsContainer.removeChild(suggestionsContainer.firstChild);
+  //   }
+  // }
 
 
     // this needs to be TUBOED
     // USE DIFFERENT METHOD
     const suggestions = document.createElement("DIV");
     suggestions.classList.add("results-container");
-    let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&proximity=ip&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2w4YWx4NzQ2MGk0bDN2bzVwaHhxd29oYyJ9.Z4bjeDcKK0NuYgsDI8izcQ`
+    let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&proximity=ip&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=${MAPBOX_API}`
     fetch(mapbox_call, {
       method: "GET",
       headers: { "Accept": "application/json" }
@@ -393,8 +400,22 @@ export default class extends Controller {
       let suggested_address = document.createElement("P");
         suggested_address.classList.add("suggested-address")
         suggested_address.innerText = results.place_name.replace(', United Kingdom','');
+        suggested_address.setAttribute("data-enter-locations-target", "suggestedaddress");
+        suggested_address.setAttribute("data-action", "click->enter-locations#selectAddress");
         suggestions.append(suggested_address)
       }
     });
+  }
+
+  selectAddress(e) {
+    console.log(3);
+    this.userlocationTarget.value = this.suggestedaddressTarget.innerText
+    // needs to be more stimulus - later
+    const suggestionsContainer = document.querySelector(".results-container");
+    while (suggestionsContainer.firstChild) {
+      suggestionsContainer.removeChild(suggestionsContainer.firstChild);
+    }
+    // now we geocode the address to coords:
+
   }
 }
