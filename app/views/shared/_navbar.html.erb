@@ -1,6 +1,11 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon p-0">
   <div class="container-fluid container-nav">
-    <span><%= link_to icon('fa-solid', 'arrow-left', class:"icon-nav icon-arrow text-black"), root_path %></span>
+    <% if controller_name == 'businesses' && action_name == 'show' %>
+      <span><%= link_to icon('fa-solid', 'arrow-left', class:"icon-nav icon-arrow text-black"), url_for(:back) %></span>
+    <% else %>
+      <span><%= link_to icon('fa-solid', 'arrow-left', class:"icon-nav icon-arrow text-black"), root_path %></span>
+    <% end %>
+
     <h1 class="app-title">Let's Get</h1>
     <div class="" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto border-danger">
@@ -9,7 +14,7 @@
           <li class="nav-item dropdown">
             <%= link_to icon('fa-solid', 'circle-user', class:"icon-nav icon-login text-black"), '#', id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "py-1 item-logout dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "py-0 item-logout dropdown-item" %>
             </div>
           </li>
         <% else %>
