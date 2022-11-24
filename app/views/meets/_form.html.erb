@@ -1,21 +1,23 @@
 <div data-controller="enter-locations">
   <div class="container d-flex flex-column">
-      <div class="align-items-center">
         <%# <%= render "locate_icon" %> %>
+      <div class="align-items-center">
         <input required type="text"
           id=userlocation name="userlocation" aria-label="userlocation" placeholder="Where are you?"
           class="input-location" required
           data-enter-locations-target="userlocation"
-          data-action="input->enter-locations#suggestions"
+          data-action="input->enter-locations#userSuggestions"
         >
         <%= render "cross_icon" %>
-        <div class="results-container" data-enter-locations-target="suggestionscontainer">
-        </div>
+        <div class="results-container" data-enter-locations-target="suggestionscontainer"></div>
 
         <input required type="text"
-          id=search name="location" placeholder="Where's your friend?"
-          class="input-location" required name="street-address"
+          id=friendlocation name="friendlocation" placeholder="Where's your friend?"
+          class="input-location" required
+          data-enter-locations-target="friendlocation"
+          data-action="input->enter-locations#friendSuggestions"
         >
+        <div class="results-container" data-enter-locations-target="friendsuggestionscontainer"></div>
       </div>
 
     [hidden simple form here]
@@ -23,8 +25,8 @@
       <%= f.input :name, input_html: { "data-enter-locations-target" => "meetname" }  %>
       <%= f.input :start_point_lat, input_html: { "data-enter-locations-target" => "startlat" } %>
       <%= f.input :start_point_long, input_html: { "data-enter-locations-target" => "startlong" } %>
-      <%= f.input :friend_lat %>
-      <%= f.input :friend_long %>
+      <%= f.input :friend_lat, input_html: { "data-enter-locations-target" => "friendlat" } %>
+      <%= f.input :friend_long, input_html: { "data-enter-locations-target" => "friendlong" } %>
       <%= f.input :midpoint_lat %>
       <%= f.input :midpoint_long %>
       <%= f.input :directions %>
