@@ -36,7 +36,7 @@ puts "Royal George created"
 Business.create(
   name:"Fitzrovia",
   description: "Greene King company`s pub perfect for sport",
-  category: "Pub",
+  category: "Coffee",
   street_address: "18 Goodge Street, Bloomsbury, Greater London",
   image_url: "TheFitzrovia.jpg"
 )
@@ -44,7 +44,7 @@ puts "Fitzrovia created"
 Business.create(
   name:"TRAVELLERS TAVERN",
   description: "Greene King company`s waterside pub",
-  category: "Pub",
+  category: "Restaurant",
   street_address: "4 Elizabeth Street, Belgravia, London",
   image_url: "travellerstavern.jpg"
 )
