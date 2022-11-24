@@ -1,40 +1,36 @@
 <div data-controller="enter-locations">
   <div class="container d-flex flex-column">
+      <div class="align-items-center">
+        <%# <%= render "locate_icon" %> %>
+        <input required type="text"
+          id=userlocation name="userlocation" aria-label="userlocation" placeholder="Where are you?"
+          class="input-location" required
+          data-enter-locations-target="userlocation"
+          data-action="input->enter-locations#suggestions"
+        >
+        <%= render "cross_icon" %>
+        <div class="results-container" data-enter-locations-target="suggestionscontainer">
+        </div>
+
+        <input required type="text"
+          id=search name="location" placeholder="Where's your friend?"
+          class="input-location" required name="street-address"
+        >
+      </div>
+
     [hidden simple form here]
-    <%= simple_form_for @meet, html: { class: "d-none"} do |f| %>
-      <%= f.input :name %>
-      <%= f.input :start_point_long %>
-      <%= f.input :start_point_lat %>
-      <%= f.input :friend_long %>
+    <%= simple_form_for @meet, html: { class: ""} do |f| %>
+      <%= f.input :name, input_html: { "data-enter-locations-target" => "meetname" }  %>
+      <%= f.input :start_point_lat, input_html: { "data-enter-locations-target" => "startlat" } %>
+      <%= f.input :start_point_long, input_html: { "data-enter-locations-target" => "startlong" } %>
       <%= f.input :friend_lat %>
-      <%= f.input :midpoint_long %>
+      <%= f.input :friend_long %>
       <%= f.input :midpoint_lat %>
+      <%= f.input :midpoint_long %>
       <%= f.input :directions %>
       <%= f.input :radius %>
       <%= f.input :active %>
       <%# NO SUBMIT, BUTTON, USE STIMULUS FOR THIS %>
     <% end %>
-
-    <div class="align-items-center">
-      <input required type="text"
-        id=userlocation name="userlocation" aria-label="userlocation" placeholder="Where are you?"
-        class="input-location" required
-        data-enter-locations-target="userlocation"
-        data-action="click->enter-locations#getUserLoc input->enter-locations#suggestions"
-      >
-      <%= render "locate_icon" %>
-      <div class="results-container results-user">
-        <% "run-mapbox-api on each space key down " %>
-        <% "for each mapbox api call..." %>
-        <% "each one has a clash of link cursor style and is a target fpr the controller so that when clicked..." %>
-        <%# return a row %>
-        <% "end" %>
-      </div>
-
-      <input required type="text"
-        id=search name="location" placeholder="Where's your friend?"
-        class="input-location" required name="street-address"
-      >
-    </div>
   </div>
 </div>
