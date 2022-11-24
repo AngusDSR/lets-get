@@ -17,7 +17,9 @@ class MeetsController < ApplicationController
     @meets = Meet.all
   end
 
-  def show; end
+  def show
+    render html: @htmldoc.html_safe
+  end
 
   def new
     @meet = Meet.new
