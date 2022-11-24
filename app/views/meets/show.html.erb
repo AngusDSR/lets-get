@@ -1,0 +1,14 @@
+<div class="container>
+  <div class="d-flex flex-column align-items-center mt-3">
+  <h1>Welcome to the map</h1>
+    @meet.name
+  <h2>Hey @user.name, let's find a place to hang out</h2>
+  </div>
+
+
+  <div id="map-container" class="z-depth-1-half map-container" style="height: 500px">
+    <iframe src="TemplateMap.jpg" frameborder="0"
+      style="border:1" allowfullscreen></iframe>
+  </div>
+</div>
+<%= link_to 'Back', meets_path %>
