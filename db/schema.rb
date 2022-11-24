@@ -28,12 +28,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_193421) do
 
   create_table "meets", force: :cascade do |t|
     t.string "name"
-    t.float "start_point_long"
     t.float "start_point_lat"
-    t.float "friend_long"
+    t.float "start_point_long"
     t.float "friend_lat"
-    t.float "midpoint_long"
+    t.float "friend_long"
     t.float "midpoint_lat"
+    t.float "midpoint_long"
     t.text "directions"
     t.integer "radius"
     t.boolean "active"
