@@ -5,7 +5,25 @@
 // }
 
 
+.business-card {
+  overflow: hidden;
+  height: 70px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  margin: 10px;
+
+}
+
+
 .business-images {
-  width: 70px;
-  border-radius: 20%;
+  height: 100%;
+  width: px;
+  object-fit: cover;
+}
+
+.business-card-title {
+  font-size: medium;
+  color: black;
 }
