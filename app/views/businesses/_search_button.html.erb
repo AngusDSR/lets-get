@@ -1,16 +1,3 @@
-<%= form_with url: businesses_path, method: :get, class: "d-flex" do %>
-  <%# <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Find a businesses"
-  %> %>
-  <%= select_tag "query"  %>
-  <%= select_tag "query", options_for_select(["Coffee"]) %>
-  <%= select_tag "query", options_for_select(["Restaurant"]) %>
-
-  <%= submit_tag "Search", class: "btn btn-secondary" %>
-
-  <%# <td><%= button_to '+', {:controller => "votes", :action => "create", :car_id => car.id, :user_id=> session[:user_id]} , :method=>:post  %></td> %>
-
-
-<% end %>
+<%= button_to "Pub", businesses_path, method: :get, params: { query: "Pub" } %>
+<%= button_to "Coffee", businesses_path, method: :get, params: { query: "Coffee" } %>
+<%= button_to "Restaurant", businesses_path, method: :get, params: { query: "Restaurant" } %>

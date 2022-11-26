@@ -6,7 +6,7 @@ class BusinessesController < ApplicationController
   def index
     if params[:query].present?
       # sql_query = "name ILIKE :query OR description ILIKE :query OR address ILIKE :query"
-      @businesses = Business.where(category:params[:query])
+      @businesses = Business.where(category: params[:query])
     else
       @businesses = Business.all
     end
@@ -21,13 +21,13 @@ class BusinessesController < ApplicationController
   end
 
   def create
-    # @business = Business.new(business_params)
-    # @business.user = current_user
-    # if @business.save
-    #   redirect_to businesses_path
-    # else
-    #   render :new, status: :unprocessable_entity
-    # end
+    @business = Business.new(business_params)
+    @business.user = current_user
+    if @business.save
+      redirect_to businesses_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def new
