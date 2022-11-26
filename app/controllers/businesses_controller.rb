@@ -8,7 +8,7 @@ class BusinessesController < ApplicationController
       # sql_query = "name ILIKE :query OR description ILIKE :query OR address ILIKE :query"
       @businesses = Business.where(category: params[:query])
     else
-      @businesses = Business.all
+      @businesses = Business.none
     end
   end
 

@@ -1,7 +1,23 @@
 .results-container {
-  border: dotted brown 2px;
+  // border: dotted brown 2px;
+  color: rgb(0, 0, 0);
+  transform: translate(15%, 15%);
+  transition: transform 1s;
+  transform: scale(1);
+  font-weight: bold;
 }
 
 .suggested-address {
   background-color: white;
+  font-weight: bold;
+  transform: translate(15%, 15%);
+  transition: transform 1s;
+  transform: scale(1);
 }
+
+// .fa-sharp fa-solid fa-rectangle-xmark{
+//   width: 24px !important;
+//   height: 24px !important;
+// }
+
+// .btn-large? Or above for the cross icon? {

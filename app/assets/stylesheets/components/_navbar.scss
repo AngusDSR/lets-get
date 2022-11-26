@@ -25,7 +25,7 @@
 
 // change this
 .icon-nav:hover {
-  color: red !important;
+  color: rgb(0, 0, 0) !important;
 }
 .icon-login {
   font-size: 2.2rem;
@@ -44,6 +44,7 @@
   align-items: right;
   text-align: center;
   font-size: 15px;
+  font-weight: 800;
 }
 
 .dropdown-menu {
@@ -69,5 +70,6 @@ div.dropdown-menu{
   left:auto;
   right:auto;
 }
+
 
 // add media queries for larger screens here

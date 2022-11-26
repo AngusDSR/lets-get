@@ -1,16 +1,19 @@
 <div data-controller="enter-locations">
   <div class="container d-flex flex-column">
-        <%# <%= render "locate_icon" %> %>
-      <div class="align-items-center">
-        <%= render "locate_icon" %>
+  <%# <div class="d-flex flex-row-reverse">
+    <%= render "cross_icon" %>
+    <%# <%= render "locate_icon" %>
+  <%# </div> %>
+      <div class="align-items-center d-flex flex-column">
+         <%= render "locate_icon" %>
         <input required type="text"
           id=userlocation name="userlocation" aria-label="userlocation" placeholder="Where are you?"
           class="input-location" required
           data-enter-locations-target="userlocation"
           data-action="input->enter-locations#userSuggestions"
-        >
+        > 
         <div class="results-container" data-enter-locations-target="suggestionscontainer"></div>
-
+         <%= render "cross_icon" %>
         <input required type="text"
           id=friendlocation name="friendlocation" placeholder="Where's your friend?"
           class="input-location" required
@@ -20,12 +23,13 @@
         <div class="results-container" data-enter-locations-target="friendsuggestionscontainer"></div>
       </div>
 
-    <%= simple_form_for @meet, html: { class: "d-none", "data-enter-locations-target" => "hiddenform"} do |f| %>
+    <%= simple_form_for @meet, html: { class: "d-none"} do |f| %>
       <%= f.input :name, input_html: { "data-enter-locations-target" => "meetname" }  %>
       <%= f.input :start_point_lat, input_html: { "data-enter-locations-target" => "startlat" } %>
       <%= f.input :start_point_long, input_html: { "data-enter-locations-target" => "startlong" } %>
-      <%= f.input :friend_lat, input_html: { "data-enter-locations-target" => "friendlat" } %>
-      <%= f.input :friend_long, input_html: { "data-enter-locations-target" => "friendlong" } %>
+      <%= f.input :friend_lat, input_html: { "data-enter-locations-target" => "friendlat" } %> %>
+      <%= f.input :friend_long, input_html: { "data-enter-locations-target" => "friendlong" } %> %>
+      <%# NO SUBMIT, BUTTON, USE STIMULUS FOR THIS %>
     <% end %>
   </div>
 </div>
