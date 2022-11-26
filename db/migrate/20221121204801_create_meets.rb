@@ -9,8 +9,8 @@ class CreateMeets < ActiveRecord::Migration[7.0]
       t.float :midpoint_lat
       t.float :midpoint_long
       t.text :directions
-      t.integer :radius
-      t.boolean :active
+      t.integer :radius, default: 250
+      t.boolean :active, default: true
       t.references :user, null: false, foreign_key: true
       t.references :businesses, null: false, foreign_key: true
       t.timestamps
