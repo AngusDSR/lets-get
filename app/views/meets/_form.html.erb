@@ -1,5 +1,9 @@
 <div data-controller="enter-locations">
   <div class="container d-flex flex-column">
+  <%# <div class="d-flex flex-row-reverse">
+    <%= render "cross_icon" %>
+    <%# <%= render "locate_icon" %>
+  <%# </div> %> %> %>
       <div class="align-items-center d-flex flex-column">
          <%= render "locate_icon" %>
         <input required type="text"
@@ -18,17 +22,12 @@
         >
       </div>
 
-    <%= simple_form_for @meet, html: { class: ""} do |f| %>
+    <%= simple_form_for @meet, html: { class: "d-none"} do |f| %>
       <%= f.input :name, input_html: { "data-enter-locations-target" => "meetname" }  %>
       <%= f.input :start_point_lat, input_html: { "data-enter-locations-target" => "startlat" } %>
       <%= f.input :start_point_long, input_html: { "data-enter-locations-target" => "startlong" } %>
-      <%= f.input :friend_lat %>
-      <%= f.input :friend_long %>
-      <%= f.input :midpoint_lat %>
-      <%= f.input :midpoint_long %>
-      <%= f.input :directions %>
-      <%= f.input :radius %>
-      <%= f.input :active %>
+      <%= f.input :friend_lat, input_html: { "data-enter-locations-target" => "friendlat" } %>
+      <%= f.input :friend_long, input_html: { "data-enter-locations-target" => "friendlong" } %>
       <%# NO SUBMIT, BUTTON, USE STIMULUS FOR THIS %>
     <% end %>
   </div>
