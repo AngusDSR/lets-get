@@ -16,7 +16,7 @@
     color: rgba(0, 0, 0, 0.7);
     box-shadow: 1px 2px 1px 1px #000000a6;
     transform: translate(15%, 15%);
-    transition: transform 1.25s;
+    transition: transform 1s;
     transform: scale(1.2);
   }
   // once text is entered
@@ -28,7 +28,7 @@
   &:valid:not(:empty) {
     box-shadow: 1px 2px 1px 1px #0000004e;
     transform: translate(15%, 15%);
-    transition: transform 1.25s;
+    transition: transform 1s;
     transform: scale(1.2);
   }
 }
