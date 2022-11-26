@@ -1,3 +1,13 @@
-<%= button_to "Pub", businesses_path, method: :get, params: { query: "Pub" } %>
-<%= button_to "Coffee", businesses_path, method: :get, params: { query: "Coffee" } %>
-<%= button_to "Restaurant", businesses_path, method: :get, params: { query: "Restaurant" } %>
+
+
+  <div class="d-flex justify-content-center flex-column mb-3 rounded">
+    <div class="p-2 ">
+      <%= button_to "Pub", businesses_path, method: :get, params: { query: "Pub" }, class:"btn btn-primary bg-dark category-button" %>
+    </div>
+    <div class="p-2">
+      <%= button_to "Coffee", businesses_path, method: :get, params: { query: "Coffee" }, class:"btn btn-primary bg-dark category-button" %>
+    </div>
+    <div class="p-2">
+      <%= button_to "Restaurant", businesses_path, method: :get, params: { query: "Restaurant" }, class:"btn btn-primary bg-dark category-button" %>
+    </div>
+  </div>
