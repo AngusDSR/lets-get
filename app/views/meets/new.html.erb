@@ -5,13 +5,11 @@
     <%# set this as a job / action in the controller only one location is validated %>
   <% provide :head_tags do %>
     <script>
-    // document.addEventListener("DOMContentLoaded", function(){
-    //     initMap(<%= Business.last.latitude %>, <%= Business.last.longitude %>)
-    // });
+    document.addEventListener("DOMContentLoaded", function(){
+    initMap(<%= Business.last.latitude %>, <%= Business.last.longitude %>)
+    });
     </script>
 <% end %>
 
-  [map hidden for now]
-
-  <%# <%= render "map_initial" %>
+  <%= render "map_initial" %>
 </div>
