@@ -2,13 +2,15 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="enter-locations"
 export default class extends Controller {
   static targets = [
-    "meetname", "startlat", "startlong",
-    "userlocation", "locateicon", "cleartext", "suggestionscontainer", "suggestedaddress"
+    // hidden form inputs
+    "meetname", "startlat", "startlong", "friendlat", "friendlong",
+    // visible inputs
+    "userlocation", "friendlocation", "locateicon", "cleartext", "suggestionscontainer", "friendsuggestionscontainer", "suggestedaddress", "friendsuggestedaddress"
   ]
 
   connect() {
 
-    console.log("enter-locations controller connected")
+    // console.log("enter-locations controller connected")
 
     // Initialize and add the map
     function initMap() {
@@ -16,8 +18,6 @@ export default class extends Controller {
       // The location of Charing Cross: change this later once we have location from user
       const area = { lat: 51.507221, long: -0.127600 };
 
-      // incommenting this map the maps work
-      console.log("controller")
       // The map, centered at Charing Cross
       let map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
@@ -345,17 +345,17 @@ export default class extends Controller {
       });
 
       // NO MARKERS YET
-      const marker = new google.maps.Marker({
-        position: area,
-        map: map,
-      });
-
+      // const marker = new google.maps.Marker({
+      //   position: area,
+      //   map: map,
+      // });
     }
 
     window.initMap = initMap;
 
   }
 
+  // should be applicable to both fields with one function
   clearInput() {
     console.log("clear field")
     this.userlocationTarget.value = null
@@ -372,16 +372,12 @@ export default class extends Controller {
     })
   }
 
-  suggestions(e){
+  userSuggestions(e){
     // clear suggestions -> put into a function
-    const suggestionsContainer = document.querySelector(".results-container");
+    const suggestionsContainer = this.suggestionscontainerTarget;
     while (suggestionsContainer.firstChild) {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
-
-    // this needs to be TUBOED
-    const suggestions = document.createElement("DIV");
-    suggestions.classList.add("results-container");
 
     const MAPBOX_API="pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2xhdmg0emczMDV2aTN4c2poN3h4Zmt4biJ9.cO_Bdy27d_tf2rhtLRFPFw"
 
@@ -392,35 +388,85 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then((data) => {
-      this.userlocationTarget.after(suggestions)
+      // suggestionsContainer.after(suggestions)
       for (let results of data.features) {
-      let suggested_address = document.createElement("P");
+        let suggested_address = document.createElement("P");
         suggested_address.classList.add("suggested-address")
         suggested_address.innerText = results.place_name.replace(', United Kingdom','');
         suggested_address.setAttribute("data-enter-locations-target", "suggestedaddress");
         suggested_address.setAttribute("data-coords", results.center);
         suggested_address.setAttribute("data-action", "click->enter-locations#selectUserAddress");
-        suggestions.append(suggested_address);
+        suggestionsContainer.append(suggested_address);
       }
     });
   }
 
   selectUserAddress(e) {
-    this.userlocationTarget.value = this.suggestedaddressTarget.innerText;
     // needs to be more stimulus - later
     const address =  this.suggestedaddressTarget.innerText;
+    this.userlocationTarget.value = address
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
     this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
     this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
 
-
-    // startlat
-    // startlong
-    // namee
     // clear suggestions -> put into a function
     const suggestionsContainer = document.querySelector(".results-container");
     while (suggestionsContainer.firstChild) {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
+
+    // update map here
+    // [ MAP ADDS USER MARKER ]
+
   }
+
+  friendSuggestions(e){
+    // clear suggestions -> put into a function
+    const suggestionsContainer = this.friendsuggestionscontainerTarget;
+    while (suggestionsContainer.firstChild) {
+      suggestionsContainer.removeChild(suggestionsContainer.firstChild);
+    }
+
+    const MAPBOX_API="pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2xhdmg0emczMDV2aTN4c2poN3h4Zmt4biJ9.cO_Bdy27d_tf2rhtLRFPFw"
+
+    let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&proximity=ip&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=${MAPBOX_API}`
+    fetch(mapbox_call, {
+      method: "GET",
+      headers: { "Accept": "application/json" }
+    })
+    .then(response => response.json())
+    .then((data) => {
+      // suggestionsContainer.after(suggestions)
+      for (let results of data.features) {
+        let suggested_address = document.createElement("P");
+        suggested_address.classList.add("suggested-address")
+        suggested_address.innerText = results.place_name.replace(', United Kingdom','');
+        suggested_address.setAttribute("data-enter-locations-target", "friendsuggestedaddress");
+        suggested_address.setAttribute("data-coords", results.center);
+        suggested_address.setAttribute("data-action", "click->enter-locations#selectFriendAddress");
+        suggestionsContainer.append(suggested_address);
+      }
+    });
+  }
+
+  selectFriendAddress(e) {
+    const address =  this.friendsuggestedaddressTarget.innerText;
+    // needs to be more stimulus - later
+    this.friendlocationTarget.value = address
+    this.meetnameTarget.value += ` ▬ ${address.substring(0,address.search(',')).trim()}`;
+    this.friendlatTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[0];
+    this.friendlongTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[1];
+
+    // clear suggestions -> put into a function
+    const suggestionsContainer = this.friendsuggestionscontainerTarget;
+    while (suggestionsContainer.firstChild) {
+      suggestionsContainer.removeChild(suggestionsContainer.firstChild);
+    }
+
+    // update map here
+    // [ MAP ADDS USER MARKER ]
+
+  }
+
+
 }
