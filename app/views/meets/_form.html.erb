@@ -3,7 +3,7 @@
   <%# <div class="d-flex flex-row-reverse">
     <%= render "cross_icon" %>
     <%# <%= render "locate_icon" %>
-  <%# </div> %> %> %>
+  <%# </div> %>
       <div class="align-items-center d-flex flex-column">
          <%= render "locate_icon" %>
         <input required type="text"
@@ -11,9 +11,9 @@
           class="input-location" required
           data-enter-locations-target="userlocation"
           data-action="input->enter-locations#userSuggestions"
-        >
+        > 
         <div class="results-container" data-enter-locations-target="suggestionscontainer"></div>
-
+         <%= render "cross_icon" %>
         <input required type="text"
           id=friendlocation name="friendlocation" placeholder="Where's your friend?"
           class="input-location" required
