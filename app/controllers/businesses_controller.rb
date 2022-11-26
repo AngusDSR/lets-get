@@ -17,14 +17,13 @@ class BusinessesController < ApplicationController
   end
 
   def destroy
-
   end
 
   def create
     @business = Business.new(business_params)
     @business.user = current_user
     if @business.save
-      redirect_to businesses_path
+      redirect_to businesses_path(user)
     else
       render :new, status: :unprocessable_entity
     end
