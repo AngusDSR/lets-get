@@ -38,11 +38,10 @@ class MeetsController < ApplicationController
         @meet.midpoint_lat,
         @meet.midpoint_long
       )
-      raise
       @businesses.each do |bus|
         Business.create(
           name: bus["name"],
-          description: "faker",
+          description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
           category: bus["types"][0],
           street_address: bus["vicinity"],
           image_url: bus["photos"][0]["photo_reference"],
