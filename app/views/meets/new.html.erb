@@ -5,15 +5,12 @@
 
   <% provide :head_tags do %>
     <script>
-    // document.addEventListener("DOMContentLoaded", function(){
-    //     initMap(<%= Business.last.latitude %>, <%= Business.last.longitude %>)
-    // });
+    document.addEventListener("DOMContentLoaded", function(){
+    initMap(<%= Business.last.latitude %>, <%= Business.last.longitude %>)
+    });
     </script>
 <% end %>
 
-<%= @test %>
+ <%# <%= render "map_initial" %>
 
-  [map hidden for now]
-
-  <%# <%= render "map_initial" %>
 </div>
