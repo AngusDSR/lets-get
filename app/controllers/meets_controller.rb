@@ -38,29 +38,22 @@ class MeetsController < ApplicationController
         @meet.midpoint_lat,
         @meet.midpoint_long
       )
-      @businesses.each do |bus|
-        Business.create(
-          name: bus["name"],
-          description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
-          category: bus["types"][0],
-          street_address: bus["vicinity"],
-          image_url: bus["photos"][0]["photo_reference"],
-          latitude: bus["geometry"]["location"]["lat"],
-          longitude: bus["geometry"]["location"]["long"]
-        )
-      end
-      raise
 
+      save_business_results(@businesses)
+
+      # How would this be moved into another action?
+
+      # pre-select the meet on the index
+
+      # on click > add to current meet with update
+
+      redirect_to
 
     # when we save, we seed all the results in the businesses model
     # need to added directiosn later
     # new column for friend directions needed
 
-
-    # 2. search nearby call
-    # 3. add search nearby results to businesses model
     # 4. redirect to businesses index (buttons)
-      # success
     else
       render :new, status: :unprocessable_entity
       # as a pop up rather than simple form info
@@ -82,11 +75,8 @@ class MeetsController < ApplicationController
   end
 
   def find_business_nearby(mid_lat, mid_long)
-    # this should be changeable by the user somewhere
-    radius = 250
-    types = "bakery|bar|book_store|cafe|park|casino|gym|spa|restaurant|museum|night_club|movie_theater|bowling_alley|amusement_park|art_gallery|bakery"
     coords = [mid_lat, mid_long].join("%2C")
-    url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{coords}&radius=#{radius}&type=#{types}&key=#{ENV.fetch('GOOGLE_MAPS_API')}")
+    url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{coords}&radius=#{Meet::RADIUS}&type=#{Business::TYPES.join('|')}&key=#{ENV.fetch('GOOGLE_MAPS_API')}")
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
     request = Net::HTTP::Get.new(url)
@@ -107,29 +97,16 @@ class MeetsController < ApplicationController
   end
 
   def save_business_results(results)
-    #
-    # Business.nen()
-    # run Business.create(relevant key and value parirs) <- name = refernce to json, so on
-    # [business_result = {
-      # CHECK WHAT THESE ARE
-    #   name: 'costa',
-    #    desc: 'ESOSDFM'
-    #   category: 'coffee shop',
-    #   lat_point: '55.1',
-    #   long_point: '0.15'
-    # }]
-      # put this in a loop, over the array of results
-    # Business.create(
-    #   name: business_result["name"],
-    #   description: business_result["description"],
-    #   category: business_result["category"],
-    #   lat_point: business_result["lat_point"],
-    #   long_point: business_result["long_point"],
-    # )
-# validate save and reirect business>index
-# pre-select the meet on the index
-
-# on click > add to current meet with update
-
+    results.each do |bus|
+      Business.create(
+        name: bus["name"],
+        description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
+        category: bus["types"][0],
+        street_address: bus["vicinity"],
+        image_url: bus["photos"][0]["photo_reference"],
+        latitude: bus["geometry"]["location"]["lat"],
+        longitude: bus["geometry"]["location"]["long"]
+      )
+    end
   end
 end
