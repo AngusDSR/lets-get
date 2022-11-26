@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [
     // hidden form inputs
-    "meetname", "startlat", "startlong", "friendlat", "friendlong",
+    "hiddenform", "meetname", "startlat", "startlong", "friendlat", "friendlong",
     // visible inputs
     "userlocation", "friendlocation", "locateicon", "cleartext", "suggestionscontainer", "friendsuggestionscontainer", "suggestedaddress", "friendsuggestedaddress"
   ]
@@ -367,8 +367,9 @@ export default class extends Controller {
         lat: data.coords.latitude,
         long: data.coords.longitude
       }
-      this.userlocationTarget.value = `${area.lat}, ${area.long}`
-      // INJECT THIS INTO THE HIDDEN FORM
+      this.startlatTarget.value = area.lat;
+      this.startlongTarget.value = area.long;
+      this.meetnameTarget.value = `${area.lat}, ${area.long} ▬ `;
     })
   }
 
@@ -380,8 +381,7 @@ export default class extends Controller {
     }
 
     const MAPBOX_API="pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2xhdmg0emczMDV2aTN4c2poN3h4Zmt4biJ9.cO_Bdy27d_tf2rhtLRFPFw"
-
-    let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&proximity=ip&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=${MAPBOX_API}`
+    let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=${MAPBOX_API}`
     fetch(mapbox_call, {
       method: "GET",
       headers: { "Accept": "application/json" }
@@ -406,8 +406,8 @@ export default class extends Controller {
     const address =  this.suggestedaddressTarget.innerText;
     this.userlocationTarget.value = address
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
-    this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
-    this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
+    this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
+    this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
 
     // clear suggestions -> put into a function
     const suggestionsContainer = document.querySelector(".results-container");
@@ -428,15 +428,14 @@ export default class extends Controller {
     }
 
     const MAPBOX_API="pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2xhdmg0emczMDV2aTN4c2poN3h4Zmt4biJ9.cO_Bdy27d_tf2rhtLRFPFw"
+    let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.friendlocationTarget.value}.json?country=gb&limit=4&proximity=ip&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=${MAPBOX_API}`
 
-    let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&proximity=ip&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=${MAPBOX_API}`
     fetch(mapbox_call, {
       method: "GET",
       headers: { "Accept": "application/json" }
     })
     .then(response => response.json())
     .then((data) => {
-      // suggestionsContainer.after(suggestions)
       for (let results of data.features) {
         let suggested_address = document.createElement("P");
         suggested_address.classList.add("suggested-address")
@@ -454,8 +453,8 @@ export default class extends Controller {
     // needs to be more stimulus - later
     this.friendlocationTarget.value = address
     this.meetnameTarget.value += ` ▬ ${address.substring(0,address.search(',')).trim()}`;
-    this.friendlatTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[0];
-    this.friendlongTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[1];
+    this.friendlatTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[1];
+    this.friendlongTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[0];
 
     // clear suggestions -> put into a function
     const suggestionsContainer = this.friendsuggestionscontainerTarget;
@@ -466,7 +465,11 @@ export default class extends Controller {
     // update map here
     // [ MAP ADDS USER MARKER ]
 
+    // SUBMITS HIDDEN FORM
+    this.hiddenformTarget.submit();
   }
+
+
 
 
 }
