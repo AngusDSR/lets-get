@@ -23,13 +23,12 @@
         <div class="results-container" data-enter-locations-target="friendsuggestionscontainer"></div>
       </div>
 
-    <%= simple_form_for @meet, html: { class: ""} do |f| %>
+    <%= simple_form_for @meet, html: { class: "d-none"} do |f| %>
       <%= f.input :name, input_html: { "data-enter-locations-target" => "meetname" }  %>
       <%= f.input :start_point_lat, input_html: { "data-enter-locations-target" => "startlat" } %>
       <%= f.input :start_point_long, input_html: { "data-enter-locations-target" => "startlong" } %>
-      <%= f.input :friend_lat, input_html: { "data-enter-locations-target" => "startlat" } %> %>
-      <%= f.input :friend_long, input_html: { "data-enter-locations-target" => "startlong" } %> %>
-
+      <%= f.input :friend_lat, input_html: { "data-enter-locations-target" => "friendlat" } %> %>
+      <%= f.input :friend_long, input_html: { "data-enter-locations-target" => "friendlong" } %> %>
       <%# NO SUBMIT, BUTTON, USE STIMULUS FOR THIS %>
     <% end %>
   </div>
