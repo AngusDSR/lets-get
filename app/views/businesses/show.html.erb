@@ -1,14 +1,22 @@
+<div class="h-15 border border-1 bg-light">
+  map
+  map
+</div>
 
+<div class="mt-2 container flex-column rounded">
+  <div class="d-flex flex-column p-3 business-show-card rounded">
+    <%= image_tag Business::PHOTO_ROUTE + @business.image_url + Business::SHOW_PARAMS, alt: @business.name, class: "mb-2" %>
+    <div class="d-flex flex-row justify-content-between">
+      <h2 class="mb-3 fw-bold"><%= @business.name %></h2>
+      <p class="category"><%= @business.category.gsub('_',' ') %></p>
+    </div>
+    <p><%= @business.description.gsub('_',' ') %>.</p>
+    <%# THIS NEEDS TO LINK TO THE MEET SHOW %>
+    <%= link_to "#", class: "btn btn-sm bg-black text-white rounded fs-3 mt-2" do %>
+      <p class="d-inline me-3">Go here</p>
+      <%= icon('fa-solid', 'location-arrow') %>
+    <% end %>
+    <sup class="mt-4 text-center "><%= @business.street_address %></sup>
 
-
-<div class="container">
-  <div class="row">
-    <h2><strong><%= @business.name %></strong></h2>
-    <div class="#">
-    <h2><%= @business.street_address %></h2>
-    <h2><%= @business.category %></h2>
-
-
-
-  </div>
+    </div>
 </div>
