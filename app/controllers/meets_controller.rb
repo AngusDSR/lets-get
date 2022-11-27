@@ -17,6 +17,15 @@ class MeetsController < ApplicationController
   end
 
   def show
+     # @meet = Meet.find_business_nearby
+  end
+
+  def index
+     # if params[:user_id]
+    #   @meets = Meet.where(:user_id +> params[:user_id]))
+    # else
+    #   @meets = Meets.All
+    # or @meets = @user_id.meets
   end
 
   def new

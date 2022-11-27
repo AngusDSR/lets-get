@@ -488,4 +488,24 @@ export default class extends Controller {
   submitHiddenForm() {
     this.hiddenformTarget.submit();
   }
-}
+
+  addUserToMap() {
+    console.log(this.userlocationTarget)
+  //   function initMap() {
+
+  //     // The location of Charing Cross
+  //     const area = { lat: 51.507221, lng: -0.127600 };
+  //     let map = new google.maps.Map(document.getElementById("map"), {
+  //       zoom: 4,
+  //       center: area,
+  //       disableDefaultUI: true
+  //     });
+
+  //     // NO MARKERS YET
+  //     // const marker = new google.maps.Marker({
+  //     //   position: area,
+  //     //   map: map,
+  //     // });
+  //   }
+  //   window.initMap = initMap;
+  // }

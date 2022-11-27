@@ -1,10 +1,23 @@
 <div class="container">
+<center>
   <div class="d-flex flex-column align-items-center mt-3">
-  </div>
-
-
-  <div id="map-container" class="z-depth-1-half map-container" style="height: 500px">
-    <iframe src="TemplateMap.jpg" frameborder="0"
-      style="border:1" allowfullscreen></iframe>
+    <div class="z-depth-1-half map-container" style="height: 500px">
+      <div class="row">
+        <h1><strong><%= @meet.name %></strong></h1>
+        <%# <h2>@meet.midpoint or at meet.last? This is the map and the midpoint result.</h2> # @meet.midpoint or @meet.last?  %>
+        <%= render "map_initial" %>
+        <h2 p style="text-align:right;">Trip duration here</h2>
+         <h4><strong>See details(Will link into directions)</h4>
   </div>
 </div>
+
+  <center>
+  </center>
+
+  <%# Share and Whatsapp button %>
+  <center>
+    <footer>
+      <a href="whatsapp://send?text=<%= request.original_url %>">Share on WhatsApp</a>
+    </footer>
+  </center>
+</div>>
