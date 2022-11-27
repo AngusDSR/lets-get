@@ -1,12 +1,10 @@
+<div class="d-flex justify-content-center flex-column mb-3 rounded">
+  <div class="p-2 ">
+  <% 4.times do %>
+    <%= button_to "Pub", meet_businesses_path(params[:meet_id]), method: :get, params: { query: "Pub" }, class:"w-80 btn btn-lg btn-dark mb-3 rounded" %>
+      </div>
+    <% end %>
+</div>
 
-  <div class="d-flex justify-content-center flex-column mb-3 rounded">
-    <div class="p-2 ">
-      <%= button_to "Pub", businesses_path, method: :get, params: { query: "Pub" }, class:"btn btn-primary bg-dark category-button" %>
-    </div>
-    <div class="p-2">
-      <%= button_to "Coffee", businesses_path, method: :get, params: { query: "Coffee" }, class:"btn btn-primary bg-dark category-button" %>
-    </div>
-    <div class="p-2">
-      <%= button_to "Restaurant", businesses_path, method: :get, params: { query: "Restaurant" }, class:"btn btn-primary bg-dark category-button" %>
-    </div>
-  </div>
+
+routing after

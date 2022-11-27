@@ -39,7 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_152033) do
     t.integer "radius", default: 250
     t.boolean "active", default: true
     t.bigint "user_id", null: false
-    t.bigint "businesses_id", null: false
+    t.bigint "businesses_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["businesses_id"], name: "index_meets_on_businesses_id"

@@ -465,11 +465,12 @@ export default class extends Controller {
     // update map here
     // [ MAP ADDS USER MARKER ]
 
-    // SUBMITS HIDDEN FORM
-    this.hiddenformTarget.submit();
+    this.submitHiddenForm();
   }
 
-
+  submitHiddenForm() {
+    this.hiddenformTarget.submit();
+  }
 
 
 }

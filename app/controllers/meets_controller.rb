@@ -40,14 +40,7 @@ class MeetsController < ApplicationController
       )
       save_business_results(@businesses)
       # pre-select the meet on the index
-      redirect_to businesses_path()
-
-      # on click > add to current meet with update
-    # when we save, we seed all the results in the businesses model
-    # need to added directiosn later
-    # new column for friend directions needed
-
-    # 4. redirect to businesses index (buttons)
+      redirect_to meet_businesses_path(@meet)
     else
       render :new, status: :unprocessable_entity
       # as a pop up rather than simple form info
@@ -92,7 +85,7 @@ class MeetsController < ApplicationController
 
   def save_business_results(results)
     results.each do |bus|
-      next if Business.find_by(place_id: bus["place_id"]).nil?
+      next unless Business.find_by(place_id: bus["place_id"]).nil?
 
       Business.create(
         name: bus["name"],
@@ -101,7 +94,7 @@ class MeetsController < ApplicationController
         street_address: bus["vicinity"],
         image_url: bus["photos"][0]["photo_reference"],
         latitude: bus["geometry"]["location"]["lat"],
-        longitude: bus["geometry"]["location"]["long"],
+        longitude: bus["geometry"]["location"]["lnng"],
         place_id: bus["place_id"]
       )
     end

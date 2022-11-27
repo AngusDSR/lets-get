@@ -1,4 +1,3 @@
-
 <%# MAP BOX %>
 <div class="mb-3">
     </div>
@@ -12,26 +11,4 @@
 
 <div class="d-flex justify-content-center">
   <%= render partial: "search_button" %>
-</div>
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-sm-4">
-    <% @businesses.each do |business|  %>
-    <%= link_to business_path(business) do %>
-        <div class="business-card">
-        <% unless business.image_url.nil? %>
-              <%=image_tag business.image_url, alt: business.name, class: "business-images" %>
-            <% end %>
-
-          <h6 class="business-card-titles"><%= business.name %></h6>
-
-
-        </div>
-        <% end %>
-        <% end %>
-      </div>
-  </div>
 </div>
