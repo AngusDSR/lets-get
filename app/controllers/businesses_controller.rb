@@ -15,9 +15,6 @@ class BusinessesController < ApplicationController
     @business = Business.find(params[:id])
   end
 
-  def destroy
-  end
-
   def create
     @business = Business.new(business_params)
     @business.user = current_user
@@ -33,10 +30,6 @@ class BusinessesController < ApplicationController
   end
 
   private
-
-  # def set_business
-  # @business = Business.find(params[:id])
-  # end
 
   def business_params
     params.require(:business).permit(:name, :description, :category, :street_address, :image_url)

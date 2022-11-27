@@ -82,7 +82,7 @@ class MeetsController < ApplicationController
       midpoint["end_location"]["lng"]
     ]
   end
-
+  raise
   def save_business_results(results)
     results.each do |bus|
       next unless Business.find_by(place_id: bus["place_id"]).nil?

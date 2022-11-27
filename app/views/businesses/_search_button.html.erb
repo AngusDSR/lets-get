@@ -1,6 +1,6 @@
-<div class="border border-1">
-  <% @businesses.distinct('category').each do |bus| %>
-    <%= button_to bus.category , meet_businesses_path(params[:meet_id]), method: :get, params: { query: bus.category }, class:"w-80 btn btn-lg btn-dark mb-3 rounded" %>
+<div class="d-flex flex-column justify-content-center align-items-center buttons-container">
+ <% @businesses.distinct.pluck(:category).each do |bus| %>
+      <%= button_to bus , meet_businesses_path(params[:meet_id]), method: :get, params: { query: bus }, class:"btn btn-lg btn-dark" %>
+      <%= button_to bus , meet_businesses_path(params[:meet_id]), method: :get, params: { query: bus }, class:"btn btn-lg btn-dark" %>
   <% end %>
-
 </div>
