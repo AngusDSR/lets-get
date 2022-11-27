@@ -1,29 +1,31 @@
 <h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
-<div class="container bg-info p-1">
-  <div class="bg-white">[Map here]</div>
-  <div class="d-flex flex-row justify-content-start align-items-center mt-2 p-1">
-    <div class="rounded-circle bg-black w-80 h-80">
-      <%= icon('fa-solid', 'bus', class:"mx-2 text-light rounded-circle") %>
-    </div>
-    <%= icon('fa-solid', 'train-subway', class:"mx-2 text-light bg-black rounded-circle") %>
-    <%= icon('fa-solid', 'train', class:"mx-2 text-light bg-black rounded-circle") %>
-  </div>
-</div>
-
 <div class="container">
-  <div class="d-flex flex-column justify-content-center mt-3">
-    <%# <p class="fs-4">My directions:</p> %>
-    <div class="container bg-light p-1">
+  <div class="container directions-container p-1">
+    <div class="bg-white">[Map here]</div>
+    <div class="d-flex flex-row justify-content-start align-items-center mt-2 p-1">
+      <span class="fa-stack fa-2x travel-icon">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fa-solid fa-bus fa-stack-1x fa-inverse inner-icon"></i>
+      </span>
+      <span class="fa-stack fa-2x travel-icon">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fa-solid fa-train-subway fa-stack-1x fa-inverse inner-icon"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column justify-content-center mt-2">
+    <div class="container directions-container p-1 rounded">
       <%= @meet.directions.split(';').each do |step| %>
       <p class="my-1"><%= step %></p>
-      <hr class="m-0">
+      <hr class="m-0 mx-1 bg-dark">
       <% end %>
     </div>
   </div>
   <div class="d-flex flex-column align-items-center">
-    <%= link_to "whatsapp://send?text=#{request.original_url}", class: "btn btn-sm bg-black text-white text-center rounded fs-3 mt-2 px-2" do %>
+    <%= link_to "whatsapp://send?text=#{request.original_url}", class: "btn btn-sm bg-black text-white text-center rounded-pill w-80 fs-5 fw-semibold m-3" do %>
       <p class="d-inline me-1">Share on WhatsApp</p>
-      <%= icon('fa-brands', 'whatsapp', class:"fs-2 text-info") %>
+      <%= icon('fa-brands', 'whatsapp', class:"text-info") %>
     <% end %>
-  </div>
+      </div>
 </div>
