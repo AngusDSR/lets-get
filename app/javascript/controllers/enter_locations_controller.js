@@ -10,9 +10,8 @@ export default class extends Controller {
 
   connect() {
 
-    // console.log("enter-locations controller connected")
+    console.log("enter-locations controller connected")
 
-    // Initialize and add the map
     function initMap() {
 
       // The location of Charing Cross
@@ -405,7 +404,6 @@ export default class extends Controller {
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
     this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
     this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
-    addUserToMap();
 
     // clear suggestions -> put into a function
     const suggestionsContainer = document.querySelector(".results-container");
@@ -413,9 +411,15 @@ export default class extends Controller {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
 
-    // update map here
-    // [ MAP ADDS USER MARKER ]
+    console.log('I have aded');
+    console.log(this.startlatTarget.value);
+    console.log(this.startlongTarget.value);
 
+    // / NO MARKERS YET
+    // const marker = new google.maps.Marker({
+    //   position: area,
+    //   map: map,
+    // });
   }
 
   friendSuggestions(e){
@@ -469,27 +473,4 @@ export default class extends Controller {
   submitHiddenForm() {
     this.hiddenformTarget.submit();
   }
-
-  addUserToMap() {
-    console.log(this.userlocationTarget)
-  //   function initMap() {
-
-  //     // The location of Charing Cross
-  //     const area = { lat: 51.507221, lng: -0.127600 };
-  //     let map = new google.maps.Map(document.getElementById("map"), {
-  //       zoom: 4,
-  //       center: area,
-  //       disableDefaultUI: true
-  //     });
-
-  //     // NO MARKERS YET
-  //     // const marker = new google.maps.Marker({
-  //     //   position: area,
-  //     //   map: map,
-  //     // });
-  //   }
-  //   window.initMap = initMap;
-  // }
-
-
 }
