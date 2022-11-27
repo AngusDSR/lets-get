@@ -5,10 +5,9 @@ class BusinessesController < ApplicationController
 
   def index
     if params[:query].present?
-      # sql_query = "name ILIKE :query OR description ILIKE :query OR address ILIKE :query"
       @businesses = Business.where(category: params[:query])
     else
-      @businesses = Business.none
+      @businesses = Business.all
     end
   end
 

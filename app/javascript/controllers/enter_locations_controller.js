@@ -15,14 +15,13 @@ export default class extends Controller {
     // Initialize and add the map
     function initMap() {
 
-      // The location of Charing Cross: change this later once we have location from user
-      const area = { lat: 51.507221, long: -0.127600 };
-
-      // The map, centered at Charing Cross
+      // The location of Charing Cross
+      const area = { lat: 51.507221, lng: -0.127600 };
       let map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
         center: area,
         disableDefaultUI: true,
+        // add this as an environment
         styles: [
           {
             "elementType": "geometry",
@@ -350,9 +349,7 @@ export default class extends Controller {
       //   map: map,
       // });
     }
-
     window.initMap = initMap;
-
   }
 
   // should be applicable to both fields with one function
@@ -365,7 +362,7 @@ export default class extends Controller {
     navigator.geolocation.getCurrentPosition((data) => {
       const area = {
         lat: data.coords.latitude,
-        long: data.coords.longitude
+        lng: data.coords.longitude
       }
       this.startlatTarget.value = area.lat;
       this.startlongTarget.value = area.long;
@@ -381,7 +378,7 @@ export default class extends Controller {
     }
 
     const MAPBOX_API="pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2xhdmg0emczMDV2aTN4c2poN3h4Zmt4biJ9.cO_Bdy27d_tf2rhtLRFPFw"
-    let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=${MAPBOX_API}`
+    let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&types=address%2Cpostcode%2Cneighborhood&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=${MAPBOX_API}`
     fetch(mapbox_call, {
       method: "GET",
       headers: { "Accept": "application/json" }
@@ -408,6 +405,7 @@ export default class extends Controller {
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
     this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
     this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
+    addUserToMap();
 
     // clear suggestions -> put into a function
     const suggestionsContainer = document.querySelector(".results-container");
@@ -465,11 +463,33 @@ export default class extends Controller {
     // update map here
     // [ MAP ADDS USER MARKER ]
 
-    // SUBMITS HIDDEN FORM
+    this.submitHiddenForm();
+  }
+
+  submitHiddenForm() {
     this.hiddenformTarget.submit();
   }
 
+  addUserToMap() {
+    console.log(this.userlocationTarget)
+  //   function initMap() {
 
+  //     // The location of Charing Cross
+  //     const area = { lat: 51.507221, lng: -0.127600 };
+  //     let map = new google.maps.Map(document.getElementById("map"), {
+  //       zoom: 4,
+  //       center: area,
+  //       disableDefaultUI: true
+  //     });
+
+  //     // NO MARKERS YET
+  //     // const marker = new google.maps.Marker({
+  //     //   position: area,
+  //     //   map: map,
+  //     // });
+  //   }
+  //   window.initMap = initMap;
+  // }
 
 
 }

@@ -3,20 +3,7 @@
   <div class="d-flex flex-column align-items-center mt-3">
     <% @meets.each do |meet| %>
       <div class="w-80 btn btn-lg btn-dark mb-3 rounded">
-        <%= meet %>
-      </div>
-
-
-    <%# change to dynamic %>
-    <% end %>
-
-    <% 4.times do %>
-      <div class="w-80 btn btn-lg btn-dark mb-3 rounded">
-        Hoxton
-        <span class="text-primary">▬</span>
-        Angel
-        <span class="text-warning">▬</span>
-        London Bridge
+        <%= meet.name %>
       </div>
     <% end %>
   </div>

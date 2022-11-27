@@ -1,29 +1,30 @@
 <div data-controller="enter-locations">
-  <div class="container d-flex flex-column">
-  <%# <div class="d-flex flex-row-reverse">
-    <%= render "cross_icon" %>
-    <%# <%= render "locate_icon" %>
-  <%# </div> %>
-      <div class="align-items-center d-flex flex-column">
-         <%= render "locate_icon" %>
-        <input required type="text"
-          id=userlocation name="userlocation" aria-label="userlocation" placeholder="Where are you?"
-          class="input-location" required
-          data-enter-locations-target="userlocation"
-          data-action="input->enter-locations#userSuggestions"
-        > 
-        <div class="results-container" data-enter-locations-target="suggestionscontainer"></div>
-         <%= render "cross_icon" %>
-        <input required type="text"
-          id=friendlocation name="friendlocation" placeholder="Where's your friend?"
-          class="input-location" required
-          data-enter-locations-target="friendlocation"
-          data-action="input->enter-locations#friendSuggestions"
-        >
-        <div class="results-container" data-enter-locations-target="friendsuggestionscontainer"></div>
-      </div>
+  <div class="container d-flex flex-column mb-3">
+    <div class="align-items-center d-flex flex-column">
+      <input required type="text"
+        id=userlocation name="userlocation" aria-label="userlocation" placeholder="Where are you?"
+        class="input-location" required
+        data-enter-locations-target="userlocation"
+        data-action="input->enter-locations#userSuggestions"
+      >
+      <%# 'LOCATE ME' icon hidden for now %>
+      <%# render "cross_icon" %>
+      <%# idea: make the input and the icon on a row, but force the icon to overlap then add right margin %>
+      <%# We could do the same with a search icon (🔎) also %>
 
-    <%= simple_form_for @meet, html: { class: "d-none"} do |f| %>
+      <%# search suggestions appear below here %>
+      <div class="results-container" data-enter-locations-target="suggestionscontainer"></div>
+      <input required type="text"
+        id=friendlocation name="friendlocation" placeholder="Where's your friend?"
+        class="input-location" required
+        data-enter-locations-target="friendlocation"
+        data-action="input->enter-locations#friendSuggestions"
+      >
+      <%# search suggestions appear below here %>
+      <div class="results-container" data-enter-locations-target="friendsuggestionscontainer"></div>
+    </div>
+
+    <%= simple_form_for @meet, html: { class: "d-none", "data-enter-locations-target" => "hiddenform" } do |f| %>
       <%= f.input :name, input_html: { "data-enter-locations-target" => "meetname" }  %>
       <%= f.input :start_point_lat, input_html: { "data-enter-locations-target" => "startlat" } %>
       <%= f.input :start_point_long, input_html: { "data-enter-locations-target" => "startlong" } %>
