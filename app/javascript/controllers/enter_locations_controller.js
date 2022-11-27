@@ -490,6 +490,4 @@ export default class extends Controller {
   //   }
   //   window.initMap = initMap;
   // }
-
-
 }
