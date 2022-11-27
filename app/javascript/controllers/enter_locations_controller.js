@@ -11,6 +11,7 @@ export default class extends Controller {
   connect() {
 
     console.log("enter-locations controller connected")
+    console.log(this.mapTarget)
 
     function initMap() {
 
@@ -364,8 +365,8 @@ export default class extends Controller {
         lng: data.coords.longitude
       }
       this.startlatTarget.value = area.lat;
-      this.startlongTarget.value = area.long;
-      this.meetnameTarget.value = `${area.lat}, ${area.long} ▬ `;
+      this.startlongTarget.value = area.lng;
+      this.meetnameTarget.value = `${area.lat}, ${area.lng} ▬ `;
     })
   }
 
@@ -411,18 +412,32 @@ export default class extends Controller {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
 
-    console.log('I have aded');
-    console.log(this.startlatTarget.value);
-    console.log(this.startlongTarget.value);
+    function initMap() {
+      console.log('second iniput map')
 
-    // / NO MARKERS YET
-    // const marker = new google.maps.Marker({
-    //   position: area,
-    //   map: map,
-    // });
+      const area = {
+        lat: parseFloat(this.startlatTarget.value),
+        lng: parseFloat(this.startlongTarget.value)
+      };
+
+      let map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 5,
+        center: area,
+        disableDefaultUI: true
+      });
+      console.log('map set');
+
+      // NO MARKERS YET
+      const marker = new google.maps.Marker({
+        position: area,
+        map: map,
+      });
+      console.log('marker set');
+    }
+    window.initMap = initMap;
   }
 
-  friendSuggestions(e){
+  friendSuggestions(e) {
     // clear suggestions -> put into a function
     const suggestionsContainer = this.friendsuggestionscontainerTarget;
     while (suggestionsContainer.firstChild) {
