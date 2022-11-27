@@ -1,23 +1,29 @@
-<div class="container">
-<center>
-  <div class="d-flex flex-column align-items-center mt-3">
-    <div class="z-depth-1-half map-container" style="height: 500px">
-      <div class="row">
-        <h1><strong><%= @meet.name %></strong></h1>
-        <%# <h2>@meet.midpoint or at meet.last? This is the map and the midpoint result.</h2> # @meet.midpoint or @meet.last?  %>
-        <%= render "map_initial" %>
-        <h2 p style="text-align:right;">Trip duration here</h2>
-         <h4><strong>See details(Will link into directions)</h4>
+<h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
+<div class="container bg-info p-1">
+  <div class="bg-white">[Map here]</div>
+  <div class="d-flex flex-row justify-content-start align-items-center mt-2 p-1">
+    <div class="rounded-circle bg-black w-80 h-80">
+      <%= icon('fa-solid', 'bus', class:"mx-2 text-light rounded-circle") %>
+    </div>
+    <%= icon('fa-solid', 'train-subway', class:"mx-2 text-light bg-black rounded-circle") %>
+    <%= icon('fa-solid', 'train', class:"mx-2 text-light bg-black rounded-circle") %>
   </div>
 </div>
 
-  <center>
-  </center>
-
-  <%# Share and Whatsapp button %>
-  <center>
-    <footer>
-      <a href="whatsapp://send?text=<%= request.original_url %>">Share on WhatsApp</a>
-    </footer>
-  </center>
-</div>>
+<div class="container">
+  <div class="d-flex flex-column justify-content-center mt-3">
+    <%# <p class="fs-4">My directions:</p> %>
+    <div class="container bg-light p-1">
+      <%= @meet.directions.split(';').each do |step| %>
+      <p class="my-1"><%= step %></p>
+      <hr class="m-0">
+      <% end %>
+    </div>
+  </div>
+  <div class="d-flex flex-column align-items-center">
+    <%= link_to "whatsapp://send?text=#{request.original_url}", class: "btn btn-sm bg-black text-white text-center rounded fs-3 mt-2 px-2" do %>
+      <p class="d-inline me-1">Share on WhatsApp</p>
+      <%= icon('fa-brands', 'whatsapp', class:"fs-2 text-info") %>
+    <% end %>
+  </div>
+</div>
