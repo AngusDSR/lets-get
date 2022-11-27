@@ -5,7 +5,7 @@
         <%= link_to business_path(business) do %>
           <div class="business-card">
             <% unless business.image_url.nil? %>
-              <%= image_tag Business::PHOTO_ROUTE + business.image_url + Business::PHOTO_PARAMS, alt: business.name, class: "business-images" %>
+              <%= image_tag Business::PHOTO_ROUTE + business.image_url + Business::INDEX_PARAMS, alt: business.name, class: "business-images" %>
             <% end %>
             <h6 class="business-card-titles"><%= business.name %></h6>
           </div>

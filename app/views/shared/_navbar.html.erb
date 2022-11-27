@@ -3,7 +3,7 @@
     <% if controller_name == 'meets' && action_name == 'new' %>
       <span><%= link_to icon('fa-solid', 'arrow-left', class:"icon-nav  d-none"), url_for(:back) %></span>
     <% else %>
-      <span><%= link_to icon('fa-solid', 'arrow-left', class:"icon-nav icon-arrow text-black"), root_path %></span>
+      <span><%= link_to icon('fa-solid', 'arrow-left', class:"icon-nav icon-arrow text-black"), url_for(:back) %></span>
     <% end %>
 
     <h1 class="app-title">Let's Get</h1>
