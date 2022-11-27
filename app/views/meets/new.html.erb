@@ -5,6 +5,7 @@
 
   <% provide :head_tags do %>
     <script>
+
     document.addEventListener("DOMContentLoaded", function(){
     initMap(<%= Business.last.latitude %>, <%= Business.last.longitude %>)
     });

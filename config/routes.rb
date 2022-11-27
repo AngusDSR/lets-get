@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
   # change this to the meet new page
-  root to: "pages#home"
+  root to: "meets#new"
 
   # Defines the root path route ("/")
+  resources :businesses, only: %i[show]
   # root "articles#index"
-  resources :businesses, only: %i[index show]
-  resources :meets
+  resources :meets do
+    resources :businesses, only: %i[index]
+  end
 end

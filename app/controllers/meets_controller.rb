@@ -38,17 +38,11 @@ class MeetsController < ApplicationController
         @meet.midpoint_lat,
         @meet.midpoint_long
       )
-
       save_business_results(@businesses)
-
-      # How would this be moved into another action?
-
       # pre-select the meet on the index
+      redirect_to businesses_path()
 
       # on click > add to current meet with update
-
-      redirect_to
-
     # when we save, we seed all the results in the businesses model
     # need to added directiosn later
     # new column for friend directions needed
@@ -98,6 +92,8 @@ class MeetsController < ApplicationController
 
   def save_business_results(results)
     results.each do |bus|
+      next if Business.find_by(place_id: bus["place_id"]).nil?
+
       Business.create(
         name: bus["name"],
         description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
@@ -105,7 +101,8 @@ class MeetsController < ApplicationController
         street_address: bus["vicinity"],
         image_url: bus["photos"][0]["photo_reference"],
         latitude: bus["geometry"]["location"]["lat"],
-        longitude: bus["geometry"]["location"]["long"]
+        longitude: bus["geometry"]["location"]["long"],
+        place_id: bus["place_id"]
       )
     end
   end
