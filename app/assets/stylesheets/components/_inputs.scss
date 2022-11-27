@@ -1,23 +1,23 @@
 .input-location {
   // How the inputs appear initially
+  width: 80%;
   margin-top: 5%;
-  padding: 4%;
-  background-color: #ffffff;
-  border-radius: 10px;
-  outline: 4;
-  border: 4;
-  color: #000000;
-  text-align: center;
+  padding: 12px;
+  background-color: #C9C9C9;
+  border: 0;
+  border-radius: 8px;
+  outline: 0;
+  color: #484848;
+  text-align: left;
   font-size: larger;
-  font-weight: bold;
 
   // How the inputs appear on select
   &:focus {
     color: rgba(0, 0, 0, 0.7);
     box-shadow: 1px 2px 1px 1px #000000a6;
     transform: translate(15%, 15%);
-    transition: transform 1s;
-    transform: scale(1.2);
+    transition: transform 0.8s;
+    transform: scale(1.1);
   }
   // once text is entered
   &:valid {
@@ -25,11 +25,9 @@
     font-size:20px
   }
   // once text is entered and it's no longer selected
-  &:valid:not(:empty) {
-    box-shadow: 1px 2px 1px 1px #0000004e;
-    transform: translate(15%, 15%);
+  &:valid:not(input[value=""]):not(:focus) {
+    box-shadow: 0;
     transition: transform 1s;
-    transform: scale(1.2);
+    border: solid 0.5px rgb(89, 0, 255);
   }
 }
-

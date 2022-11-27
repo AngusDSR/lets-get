@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_152033) do
     t.float "midpoint_lat"
     t.float "midpoint_long"
     t.text "directions"
-    t.integer "radius", default: 250
+    t.integer "radius", default: 100
     t.boolean "active", default: true
     t.bigint "user_id", null: false
     t.bigint "businesses_id"

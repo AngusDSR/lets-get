@@ -1,17 +1,15 @@
 <div class="d-flex flex-column">
 
-  <%# Next up need to do the background process oflooking up the midway point %>
   <%= render "form" %>
 
   <% provide :head_tags do %>
     <script>
-
-    document.addEventListener("DOMContentLoaded", function(){
-    initMap(<%= Business.last.latitude %>, <%= Business.last.longitude %>)
-    });
+      document.addEventListener("DOMContentLoaded", function(){
+      initMap(51.507221,-0.127600)
+      });
     </script>
-<% end %>
+  <% end %>
 
- <%# <%= render "map_initial" %>
+ <%= render "map_initial" %>
 
 </div>

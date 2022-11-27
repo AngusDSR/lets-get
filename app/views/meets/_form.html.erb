@@ -1,5 +1,5 @@
 <div data-controller="enter-locations">
-  <div class="container d-flex flex-column">
+  <div class="container d-flex flex-column mb-3">
     <div class="align-items-center d-flex flex-column">
       <input required type="text"
         id=userlocation name="userlocation" aria-label="userlocation" placeholder="Where are you?"
@@ -8,7 +8,7 @@
         data-action="input->enter-locations#userSuggestions"
       >
       <%# 'LOCATE ME' icon hidden for now %>
-      <%= render "cross_icon" %>
+      <%# render "cross_icon" %>
       <%# idea: make the input and the icon on a row, but force the icon to overlap then add right margin %>
       <%# We could do the same with a search icon (🔎) also %>
 
