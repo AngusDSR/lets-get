@@ -26,8 +26,10 @@
   }
   // once text is entered and it's no longer selected
   &:valid:not(input[value=""]):not(:focus) {
-    box-shadow: 0;
+    box-shadow: none;
     transition: transform 1s;
-    border: solid 0.5px rgb(89, 0, 255);
+    border: solid 2.5px #2D497B;
+    font-weight: 600;
+    color: #0e1626;
   }
 }

@@ -1,0 +1,5 @@
+<div class="d-flex flex-column justify-content-center align-items-center buttons-container-initial">
+ <% @businesses.distinct.pluck(:category).each do |bus| %>
+      <%= button_to bus.gsub('_', ' ') , meet_businesses_path(params[:meet_id]), method: :get, params: { query: bus }, class:"btn btn-lg btn-dark" %>
+  <% end %>
+</div>
