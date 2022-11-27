@@ -1,10 +1,6 @@
-<div class="d-flex justify-content-center flex-column mb-3 rounded">
-  <div class="p-2 ">
-  <% 4.times do %>
-    <%= button_to "Pub", meet_businesses_path(params[:meet_id]), method: :get, params: { query: "Pub" }, class:"w-80 btn btn-lg btn-dark mb-3 rounded" %>
-      </div>
-    <% end %>
+<div class="border border-1">
+  <% @businesses.distinct('category').each do |bus| %>
+    <%= button_to bus.category , meet_businesses_path(params[:meet_id]), method: :get, params: { query: bus.category }, class:"w-80 btn btn-lg btn-dark mb-3 rounded" %>
+  <% end %>
+
 </div>
-
-
-routing after

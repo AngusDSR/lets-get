@@ -8,15 +8,6 @@ User.create(
 )
 puts "Dummy user created"
 
-Business.create(
-  name: "placeholder",
-  description: "placeholder",
-  category: "Pub",
-  street_address: "placeholder",
-  image_url: "placeholder"
-)
-puts "Placeholer created"
-
 # Business.create(
 #   name: "Assembly House",
 #   description: "Greene King dog friendly pub",
