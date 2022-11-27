@@ -48,6 +48,7 @@ class MeetsController < ApplicationController
         @meet.midpoint_long
       )
       save_business_results(@businesses)
+      sleep(1)
       # pre-select the meet on the index
       redirect_to meet_businesses_path(@meet)
     else

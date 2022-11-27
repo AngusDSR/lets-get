@@ -10,9 +10,9 @@ export default class extends Controller {
 
   connect() {
 
-    // console.log("enter-locations controller connected")
+    console.log("enter-locations controller connected")
+    console.log(this.mapTarget)
 
-    // Initialize and add the map
     function initMap() {
 
       // The location of Charing Cross
@@ -365,8 +365,8 @@ export default class extends Controller {
         lng: data.coords.longitude
       }
       this.startlatTarget.value = area.lat;
-      this.startlongTarget.value = area.long;
-      this.meetnameTarget.value = `${area.lat}, ${area.long} ▬ `;
+      this.startlongTarget.value = area.lng;
+      this.meetnameTarget.value = `${area.lat}, ${area.lng} ▬ `;
     })
   }
 
@@ -405,7 +405,6 @@ export default class extends Controller {
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
     this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
     this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
-    addUserToMap();
 
     // clear suggestions -> put into a function
     const suggestionsContainer = document.querySelector(".results-container");
@@ -413,12 +412,32 @@ export default class extends Controller {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
 
-    // update map here
-    // [ MAP ADDS USER MARKER ]
+    function initMap() {
+      console.log('second iniput map')
 
+      const area = {
+        lat: parseFloat(this.startlatTarget.value),
+        lng: parseFloat(this.startlongTarget.value)
+      };
+
+      let map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 5,
+        center: area,
+        disableDefaultUI: true
+      });
+      console.log('map set');
+
+      // NO MARKERS YET
+      const marker = new google.maps.Marker({
+        position: area,
+        map: map,
+      });
+      console.log('marker set');
+    }
+    window.initMap = initMap;
   }
 
-  friendSuggestions(e){
+  friendSuggestions(e) {
     // clear suggestions -> put into a function
     const suggestionsContainer = this.friendsuggestionscontainerTarget;
     while (suggestionsContainer.firstChild) {
@@ -490,4 +509,3 @@ export default class extends Controller {
   //   }
   //   window.initMap = initMap;
   // }
-}
