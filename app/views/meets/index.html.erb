@@ -3,7 +3,7 @@
   <div class="d-flex flex-column align-items-center mt-3">
     <% @meets.each do |meet| %>
       <div class="w-80 btn btn-lg btn-dark mb-3 rounded">
-        <%= @meet.name %>
+        <%= link_to meet.name, meet_path(meet), class: "text-white text-decoration-none" %>
       </div>
     <% end %>
   </div>

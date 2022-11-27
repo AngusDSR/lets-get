@@ -17,15 +17,12 @@ class MeetsController < ApplicationController
   end
 
   def show
-     # @meet = Meet.find_business_nearby
-  end
-
-  def index
-     # if params[:user_id]
-    #   @meets = Meet.where(:user_id +> params[:user_id]))
-    # else
-    #   @meets = Meets.All
-    # or @meets = @user_id.meets
+    @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
+    @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
+    @steps = get_meet_navigation_steps(@start, "Trafalgar Square").map { |step| step["html_instructions"] }.join(';')
+    # test to work out what makes new lines \n ?
+    @whatsapp_steps = @steps.split(';')
+    @meet.update_column(:directions, @steps)
   end
 
   def new
@@ -85,7 +82,7 @@ class MeetsController < ApplicationController
   def indentify_midpoint(user_location, friend_location)
     # Generate route
     route_steps = Google::Maps.route(user_location, friend_location).steps
-    # How many steps?
+    # How many steps?def
     midpoint = route_steps[route_steps.size / 2]
     [
       midpoint["end_location"]["lat"],
@@ -108,5 +105,9 @@ class MeetsController < ApplicationController
         place_id: bus["place_id"]
       )
     end
+  end
+
+  def get_meet_navigation_steps(user_location, meetpoint)
+    Google::Maps.route(user_location, meetpoint).steps
   end
 end
