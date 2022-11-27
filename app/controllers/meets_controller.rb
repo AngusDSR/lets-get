@@ -39,6 +39,7 @@ class MeetsController < ApplicationController
         @meet.midpoint_long
       )
       save_business_results(@businesses)
+      sleep(1)
       # pre-select the meet on the index
       redirect_to meet_businesses_path(@meet)
     else
@@ -82,7 +83,7 @@ class MeetsController < ApplicationController
       midpoint["end_location"]["lng"]
     ]
   end
-  raise
+
   def save_business_results(results)
     results.each do |bus|
       next unless Business.find_by(place_id: bus["place_id"]).nil?

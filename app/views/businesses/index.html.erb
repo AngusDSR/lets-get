@@ -1,2 +1,6 @@
-<%= render partial: "search_button" %>
-<%= render partial: "businesses_list" if params[:query].present? %>
+<% if params[:query].present? %>
+  <%= render partial: "filter_buttons_smaller" %>
+  <%= render partial: "businesses_list" %>
+<% else %>
+  <%= render partial: "filter_buttons_initial" %>
+<% end %>
