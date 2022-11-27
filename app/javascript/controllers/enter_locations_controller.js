@@ -412,29 +412,11 @@ export default class extends Controller {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
 
-    function initMap() {
-      console.log('second iniput map')
+    const area = {
+      lat: parseFloat(this.startlatTarget.value),
+      lng: parseFloat(this.startlongTarget.value)
+    };
 
-      const area = {
-        lat: parseFloat(this.startlatTarget.value),
-        lng: parseFloat(this.startlongTarget.value)
-      };
-
-      let map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 5,
-        center: area,
-        disableDefaultUI: true
-      });
-      console.log('map set');
-
-      // NO MARKERS YET
-      const marker = new google.maps.Marker({
-        position: area,
-        map: map,
-      });
-      console.log('marker set');
-    }
-    window.initMap = initMap;
   }
 
   friendSuggestions(e) {
@@ -489,23 +471,4 @@ export default class extends Controller {
     this.hiddenformTarget.submit();
   }
 
-  addUserToMap() {
-    console.log(this.userlocationTarget)
-  //   function initMap() {
-
-  //     // The location of Charing Cross
-  //     const area = { lat: 51.507221, lng: -0.127600 };
-  //     let map = new google.maps.Map(document.getElementById("map"), {
-  //       zoom: 4,
-  //       center: area,
-  //       disableDefaultUI: true
-  //     });
-
-  //     // NO MARKERS YET
-  //     // const marker = new google.maps.Marker({
-  //     //   position: area,
-  //     //   map: map,
-  //     // });
-  //   }
-  //   window.initMap = initMap;
-  // }
+}
