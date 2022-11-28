@@ -1,5 +1,5 @@
 <div class="d-flex flex-row justify-content-center align-items-center buttons-container-after">
   <% @businesses.distinct.pluck(:category).each do |bus| %>
-    <%= button_to bus.gsub('_', ' '), meet_businesses_path(params[:meet_id]), method: :get, params: { query: bus }, class:"btn btn btn-dark rounded" %>
+    <h3 class="fw-bold"><%= bus.capitalize.gsub('_', ' ') + "s" %></h3>
   <% end %>
 </div>

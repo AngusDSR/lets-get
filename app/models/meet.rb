@@ -1,5 +1,5 @@
 class Meet < ApplicationRecord
-  RADIUS = 100
+  RADIUS = 250
   belongs_to :user
   has_one :business
   # add validations

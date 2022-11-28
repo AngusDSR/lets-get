@@ -12,7 +12,8 @@
     </div>
     <p><%= @business.description.gsub('_',' ') %>.</p>
     <%# THIS NEEDS TO LINK TO THE MEET SHOW %>
-    <%= link_to "#", class: "btn btn-sm bg-black text-white rounded fs-3 mt-2" do %>
+    <%= button_to "link bus to meet", :method=> "someButton" %>
+    <%= link_to meet_path(@meet), class: "btn btn-sm bg-black text-white rounded fs-3 mt-2" do %>
       <p class="d-inline me-3">Go here</p>
       <%= icon('fa-solid', 'location-arrow') %>
     <% end %>

@@ -6,7 +6,9 @@
       <span><%= link_to icon('fa-solid', 'arrow-left', class:"icon-nav icon-arrow text-black"), url_for(:back) %></span>
     <% end %>
 
-    <h1 class="app-title">Let's Get</h1>
+    <%= link_to root_path, class: "mt-1 text-decoration-none" do %>
+      <h1 class="app-title">Let's Get</h1>
+    <% end %>
     <div class="" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto border-danger">
         <% if user_signed_in? %>
