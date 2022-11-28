@@ -10,7 +10,7 @@ export default class extends Controller {
 
   connect() {
 
-    console.log("enter-locations controller connected");
+    // console.log("enter-locations controller connected");
 
     const area = { lat: 51.507221, lng: -0.127600 };
     let map = new google.maps.Map(document.getElementById("map"), {
@@ -340,12 +340,12 @@ export default class extends Controller {
     });
 
     // NO MARKERS YET
-    const image = "http://maps.google.com/mapfiles/kml/shapes/open-diamond.png";
-    const marker = new google.maps.Marker({
-      position: area,
-      map: map,
-      icon: image,
-    });
+    // const image = "http://maps.google.com/mapfiles/kml/shapes/open-diamond.png";
+    // const marker = new google.maps.Marker({
+    //   position: area,
+    //   map: map,
+    //   icon: image,
+    // });
 
   }
 
@@ -400,20 +400,17 @@ export default class extends Controller {
     const address =  this.suggestedaddressTarget.innerText;
     this.userlocationTarget.value = address
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
-    this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
-    this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
+    const start_lat = this.suggestedaddressTarget.dataset.coords.split(',')[1];
+    const start_long = this.suggestedaddressTarget.dataset.coords.split(',')[0];
+    this.startlatTarget.value = start_lat
+    this.startlongTarget.value = start_long
+    this.updateMap(start_lat, start_long);
 
     // clear suggestions -> put into a function
     const suggestionsContainer = document.querySelector(".results-container");
     while (suggestionsContainer.firstChild) {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
-
-    const area = {
-      lat: parseFloat(this.startlatTarget.value),
-      lng: parseFloat(this.startlongTarget.value)
-    };
-
   }
 
   friendSuggestions(e) {
@@ -466,6 +463,26 @@ export default class extends Controller {
 
   submitHiddenForm() {
     this.hiddenformTarget.submit();
+  }
+
+  updateMap(lat, lng) {
+    const area = {
+      lat: parseFloat(lat),
+      lng: parseFloat(lng)
+    };
+    let map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 18,
+      center: area,
+      disableDefaultUI: true
+      // ADD STYLE
+    });
+
+    const image = "http://maps.google.com/mapfiles/kml/shapes/open-diamond.png";
+    const marker = new google.maps.Marker({
+      position: area,
+      map: map,
+      icon: image,
+    });
   }
 
 }
