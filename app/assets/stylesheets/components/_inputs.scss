@@ -28,7 +28,7 @@
   &:valid:not(input[value=""]):not(:focus) {
     box-shadow: none;
     transition: transform 1s;
-    border: solid 2.5px #2D497B;
+    border: solid 3px #2D497B;
     font-weight: 600;
     color: #0e1626;
   }

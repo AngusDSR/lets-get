@@ -1,9 +1,23 @@
 
-.map-container {
-  margin: 1px;
+// HOME
+.map-container-init {
+  margin-top: 40%;
+  height: 50vh;
 }
 
-#map {
-  position: relative;
+.map-init {
   height: 45vh;
+  overflow: inherit;
+}
+
+// BUSINESS INDEX
+.map-container-bus-index {
+  margin-top: 15%;
+  height: 30vh;
+}
+
+.map-bus-index {
+  position: relative;
+  height: 25vh;
+  border: solid #000 0.5rem;
 }

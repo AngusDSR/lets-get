@@ -10,6 +10,8 @@
       <h2 class="mb-3 fw-bold"><%= @business.name %></h2>
       <p class="category"><%= @business.category.gsub('_',' ') %></p>
     </div>
+     <p><%= icon('fa-solid', 'star') * @business.rating.divmod(1)[0].round(0.5) %></p>
+    <p><%= icon('fa-solid', 'star-half') * @business.rating.divmod(1)[1].round(0.5) %></p>
     <p><%= @business.description.gsub('_',' ') %>.</p>
     <%# THIS NEEDS TO LINK TO THE MEET SHOW %>
     <%= button_to "link bus to meet", :method=> "someButton" %>

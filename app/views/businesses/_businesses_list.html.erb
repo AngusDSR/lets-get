@@ -2,12 +2,19 @@
   <div class="row">
     <div class="col-12 col-sm-4">
       <% @businesses.each do |business|  %>
-        <%= link_to meet_business_path(Meet.find(params[:meet_id]), business) do %>
+        <%= link_to meet_business_path(Meet.find(params[:meet_id]), business), class: "text-decoration-none text-black" do %>
           <div class="business-card">
             <% unless business.image_url.nil? %>
               <%= image_tag Business::PHOTO_ROUTE + business.image_url + Business::INDEX_PARAMS, alt: business.name, class: "business-images" %>
             <% end %>
-            <h6 class="business-card-titles"><%= business.name %></h6>
+            <div class="ms-2 d-flex flex-column">
+              <h6 class="business-card-titles"><%= business.name %></h6>
+              <div class="d-flex d-row">
+              <p><%= icon('fa-solid', 'star') * business.rating.divmod(1)[0].round(0.5) %></p>
+              <p><%= icon('fa-solid', 'star-half') * business.rating.divmod(1)[1].round(0.5) %></p>
+              <p class="ms-1"><%= business.rating %></p>
+              </div>
+            </div>
           </div>
         <% end %>
       <% end %>

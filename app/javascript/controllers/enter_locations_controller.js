@@ -10,19 +10,15 @@ export default class extends Controller {
 
   connect() {
 
-    console.log("enter-locations controller connected")
-    console.log(this.mapTarget)
+    // console.log("enter-locations controller connected");
 
-    function initMap() {
-
-      // The location of Charing Cross
-      const area = { lat: 51.507221, lng: -0.127600 };
-      let map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 12,
-        center: area,
-        disableDefaultUI: true,
-        // add this as an environment
-        styles: [
+    const area = { lat: 51.507221, lng: -0.127600 };
+    let map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      center: area,
+      disableDefaultUI: true,
+      // add this as an environment
+      styles: [
           {
             "elementType": "geometry",
             "stylers": [
@@ -340,16 +336,17 @@ export default class extends Controller {
               }
             ]
           }
-        ]
-      });
+      ]
+    });
 
-      // NO MARKERS YET
-      // const marker = new google.maps.Marker({
-      //   position: area,
-      //   map: map,
-      // });
-    }
-    window.initMap = initMap;
+    // NO MARKERS YET
+    // const image = "http://maps.google.com/mapfiles/kml/shapes/open-diamond.png";
+    // const marker = new google.maps.Marker({
+    //   position: area,
+    //   map: map,
+    //   icon: image,
+    // });
+
   }
 
   // should be applicable to both fields with one function
@@ -405,18 +402,13 @@ export default class extends Controller {
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
     this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
     this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
+    this.updateMap(this.startlatTarget.value, this.startlongTarget.value );
 
     // clear suggestions -> put into a function
     const suggestionsContainer = document.querySelector(".results-container");
     while (suggestionsContainer.firstChild) {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
-
-    const area = {
-      lat: parseFloat(this.startlatTarget.value),
-      lng: parseFloat(this.startlongTarget.value)
-    };
-
   }
 
   friendSuggestions(e) {
@@ -449,26 +441,300 @@ export default class extends Controller {
 
   selectFriendAddress(e) {
     const address =  this.friendsuggestedaddressTarget.innerText;
-    // needs to be more stimulus - later
     this.friendlocationTarget.value = address
     this.meetnameTarget.value += ` ▬ ${address.substring(0,address.search(',')).trim()}`;
     this.friendlatTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[1];
     this.friendlongTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[0];
-
+    this.updateMap(this.friendlatTarget.value, this.friendlongTarget.value);
     // clear suggestions -> put into a function
     const suggestionsContainer = this.friendsuggestionscontainerTarget;
     while (suggestionsContainer.firstChild) {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);
     }
 
-    // update map here
-    // [ MAP ADDS USER MARKER ]
-
     this.submitHiddenForm();
   }
 
   submitHiddenForm() {
     this.hiddenformTarget.submit();
+  }
+
+  updateMap(lat, lng) {
+    const area = {
+      lat: parseFloat(lat),
+      lng: parseFloat(lng)
+    };
+    let map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 18,
+      center: area,
+      disableDefaultUI: true,
+      styles: [
+        {
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#1d2c4d"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#8ec3b9"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#1a3646"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.country",
+          "elementType": "geometry.stroke",
+          "stylers": [
+            {
+              "color": "#4b6878"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.land_parcel",
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.land_parcel",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#64779e"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.province",
+          "elementType": "geometry.stroke",
+          "stylers": [
+            {
+              "color": "#4b6878"
+            }
+          ]
+        },
+        {
+          "featureType": "landscape.man_made",
+          "elementType": "geometry.stroke",
+          "stylers": [
+            {
+              "color": "#334e87"
+            }
+          ]
+        },
+        {
+          "featureType": "landscape.natural",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#023e58"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#283d6a"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#6f9ba5"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#1d2c4d"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.business",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "geometry.fill",
+          "stylers": [
+            {
+              "color": "#023e58"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "labels.text",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#3C7680"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#304a7d"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#98a5be"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#1d2c4d"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#2c6675"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "geometry.stroke",
+          "stylers": [
+            {
+              "color": "#255763"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#b0d5ce"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#023e58"
+            }
+          ]
+        },
+        {
+          "featureType": "transit",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#98a5be"
+            }
+          ]
+        },
+        {
+          "featureType": "transit",
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#1d2c4d"
+            }
+          ]
+        },
+        {
+          "featureType": "transit.line",
+          "elementType": "geometry.fill",
+          "stylers": [
+            {
+              "color": "#283d6a"
+            }
+          ]
+        },
+        {
+          "featureType": "transit.station",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#3a4762"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#0e1626"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#4e6d70"
+            }
+          ]
+        }
+    ]
+  });
+
+    const image = "http://maps.google.com/mapfiles/kml/shapes/open-diamond.png";
+    const marker = new google.maps.Marker({
+      position: area,
+      map: map,
+      icon: image,
+    });
   }
 
 }

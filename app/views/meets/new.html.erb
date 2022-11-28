@@ -1,15 +1,11 @@
-<div class="d-flex flex-column">
+<div class="d-flex flex-column" data-controller="enter-locations">
 
   <%= render "form" %>
 
-  <% provide :head_tags do %>
-    <script>
-      document.addEventListener("DOMContentLoaded", function(){
-        initMap(51.507221,-0.127600)
-      });
-    </script>
-  <% end %>
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <h4>Hey [User], let's find some ____ </h4>
+  </div>
 
- <%= render "map_initial" %>
+ <%= render "init_map" %>
 
 </div>
