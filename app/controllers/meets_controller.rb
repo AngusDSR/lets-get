@@ -46,6 +46,7 @@ class MeetsController < ApplicationController
       )
       save_business_results(@businesses)
       sleep(1)
+
       # pre-select the meet on the index
       redirect_to meet_businesses_path(@meet)
     else
@@ -104,6 +105,7 @@ class MeetsController < ApplicationController
         longitude: bus["geometry"]["location"]["lnng"],
         place_id: bus["place_id"]
       )
+      Business::NUMBER_ADDED += 1
     end
   end
 

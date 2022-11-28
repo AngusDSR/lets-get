@@ -1,7 +1,6 @@
 class BusinessesController < ApplicationController
-  # before_action :set_business, only: %i[show]
-  # Move this down to the show action
-  respond_to :html
+  before_action :set_meet, only: %i[show]
+  # respond_to :html
 
   def index
     if params[:query].present?
@@ -30,6 +29,10 @@ class BusinessesController < ApplicationController
   end
 
   private
+
+  def set_meet
+    @meet = Meet.find(params[:meet_id])
+  end
 
   def business_params
     params.require(:business).permit(:name, :description, :category, :street_address, :image_url)

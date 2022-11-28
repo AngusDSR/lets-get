@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12 col-sm-4">
       <% @businesses.each do |business|  %>
-        <%= link_to business_path(business) do %>
+        <%= link_to meet_business_path(Meet.find(params[:meet_id]), business) do %>
           <div class="business-card">
             <% unless business.image_url.nil? %>
               <%= image_tag Business::PHOTO_ROUTE + business.image_url + Business::INDEX_PARAMS, alt: business.name, class: "business-images" %>

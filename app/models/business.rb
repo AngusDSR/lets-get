@@ -1,4 +1,5 @@
 class Business < ApplicationRecord
+  NUMBER_ADDED = 0
   TYPES = %w[bar cafe park casino gym spa restaurant museum night_club movie_theater bowling_alley amusement_park art_gallery]
   PHOTO_ROUTE = "https://maps.googleapis.com/maps/api/place/photo?photoreference="
   INDEX_PARAMS = "&sensor=false&maxheight=100&maxwidth=100&key=#{ENV.fetch('GOOGLE_MAPS_API')}"
