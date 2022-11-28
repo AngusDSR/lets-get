@@ -4,23 +4,19 @@ require "net/http"
 class MeetsController < ApplicationController
   before_action :set_meet, only: %i[show]
 
-  # needs a joining table between businesses and meets?
-  # one meet could include a 10 nearby business but so could another
+  # a joining table between businesses and meets?
 
   def index
-    # this page will be a simple list - maybe with a photo
-    # should only be current user's
-    # low priority
-
-    # current_user.meets
     @meets = Meet.all
   end
 
   def show
+    # Currently hardcoded to Trafalgar Square for demo, should route to the business' location
     @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
+
+                                        # HERE
     @steps = get_meet_navigation_steps(@start, "Trafalgar Square").map { |step| step["html_instructions"] }.join(';')
-    # test to work out what makes new lines \n ?
     @whatsapp_steps = @steps.split(';')
     @meet.update_column(:directions, @steps)
   end
