@@ -10,19 +10,15 @@ export default class extends Controller {
 
   connect() {
 
-    console.log("enter-locations controller connected")
-    console.log(this.mapTarget)
+    console.log("enter-locations controller connected");
 
-    function initMap() {
-
-      // The location of Charing Cross
-      const area = { lat: 51.507221, lng: -0.127600 };
-      let map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 12,
-        center: area,
-        disableDefaultUI: true,
-        // add this as an environment
-        styles: [
+    const area = { lat: 51.507221, lng: -0.127600 };
+    let map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      center: area,
+      disableDefaultUI: true,
+      // add this as an environment
+      styles: [
           {
             "elementType": "geometry",
             "stylers": [
@@ -340,16 +336,17 @@ export default class extends Controller {
               }
             ]
           }
-        ]
-      });
+      ]
+    });
 
-      // NO MARKERS YET
-      // const marker = new google.maps.Marker({
-      //   position: area,
-      //   map: map,
-      // });
-    }
-    window.initMap = initMap;
+    // NO MARKERS YET
+    const image = "http://maps.google.com/mapfiles/kml/shapes/open-diamond.png";
+    const marker = new google.maps.Marker({
+      position: area,
+      map: map,
+      icon: image,
+    });
+
   }
 
   // should be applicable to both fields with one function
