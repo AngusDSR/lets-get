@@ -21,7 +21,6 @@
     >
     <%# search suggestions appear below here %>
     <div class="results-container" data-enter-locations-target="friendsuggestionscontainer"></div>
-
     <%= simple_form_for @meet, html: { class: "d-none", "data-enter-locations-target" => "hiddenform" } do |f| %>
       <%= f.input :name, input_html: { "data-enter-locations-target" => "meetname" }  %>
       <%= f.input :start_point_lat, input_html: { "data-enter-locations-target" => "startlat" } %>

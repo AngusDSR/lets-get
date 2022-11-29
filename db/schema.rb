@@ -40,10 +40,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_223741) do
     t.integer "radius", default: 100
     t.boolean "active", default: true
     t.bigint "user_id", null: false
-    t.bigint "businesses_id"
+    t.bigint "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["businesses_id"], name: "index_meets_on_businesses_id"
+    t.index ["business_id"], name: "index_meets_on_business_id"
     t.index ["user_id"], name: "index_meets_on_user_id"
   end
 
@@ -60,6 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_223741) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "meets", "businesses", column: "businesses_id"
+  add_foreign_key "meets", "businesses"
   add_foreign_key "meets", "users"
 end
