@@ -338,15 +338,6 @@ export default class extends Controller {
           }
       ]
     });
-
-    // NO MARKERS YET
-    // const image = "http://maps.google.com/mapfiles/kml/shapes/open-diamond.png";
-    // const marker = new google.maps.Marker({
-    //   position: area,
-    //   map: map,
-    //   icon: image,
-    // });
-
   }
 
   // should be applicable to both fields with one function
