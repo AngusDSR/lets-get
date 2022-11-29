@@ -10,20 +10,25 @@
       <h2 class="mb-3 fw-bold"><%= @business.name %></h2>
       <p class="category"><%= @business.category.gsub('_',' ') %></p>
     </div>
-     <p><%= icon('fa-solid', 'star') * @business.rating.divmod(1)[0].round(0.5) %></p>
-    <p><%= icon('fa-solid', 'star-half') * @business.rating.divmod(1)[1].round(0.5) %></p>
+     <p>
+      <%= icon('fa-solid', 'star', class: "m-0") * @business.rating.divmod(1)[0].round(0.5) %>
+      <%= icon('fa-solid', 'star-half', class: "m-0") * @business.rating.divmod(1)[1].round(0.5) %>
+    </p>
     <p><%= @business.description.gsub('_',' ') %>.</p>
-    <%# THIS NEEDS TO LINK TO THE MEET SHOW %>
-    <%= button_to class: "button-28" do %>
-      <p class="d-inline me-3">Bus Route</p>
+
+    <%= simple_form_for @meet do |f| %>
+      <%= f.input :business_id, input_html: { value: @business.id } %>
+      <%= f.button :button, class: "btn btn-sm bg-black text-white rounded fs-3 mt-2" do %>
+        <p class="d-inline me-3">Go here</p>
+        <%= icon('fa-solid', 'location-arrow') %>
+      <% end %>
     <% end %>
-    <%= button_to class: "button-28" do %>
-      <p class button="button-28" role="button" data-action="click->profile#click">Tube Route</p>
-    <% end %>
-    <%= link_to meet_path(@meet), class: "btn btn-sm bg-black text-white rounded fs-3 mt-2" do %>
-      <p class="d-inline me-3">Go here</p>
-      <%= icon('fa-solid', 'location-arrow') %>
-    <% end %>
+
+    <%# simple form  %>
+    <%# go to a route to update this meet/business %>
+    <%# in that controller action / connect them %>
+    <%# then re-route to the right page %>
+
     <sup class="mt-4 text-center "><%= @business.street_address %></sup>
 
     </div>

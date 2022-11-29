@@ -1,6 +1,6 @@
 class BusinessesController < ApplicationController
-  before_action :set_business, only: %i[show select_business]
-  before_action :set_meet, only: %i[show select_business]
+  before_action :set_business, only: %i[show]
+  before_action :set_meet, only: %i[show index]
 
   def index
     if params[:query].present?
@@ -40,10 +40,5 @@ class BusinessesController < ApplicationController
 
   def business_params
     params.require(:business).permit(:name, :description, :category, :street_address, :image_url)
-  end
-
-  def select_business
-    # This is intended to set the current meet's business to the business show
-    @meet.business = @business
   end
 end
