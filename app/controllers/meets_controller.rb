@@ -3,22 +3,19 @@ require "net/http"
 
 class MeetsController < ApplicationController
   before_action :set_meet, only: %i[show update]
-
-  # a joining table between businesses and meets?
+  before_action :set_business, only: %i[update]
 
   def index
     @meets = Meet.all
   end
 
   def show
-    # Currently hardcoded to Trafalgar Square for demo, should route to the business' location
     @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
-
-                                        # HERE
-    @steps = get_meet_navigation_steps(@start, "Trafalgar Square").map { |step| step["html_instructions"] }.join(';')
-    @whatsapp_steps = @steps.split(';')
-    @meet.update_column(:directions, @steps)
+    if @meet.directions.nil?
+      @meet.directions = get_meet_navigation_steps(@start, @meet.business.street_address).map { |step| step["html_instructions"] }.join(';')
+    end
+    @whatsapp_steps = @meet.directions.split(';')
   end
 
   def new
@@ -52,19 +49,23 @@ class MeetsController < ApplicationController
   end
 
   def update
-    @meet.business = Business.find(meet_params[:business_id])
-    if @meet.save
-      redirect_to meet_path(@meet)
-    end
+    @meet.business = @business
+    @meet.name.gsub!(/(?<=▬).*(?=▬)/, " #{@business.name} ").gsub!(/[0-9]+\s/, '')
+    @meet.save
+    # REFACTOR
+    redirect_to meet_path(@meet)
 
     # do API call and add direcitons here
-    # Look up business using_id from form input
   end
 
   private
 
   def set_meet
     @meet = Meet.find(params[:id])
+  end
+
+  def set_business
+    @business = Business.find(meet_params[:business_id])
   end
 
   def meet_params
@@ -89,7 +90,7 @@ class MeetsController < ApplicationController
   def indentify_midpoint(user_location, friend_location)
     # Generate route
     route_steps = Google::Maps.route(user_location, friend_location).steps
-    # How many steps?def
+    # How many steps?
     midpoint = route_steps[route_steps.size / 2]
     [
       midpoint["end_location"]["lat"],
@@ -100,13 +101,13 @@ class MeetsController < ApplicationController
   def save_business_results(results)
     results.each do |bus|
       next unless Business.find_by(place_id: bus["place_id"]).nil?
-
+      @photos = bus["photos"][0]["photo_reference"] unless bus["photos"].nil?
       Business.create(
         name: bus["name"],
         description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
         category: bus["types"][0],
         street_address: bus["vicinity"],
-        image_url: bus["photos"][0]["photo_reference"],
+        image_url: @photos,
         rating: bus["rating"],
         latitude: bus["geometry"]["location"]["lat"],
         longitude: bus["geometry"]["location"]["lnng"],
