@@ -108,6 +108,7 @@ class MeetsController < ApplicationController
         category: bus["types"][0],
         street_address: bus["vicinity"],
         image_url: @photos,
+        # CONSIDER ONLY SHOWING HIGHLY RATED
         rating: bus["rating"],
         latitude: bus["geometry"]["location"]["lat"],
         longitude: bus["geometry"]["location"]["lnng"],

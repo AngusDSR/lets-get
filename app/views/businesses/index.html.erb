@@ -1,8 +1,12 @@
- <%= render "index_map" %>
+<div data-controller="map">
+  <%= tag :meta, name: :meet, content: "#{@meet.midpoint_lat}, #{@meet.midpoint_long}" %>
+  <%= render "index_map" %>
 
-<% if params[:query].present? %>
-  <%= render partial: "business_categories_title" %>
-  <%= render partial: "businesses_list" %>
-<% else %>
-  <%= render partial: "filter_buttons_initial" %>
-<% end %>
+  <% if params[:query].present? %>
+    <%= render partial: "business_categories_title" %>
+    <%= render partial: "businesses_list" %>
+  <% else %>
+    <%= render partial: "filter_buttons_initial" %>
+  <% end %>
+
+</div>
