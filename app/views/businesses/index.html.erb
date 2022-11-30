@@ -1,5 +1,7 @@
-<div data-controller="map">
-  <%= tag :meta, name: :meet, content: "#{@meet.midpoint_lat}, #{@meet.midpoint_long}" %>
+<div data-controller="map"
+  data-map-center-value="<%= { lat: @meet.midpoint_lat, lng: @meet.midpoint_long }.to_json %>"
+>
+
   <%= render "index_map" %>
 
   <% if params[:query].present? %>
