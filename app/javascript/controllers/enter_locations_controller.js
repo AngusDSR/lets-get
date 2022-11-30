@@ -373,7 +373,6 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then((data) => {
-      // suggestionsContainer.after(suggestions)
       for (let results of data.features) {
         let suggested_address = document.createElement("P");
         suggested_address.classList.add("suggested-address")

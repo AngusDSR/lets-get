@@ -2,14 +2,15 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="map"
 export default class extends Controller {
-  static targets = [ "indexmap" ]
+  static targets = [ "indexmap", "business" ]
   static values = { center: Object }
 
   connect() {
 
     // console.log('connected to map stimulus controller')
 
-    const area = { lat: 51.507221, lng: -0.127600 };
+    // console.log(this.businessTargets);
+
     let map = new google.maps.Map(document.getElementById("map"), {
       zoom: 15,
       center: this.centerValue,
@@ -336,14 +337,23 @@ export default class extends Controller {
       ]
     });
 
-    const image = "http://maps.google.com/mapfiles/kml/shapes/open-diamond.png";
-    const marker = new google.maps.Marker({
+    const centrePNG = "http://maps.google.com/mapfiles/kml/shapes/target.png";
+    const centerMarker = new google.maps.Marker({
       position: this.centerValue,
       map: map,
-      icon: image,
+      icon: centrePNG,
     });
     // draw a radius around this point
 
-
+    for (let business of this.businessTargets) {
+      // console.log(business.dataset.coords);
+      // could bring in the ratings / maps icons
+      const image = "http://maps.google.com/mapfiles/kml/shapes/road_shield3.png";
+      const marker = new google.maps.Marker({
+        position: JSON.parse(business.dataset.coords),
+        map: map,
+        icon: image,
+      });
+    }
   }
 }
