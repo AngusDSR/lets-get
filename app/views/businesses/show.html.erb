@@ -5,30 +5,17 @@
 
 <div class="mt-2 container flex-column rounded">
   <div class="d-flex flex-column p-3 business-show-card rounded">
-    <%= image_tag Business::PHOTO_ROUTE + @business.image_url + Business::SHOW_PARAMS, alt: @business.name, class: "mb-2" %>
+    <%= image_tag Business::PHOTO_ROUTE + @business.image_url + Business::SHOW_PARAMS, alt: @business.name, class: "mb-2 rounded business-show-image" %>
     <div class="d-flex flex-row justify-content-between">
       <h2 class="mb-3 fw-bold"><%= @business.name %></h2>
       <p class="category"><%= @business.category.gsub('_',' ') %></p>
     </div>
      <p>
       <%= icon('fa-solid', 'star', class: "m-0") * @business.rating.divmod(1)[0].round(0.5) %>
-      <%= icon('fa-solid', 'star-half', class: "m-0") * @business.rating.divmod(1)[1].round(0.5) %>
+      <%= icon('fa-solid', 'star-half', style: "margin-left:-4px;") * @business.rating.divmod(1)[1].round(0.5) %>
     </p>
     <p><%= @business.description.gsub('_',' ') %>.</p>
-
-    <%= simple_form_for @meet do |f| %>
-      <%= f.input :business_id, input_html: { value: @business.id } %>
-      <%= f.button :button, class: "btn btn-sm bg-black text-white rounded fs-3 mt-2" do %>
-        <p class="d-inline me-3">Go here</p>
-        <%= icon('fa-solid', 'location-arrow') %>
-      <% end %>
-    <% end %>
-
-    <%# simple form  %>
-    <%# go to a route to update this meet/business %>
-    <%# in that controller action / connect them %>
-    <%# then re-route to the right page %>
-
+    <%= render "hidden_show_form" %>
     <sup class="mt-4 text-center "><%= @business.street_address %></sup>
 
     </div>

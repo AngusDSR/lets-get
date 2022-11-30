@@ -24,6 +24,13 @@
   object-fit: cover;
 }
 
+.business-show-image {
+  max-height: 30vh;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.2);
+}
+
 .business-card-title {
   font-size: medium;
   color: #000;

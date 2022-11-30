@@ -33,3 +33,9 @@
     color: #0e1626;
   }
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
