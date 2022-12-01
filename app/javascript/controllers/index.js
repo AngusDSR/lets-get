@@ -16,5 +16,8 @@ application.register("hello", HelloController)
 import MapController from "./map_controller"
 application.register("map", MapController)
 
+import MeetShowMapController from "./meet_show_map_controller"
+application.register("meet-show-map", MeetShowMapController)
+
 import TypedJsController from "./typed_js_controller"
 application.register("typed-js", TypedJsController)

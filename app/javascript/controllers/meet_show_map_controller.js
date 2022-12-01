@@ -1,18 +1,18 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="business-show-map"
+// Connects to data-controller="meet-show-map"
 export default class extends Controller {
-  static targets = ["busshowmap", "business"]
+  static targets = ["business"]
+  static values = { business: Object }
 
   connect() {
-    console.log('connected to business-show-map controller')
-    console.log(JSON.parse(this.businessTarget.dataset.coords))
 
-
+    console.log("connected to data-controller: meet-show-map");
+    // console.log(this.businessValue);
 
     let map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 14,
-      center: JSON.parse(this.businessTarget.dataset.coords),
+      zoom: 15,
+      center: this.businessValue,
       disableDefaultUI: true,
       // add this as an environment
       styles: [
@@ -267,11 +267,12 @@ export default class extends Controller {
       ]
     });
 
-    const image = "http://maps.google.com/mapfiles/kml/shapes/road_shield3.png";
-    const marker = new google.maps.Marker({
-      position: JSON.parse(this.businessTarget.dataset.coords),
-      map: map,
-      icon: image,
-    });
+    const image = "http://maps.google.com/mapfiles/kml/shapes/star.png";
+      const marker = new google.maps.Marker({
+        position: this.businessValue,
+        map: map,
+        icon: image,
+      });
+
   }
 }
