@@ -19,6 +19,7 @@ class MeetsController < ApplicationController
   end
 
   def new
+    Business.destroy_all
     @meet = Meet.new
   end
 
@@ -108,9 +109,10 @@ class MeetsController < ApplicationController
         category: bus["types"][0],
         street_address: bus["vicinity"],
         image_url: @photos,
+        # CONSIDER ONLY SHOWING HIGHLY RATED
         rating: bus["rating"],
         latitude: bus["geometry"]["location"]["lat"],
-        longitude: bus["geometry"]["location"]["lnng"],
+        longitude: bus["geometry"]["location"]["lng"],
         place_id: bus["place_id"]
       )
     end

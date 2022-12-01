@@ -4,11 +4,17 @@
 
 import { application } from "./application"
 
+import BusinessShowMapController from "./business_show_map_controller"
+application.register("business-show-map", BusinessShowMapController)
+
 import EnterLocationsController from "./enter_locations_controller"
 application.register("enter-locations", EnterLocationsController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import MapController from "./map_controller"
+application.register("map", MapController)
 
 import TypedJsController from "./typed_js_controller"
 application.register("typed-js", TypedJsController)

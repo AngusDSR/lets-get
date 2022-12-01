@@ -1,5 +1,9 @@
-<div class="d-flex flex-row justify-content-center align-items-center buttons-container-after">
-  <% @businesses.distinct.pluck(:category).each do |bus| %>
-    <h3 class="fw-bold"><%= bus.capitalize.gsub('_', ' ') + "s" %></h3>
+<div class="mt-1 d-flex flex-row justify-content-center align-items-center buttons-container-after">
+  <% if params[:query].present? %>
+    <% @businesses.distinct.pluck(:category).each do |bus| %>
+      <h3 class="fw-bold"><%= bus.capitalize.gsub('_', ' ') + "s" %></h3>
+    <% end %>
+  <% else %>
+    <h3 class="fw-bold">What kind of place?</h3>
   <% end %>
 </div>
