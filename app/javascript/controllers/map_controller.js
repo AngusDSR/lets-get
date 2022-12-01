@@ -9,10 +9,8 @@ export default class extends Controller {
 
     // console.log('connected to map stimulus controller')
 
-    // console.log(this.businessTargets);
-
     let map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 15,
+      zoom: 16,
       center: this.centerValue,
       disableDefaultUI: true,
       // add this as an environment
@@ -346,7 +344,6 @@ export default class extends Controller {
     // draw a radius around this point
 
     for (let business of this.businessTargets) {
-      // console.log(business.dataset.coords);
       // could bring in the ratings / maps icons
       const image = "http://maps.google.com/mapfiles/kml/shapes/road_shield3.png";
       const marker = new google.maps.Marker({

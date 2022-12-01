@@ -1,13 +1,13 @@
 <div data-controller="map"
   data-map-center-value="<%= { lat: @meet.midpoint_lat, lng: @meet.midpoint_long }.to_json %>"
 >
-
-  <%= render "index_map" %>
-
   <% if params[:query].present? %>
     <%= render partial: "business_categories_title" %>
+    <%= render "index_map" %>
     <%= render partial: "businesses_list" %>
   <% else %>
+    <%= render partial: "business_categories_title" %>
+    <%= render "index_map" %>
     <%= render partial: "filter_buttons_initial" %>
   <% end %>
 

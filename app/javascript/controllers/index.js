@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import BusinessShowMapController from "./business_show_map_controller"
+application.register("business-show-map", BusinessShowMapController)
+
 import EnterLocationsController from "./enter_locations_controller"
 application.register("enter-locations", EnterLocationsController)
 
