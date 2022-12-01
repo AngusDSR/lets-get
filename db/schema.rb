@@ -31,20 +31,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_183558) do
 
   create_table "meets", force: :cascade do |t|
     t.string "name"
-    t.float "start_point_lat"
     t.float "start_point_long"
-    t.float "friend_lat"
+    t.float "start_point_lat"
     t.float "friend_long"
-    t.float "midpoint_lat"
+    t.float "friend_lat"
     t.float "midpoint_long"
+    t.float "midpoint_lat"
     t.text "directions"
-    t.integer "radius", default: 100
-    t.boolean "active", default: true
+    t.integer "radius"
+    t.boolean "active"
     t.bigint "user_id", null: false
-    t.bigint "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_meets_on_business_id"
     t.index ["user_id"], name: "index_meets_on_user_id"
   end
 
@@ -61,6 +59,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_183558) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "meets", "businesses"
   add_foreign_key "meets", "users"
 end

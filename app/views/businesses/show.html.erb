@@ -1,19 +1,25 @@
-<%= render "bus_show_map" %>
+<div data-controller="business-show-map">
 
-<div class="mt-2 container flex-column rounded">
-  <div class="d-flex flex-column p-3 business-show-card rounded">
-    <%= image_tag Business::PHOTO_ROUTE + @business.image_url + Business::SHOW_PARAMS, alt: @business.name, class: "mb-2 rounded business-show-image" %>
-    <div class="d-flex flex-row justify-content-between">
-      <h2 class="mb-3 fw-bold"><%= @business.name %></h2>
-      <p class="category"><%= @business.category.gsub('_',' ') %></p>
-    </div>
-     <p>
-      <%= icon('fa-solid', 'star', class: "m-0") * @business.rating.divmod(1)[0].round(0.5) %>
-      <%= icon('fa-solid', 'star-half', style: "margin-left:-4px;") * @business.rating.divmod(1)[1].round(0.5) %>
-    </p>
-    <p><%= @business.description.gsub('_',' ') %>.</p>
-    <%= render "hidden_show_form" %>
-    <sup class="mt-4 text-center "><%= @business.street_address %></sup>
+  <%= render "bus_show_map" %>
 
-    </div>
+  <div class="mt-2 container flex-column rounded">
+    <div class="d-flex flex-column p-3 business-show-card rounded"
+      data-business-show-map-target="business"
+      data-coords="<%= { lat: @business.latitude, lng: @business.longitude }.to_json %>"
+    >
+      <%= image_tag Business::PHOTO_ROUTE + @business.image_url + Business::SHOW_PARAMS, alt: @business.name, class: "mb-2 rounded business-show-image" %>
+      <div class="d-flex flex-row justify-content-between">
+        <h2 class="mb-3 fw-bold"><%= @business.name %></h2>
+        <p class="category"><%= @business.category.gsub('_',' ') %></p>
+      </div>
+      <p>
+        <%= icon('fa-solid', 'star', class: "m-0") * @business.rating.divmod(1)[0].round(0.5) %>
+        <%= icon('fa-solid', 'star-half', style: "margin-left:-4px;") * @business.rating.divmod(1)[1].round(0.5) %>
+      </p>
+      <p><%= @business.description.gsub('_',' ') %>.</p>
+      <%= render "hidden_show_form" %>
+      <sup class="mt-4 text-center "><%= @business.street_address %></sup>
+
+      </div>
+  </div>
 </div>
