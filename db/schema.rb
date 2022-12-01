@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_28_223741) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_01_183558) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,25 +26,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_223741) do
     t.float "longitude"
     t.string "place_id"
     t.float "rating"
+    t.boolean "current_search", default: true
   end
 
   create_table "meets", force: :cascade do |t|
     t.string "name"
-    t.float "start_point_long"
     t.float "start_point_lat"
-    t.float "friend_long"
+    t.float "start_point_long"
     t.float "friend_lat"
-    t.float "midpoint_long"
+    t.float "friend_long"
     t.float "midpoint_lat"
+    t.float "midpoint_long"
     t.text "directions"
-    t.integer "radius"
-    t.boolean "active"
+    t.integer "radius", default: 100
+    t.boolean "active", default: true
     t.bigint "user_id", null: false
     t.bigint "business_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["business_id"], name: "index_meets_on_business_id"
-
     t.index ["user_id"], name: "index_meets_on_user_id"
   end
 
