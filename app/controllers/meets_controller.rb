@@ -19,7 +19,7 @@ class MeetsController < ApplicationController
   end
 
   def new
-    Business.update_all(current_search: false)
+    Business.destroy_all
     @meet = Meet.new
   end
 

@@ -78,6 +78,14 @@ export default class extends Controller {
         },
         {
           "featureType": "landscape.man_made",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "landscape.man_made",
           "elementType": "geometry.stroke",
           "stylers": [
             {
@@ -105,6 +113,15 @@ export default class extends Controller {
         },
         {
           "featureType": "poi",
+          "elementType": "labels.text",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
           "elementType": "labels.text.fill",
           "stylers": [
             {
@@ -122,11 +139,28 @@ export default class extends Controller {
           ]
         },
         {
+          "featureType": "poi.business",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
           "featureType": "poi.park",
           "elementType": "geometry.fill",
           "stylers": [
             {
               "color": "#023e58"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "labels.text",
+          "stylers": [
+            {
+              "visibility": "off"
             }
           ]
         },
@@ -167,6 +201,15 @@ export default class extends Controller {
           ]
         },
         {
+          "featureType": "road.arterial",
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
           "featureType": "road.highway",
           "elementType": "geometry",
           "stylers": [
@@ -186,6 +229,15 @@ export default class extends Controller {
         },
         {
           "featureType": "road.highway",
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
           "elementType": "labels.text.fill",
           "stylers": [
             {
@@ -199,6 +251,23 @@ export default class extends Controller {
           "stylers": [
             {
               "color": "#023e58"
+            }
+          ]
+        },
+        {
+          "featureType": "road.local",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "road.local",
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "off"
             }
           ]
         },

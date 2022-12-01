@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div data-controller="meet-show-map"
   data-meet-show-map-business-value="<%= { lat: @meet.business.latitude, lng: @meet.business.longitude }.to_json %>"
 >
@@ -9,21 +10,30 @@
       <%= render "train_icon" if (@meet.directions.downcase.include? "train") || (@meet.directions.downcase.include? "subway") %>
       <%= render "bus_icon" if @meet.directions.downcase.include? "bus" %>
       </div>
+=======
+<h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
+<div class="container">
+  <div class="container directions-container p-1">
+    <div class="bg-white">[Map here]</div>
+    <div class="d-flex flex-row justify-content-start align-items-center mt-2 p-1">
+    <%= render "train_icon" if (@meet.directions.downcase.include? "train") || (@meet.directions.downcase.include? "subway") %>
+    <%= render "bus_icon" if @meet.directions.downcase.include? "bus" %>
+>>>>>>> parent of 611ef3d... meet show map works again - still needs navigation
     </div>
-
-    <div class="d-flex flex-column justify-content-center mt-2">
-      <div class="container directions-container p-1 rounded">
-        <% @meet.directions.split(';').each do |step| %>
-          <p class="my-1"><%= step %></p>
-          <hr class="m-0 mx-1 bg-dark">
-        <% end %>
-      </div>
-    </div>
-    <div class="d-flex flex-column align-items-center">
-      <%= link_to "whatsapp://send?text=#{@whatsapp_steps}", class: "btn-whatsapp btn btn-sm bg-black text-center rounded-pill w-80 fs-5 m-3" do %>
-        <p class="d-inline me-1 px-1">Share on WhatsApp</p>
-        <%= icon('fa-brands', 'whatsapp', class:"icon-whastsapp") %>
-      <% end %>
-        </div>
   </div>
+
+  <div class="d-flex flex-column justify-content-center mt-2">
+    <div class="container directions-container p-1 rounded">
+      <% @meet.directions.split(';').each do |step| %>
+        <p class="my-1"><%= step %></p>
+        <hr class="m-0 mx-1 bg-dark">
+      <% end %>
+    </div>
+  </div>
+  <div class="d-flex flex-column align-items-center">
+    <%= link_to "whatsapp://send?text=#{@whatsapp_steps}", class: "btn-whatsapp btn btn-sm bg-black text-center rounded-pill w-80 fs-5 m-3" do %>
+      <p class="d-inline me-1 px-1">Share on WhatsApp</p>
+      <%= icon('fa-brands', 'whatsapp', class:"icon-whastsapp") %>
+    <% end %>
+      </div>
 </div>
