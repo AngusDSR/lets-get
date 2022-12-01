@@ -565,28 +565,11 @@ export default class extends Controller {
           ]
         },
         {
-          "featureType": "poi.business",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
           "featureType": "poi.park",
           "elementType": "geometry.fill",
           "stylers": [
             {
               "color": "#023e58"
-            }
-          ]
-        },
-        {
-          "featureType": "poi.park",
-          "elementType": "labels.text",
-          "stylers": [
-            {
-              "visibility": "off"
             }
           ]
         },
@@ -699,6 +682,14 @@ export default class extends Controller {
           ]
         },
         {
+          "featureType": "transit.station.airport",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
           "featureType": "water",
           "elementType": "geometry",
           "stylers": [
@@ -716,8 +707,8 @@ export default class extends Controller {
             }
           ]
         }
-    ]
-  });
+      ]
+    });
 
     const image = "http://maps.google.com/mapfiles/kml/shapes/open-diamond.png";
     const marker = new google.maps.Marker({
