@@ -109,10 +109,6 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.11.0)
-    exception_handler (0.8.0.2)
-      bundler
-      rails (>= 4.2.0)
-      responders
     execjs (2.8.1)
     faker (3.0.0)
       i18n (>= 1.8.11, < 2)
@@ -267,7 +263,6 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
-  exception_handler (~> 0.8.0.0)
   faker
   font-awesome-sass (~> 6.2.1)
   geocoder
