@@ -6,15 +6,15 @@ import Typed from "typed.js"
 export default class extends Controller {
   connect() {
     new Typed(this.element, {
-      strings: ["Hey there!", "Let's find some suggestions!", "Bars, Coffee Shops...", "And many more available!",
-      "Enter your locations above!"],
-      typeSpeed: 15,
+      strings: ["Hey there!", "Let's find some suggestions!", "Bars, Coffee Shops...",
+      "And many more available!", "Enter your locations above!"],
+      typeSpeed: 50,
       loop: false,
-      backSpeed: 100,
-      backDelay: 100,
+      backSpeed: 500,
+      backDelay: 500,
       fadeOut: true,
       fadeOutClass: 'typed-fade-out',
-      fadeOutDelay: 1000,
+      fadeOutDelay: 500,
       showCursor: true,
     })
   }
