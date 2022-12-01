@@ -1,8 +1,8 @@
 <div data-controller="meet-show-map"
   data-meet-show-map-business-value="<%= { lat: @meet.business.latitude, lng: @meet.business.longitude }.to_json %>"
 >
-  <h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
   <div class="container">
+    <h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
     <div class="container directions-container p-1">
       <%= render "meet_show_map" %>
       <div class="d-flex flex-row justify-content-start align-items-center mt-1 p-1">
