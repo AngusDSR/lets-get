@@ -12,6 +12,9 @@ class MeetsController < ApplicationController
   def show
     @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
+    @directions_to_share = @meet.directions.dup
+    @name = "Directions to #{@meet.business.name}:"
+    @whatsapp_steps = @directions_to_share.unshift(@name).join("%0a▬ ")
     return unless @meet.directions.nil?
 
     @route = get_meet_navigation_steps(@start, @meet.business.street_address)
@@ -19,11 +22,6 @@ class MeetsController < ApplicationController
     @meet.duration = @route.duration.text
     @meet.modes = get_icons(@route)
     @meet.save
-    # @whatsapp_steps = @meet.directions.split("%0a")
-    @whatsapp_steps = @meet.directions.split("pp;")
-
-    # OLD WAY OF DOING IT THAT HALF WORKS
-    # @meet.directions = get_meet_navigation_steps(@start, @meet.business.street_address).map { |step| step["html_instructions"] }.join(';')
   end
 
   def new

@@ -3,7 +3,7 @@
 >
   <div class="container">
     <div class="mt-2 px-2 py-3 card-directions">
-      <h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
+      <h4 class="mb-3 fw-bold"><%= @name %></h4>
       <%= render "meet_show_map" %>
       <div class="d-flex flex-row justify-content-start align-items-center mt-1 p-1">
         <% @meet.modes.each do |mode| %>
@@ -12,14 +12,10 @@
       </div>
       <div class="d-flex flex-column justify-content-center mt-2">
         <div class="container directions-container p-1 rounded">
-
-          <%# if transport mode == TRANSIT, show transit details (get the x bus to...) %>
           <% @meet.directions.each do |step| %>
             <p class="my-1 fs-4"><%= step %></p>
             <hr class="m-0 mx-1 bg-dark">
           <% end %>
-
-
         </div>
       </div>
       <div class="d-flex flex-column align-items-center">
