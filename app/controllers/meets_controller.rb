@@ -19,7 +19,7 @@ class MeetsController < ApplicationController
   end
 
   def new
-    Business.destroy_all
+    Business.update_all(current_search: false)
     @meet = Meet.new
   end
 
@@ -101,20 +101,24 @@ class MeetsController < ApplicationController
 
   def save_business_results(results)
     results.each do |bus|
-      next unless Business.find_by(place_id: bus["place_id"]).nil?
-      @photos = bus["photos"][0]["photo_reference"] unless bus["photos"].nil?
-      Business.create(
-        name: bus["name"],
-        description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
-        category: bus["types"][0],
-        street_address: bus["vicinity"],
-        image_url: @photos,
-        # CONSIDER ONLY SHOWING HIGHLY RATED
-        rating: bus["rating"],
-        latitude: bus["geometry"]["location"]["lat"],
-        longitude: bus["geometry"]["location"]["lng"],
-        place_id: bus["place_id"]
-      )
+      if Business.find_by(place_id: bus["place_id"]).nil?
+        @photos = bus["photos"][0]["photo_reference"] unless bus["photos"].nil?
+        @rating = bus["rating"].nil? ? 0 : bus["rating"]
+        Business.create(
+          name: bus["name"],
+          description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
+          category: bus["types"][0],
+          street_address: bus["vicinity"],
+          image_url: @photos,
+          # CONSIDER ONLY SHOWING HIGHLY RATED
+          rating: @rating,
+          latitude: bus["geometry"]["location"]["lat"],
+          longitude: bus["geometry"]["location"]["lng"],
+          place_id: bus["place_id"]
+        )
+      else
+        Business.update(place_id: bus["place_id"], current_search: true)
+      end
     end
   end
 
