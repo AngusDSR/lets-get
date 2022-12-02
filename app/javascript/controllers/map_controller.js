@@ -10,7 +10,7 @@ export default class extends Controller {
     // console.log('connected to map stimulus controller')
 
     let map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 16,
+      zoom: 14,
       center: this.centerValue,
       disableDefaultUI: true,
       // add this as an environment
@@ -72,14 +72,6 @@ export default class extends Controller {
             "stylers": [
               {
                 "color": "#4b6878"
-              }
-            ]
-          },
-          {
-            "featureType": "landscape.man_made",
-            "stylers": [
-              {
-                "visibility": "off"
               }
             ]
           },
@@ -156,15 +148,6 @@ export default class extends Controller {
           },
           {
             "featureType": "poi.park",
-            "elementType": "labels.text",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.park",
             "elementType": "labels.text.fill",
             "stylers": [
               {
@@ -200,15 +183,6 @@ export default class extends Controller {
             ]
           },
           {
-            "featureType": "road.arterial",
-            "elementType": "labels",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
             "featureType": "road.highway",
             "elementType": "geometry",
             "stylers": [
@@ -228,15 +202,6 @@ export default class extends Controller {
           },
           {
             "featureType": "road.highway",
-            "elementType": "labels",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "road.highway",
             "elementType": "labels.text.fill",
             "stylers": [
               {
@@ -250,23 +215,6 @@ export default class extends Controller {
             "stylers": [
               {
                 "color": "#023e58"
-              }
-            ]
-          },
-          {
-            "featureType": "road.local",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "road.local",
-            "elementType": "labels",
-            "stylers": [
-              {
-                "visibility": "off"
               }
             ]
           },

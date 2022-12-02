@@ -6,7 +6,8 @@
 }
 
 .business-show-card {
-  background-color: $gray;
+  background-color: #fff;
+  border-radius: 18px;
   color: #000;
 }
 .category {
@@ -28,10 +29,13 @@
   max-height: 30vh;
   object-fit: cover;
   object-position: center;
+  border-radius: 10px;
   filter: contrast(1.2);
 }
 
-.business-card-title {
+.card-directions {
+  border-radius: 16px;
+  background-color: #fff;
   font-size: medium;
   color: #000;
 }

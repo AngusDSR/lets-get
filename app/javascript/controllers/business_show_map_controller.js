@@ -11,7 +11,7 @@ export default class extends Controller {
 
 
     let map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 14,
+      zoom: 16,
       center: JSON.parse(this.businessTarget.dataset.coords),
       disableDefaultUI: true,
       // add this as an environment
@@ -73,14 +73,6 @@ export default class extends Controller {
           "stylers": [
             {
               "color": "#4b6878"
-            }
-          ]
-        },
-        {
-          "featureType": "landscape.man_made",
-          "stylers": [
-            {
-              "visibility": "off"
             }
           ]
         },
@@ -157,15 +149,6 @@ export default class extends Controller {
         },
         {
           "featureType": "poi.park",
-          "elementType": "labels.text",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "poi.park",
           "elementType": "labels.text.fill",
           "stylers": [
             {
@@ -201,15 +184,6 @@ export default class extends Controller {
           ]
         },
         {
-          "featureType": "road.arterial",
-          "elementType": "labels",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
           "featureType": "road.highway",
           "elementType": "geometry",
           "stylers": [
@@ -229,15 +203,6 @@ export default class extends Controller {
         },
         {
           "featureType": "road.highway",
-          "elementType": "labels",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
           "elementType": "labels.text.fill",
           "stylers": [
             {
@@ -251,23 +216,6 @@ export default class extends Controller {
           "stylers": [
             {
               "color": "#023e58"
-            }
-          ]
-        },
-        {
-          "featureType": "road.local",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "road.local",
-          "elementType": "labels",
-          "stylers": [
-            {
-              "visibility": "off"
             }
           ]
         },
@@ -333,8 +281,8 @@ export default class extends Controller {
             }
           ]
         }
-      ]
-    });
+    ]
+  });
 
     const image = "http://maps.google.com/mapfiles/kml/shapes/road_shield3.png";
     const marker = new google.maps.Marker({

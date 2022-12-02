@@ -2,12 +2,13 @@
   data-meet-show-map-business-value="<%= { lat: @meet.business.latitude, lng: @meet.business.longitude }.to_json %>"
 >
   <div class="container">
-    <h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
-    <div class="container directions-container p-1">
+    <div class="mt-2 px-2 py-3 card-directions">
+      <h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
       <%= render "meet_show_map" %>
       <div class="d-flex flex-row justify-content-start align-items-center mt-1 p-1">
-        <%= render "train_icon" if (@meet.directions.downcase.include? "train") || (@meet.directions.downcase.include? "subway") %>
-        <%= render "bus_icon" if @meet.directions.downcase.include? "bus" %>
+        <%= image_tag "train.png" if (@meet.directions.downcase.include? "train") %>
+        <%= image_tag "subway.png" if (@meet.directions.downcase.include? "subway") %>
+        <%= image_tag "bus.png" if @meet.directions.downcase.include? "bus" %>
       </div>
 
       <div class="d-flex flex-column justify-content-center mt-2">
@@ -15,7 +16,7 @@
 
           <%# if transport mode == TRANSIT, show transit details (get the x bus to...) %>
           <% @meet.directions.split(';').each do |step| %>
-            <p class="my-1"><%= step %></p>
+            <p class="my-1 fs-4"><%= step %></p>
             <hr class="m-0 mx-1 bg-dark">
           <% end %>
 
@@ -23,7 +24,7 @@
         </div>
       </div>
       <div class="d-flex flex-column align-items-center">
-        <%= link_to "whatsapp://send?text=#{@whatsapp_steps}", class: "btn-whatsapp btn btn-sm bg-black text-center rounded-pill w-80 fs-5 m-3" do %>
+        <%= link_to "whatsapp://send?text=#{@whatsapp_steps}", class: "btn-whatsapp btn btn-lg bg-black text-center fs-5 m-3" do %>
           <p class="d-inline me-1 px-1">Share on WhatsApp</p>
           <%= icon('fa-brands', 'whatsapp', class:"icon-whastsapp") %>
         <% end %>

@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400&display=swap');
 
 .app-title {
-  font-family: Alexandria;
+  // font-family: Alexandria;
+  font-family: "Righteous", "Helvetica", "sans-serif";
   font-weight: 400;
-  font-size: 3.2rem;
-  color: #000;
+  font-size: 3.6rem;
+  color: $thames-blue;
   background:
     linear-gradient(currentColor 0 0) 100% 100% /var(--p, 0%) 3px no-repeat,
     linear-gradient(currentColor 0 0) var(--d, -101%) 100% /50% 3px no-repeat;
@@ -37,15 +38,18 @@
 }
 .icon-login {
   font-size: 2.2rem;
+  color: $thames-blue !important;
 }
 .icon-arrow {
   font-size: 2.4rem;
   max-width: 1rem;
+  color: $thames-blue !important;
 }
 
 .btn-account {
   padding: 0;
   border: 0;
+  color: $thames-blue !important;
 }
 
 .item-logout {
@@ -63,12 +67,6 @@
   background: none;
 }
 
-.myButton:hover {
-background: #1C6EA4; }
-
-.myButton:active {
-background: #144E75; };
-
 .menu_container {
   position: absolute;
   width: 100%;
@@ -78,6 +76,3 @@ div.dropdown-menu{
   left:auto;
   right:auto;
 }
-
-
-// add media queries for larger screens here
