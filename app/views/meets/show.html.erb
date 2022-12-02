@@ -1,11 +1,14 @@
-<h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
-<div class="container">
-  <div class="container directions-container p-1">
-    <div class="bg-white">[Map here]</div>
-    <div class="d-flex flex-row justify-content-start align-items-center mt-2 p-1">
-    <%= render "train_icon" if (@meet.directions.downcase.include? "train") || (@meet.directions.downcase.include? "subway") %>
-    <%= render "bus_icon" if @meet.directions.downcase.include? "bus" %>
-    </div>
+<div data-controller="meet-show-map"
+  data-meet-show-map-business-value="<%= { lat: @meet.business.latitude, lng: @meet.business.longitude }.to_json %>"
+>
+  <h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
+  <div class="container">
+    <div class="container directions-container p-1">
+      <%= render "meet_show_map" %>
+      <div class="d-flex flex-row justify-content-start align-items-center mt-1 p-1">
+        <%= render "train_icon" if (@meet.directions.downcase.include? "train") || (@meet.directions.downcase.include? "subway") %>
+        <%= render "bus_icon" if @meet.directions.downcase.include? "bus" %>
+      </div>
   </div>
 
   <div class="d-flex flex-column justify-content-center mt-2">
