@@ -5,12 +5,15 @@
     <div class="mt-2 px-2 py-3 card-directions">
       <h4 class="mb-3 fw-bold"><%= @name %></h4>
       <%= render "meet_show_map" %>
-      <div class="d-flex flex-row justify-content-start align-items-center mt-1 p-1">
+      <div class="d-flex flex-row justify-content-between align-items-center mt-1 p-1">
+        <div>
         <% @meet.modes.each do |mode| %>
           <%= image_tag "#{mode.downcase}.png" %>
         <% end %>
+        </div>
+        <p class="fw-bold btn btn-info rounded-pill py-0"><%= @meet.duration %></p>
       </div>
-      <div class="d-flex flex-column justify-content-center mt-2">
+      <div class="d-flex flex-column justify-content-baseline mt-2">
         <div class="container directions-container p-1 rounded">
           <% @meet.directions.each do |step| %>
             <p class="my-1 fs-4"><%= step %></p>
