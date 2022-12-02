@@ -12,16 +12,18 @@ class MeetsController < ApplicationController
   def show
     @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
-    if @meet.directions.nil?
-      @route = get_meet_navigation_steps(@start, @meet.business.street_address)
-      @meet.directions = create_directions(@route)
-      @meet.save
-      @duration = @route.duration.text
-      @whatsapp_steps = @meet.directions.split('%0a')
+    return unless @meet.directions.nil?
 
-      # OLD WAY OF DOING IT THAT HALF WORKS
-      # @meet.directions = get_meet_navigation_steps(@start, @meet.business.street_address).map { |step| step["html_instructions"] }.join(';')
-    end
+    @route = get_meet_navigation_steps(@start, @meet.business.street_address)
+    @meet.directions = create_directions(@route)
+    @meet.duration = @route.duration.text
+    @meet.modes = get_icons(@route)
+    @meet.save
+    # @whatsapp_steps = @meet.directions.split("%0a")
+    @whatsapp_steps = @meet.directions.split("pp;")
+
+    # OLD WAY OF DOING IT THAT HALF WORKS
+    # @meet.directions = get_meet_navigation_steps(@start, @meet.business.street_address).map { |step| step["html_instructions"] }.join(';')
   end
 
   def new
@@ -131,16 +133,25 @@ class MeetsController < ApplicationController
 
   def create_directions(route)
     # consider using .in_groups_of(2).to_h to show icons on each step
-    @directions = []
+    directions = []
     route.steps.each do |step|
-      # @directions << step.travel_mode # to be used for icons
+      # directions << step.travel_mode # to be used for icons
       if step.travel_mode == "TRANSIT"
-        @stops = step.transit_details.num_stops
-        @directions << "Take the #{step.transit_details.line.short_name} to #{step.transit_details.arrival_stop.name} (#{@stops} #{"stop".pluralize(@stops)})"
+        stops = step.transit_details.num_stops
+        directions << "Take the #{step.transit_details.line.short_name} to #{step.transit_details.arrival_stop.name} (#{stops} #{"stop".pluralize(stops)})"
       else
-        @directions << step.html_instructions
+        directions << step.html_instructions
       end
     end
-    @directions
+    directions
+  end
+
+  def get_icons(route)
+    modes = []
+    route.steps.each do |step|
+      # mode =
+      modes << step.transit_details.line.vehicle.name unless step.transit_details.nil?
+    end
+    modes
   end
 end

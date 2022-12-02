@@ -6,9 +6,9 @@
       <h4 class="mb-3 fw-bold"><%= @meet.name %></h4>
       <%= render "meet_show_map" %>
       <div class="d-flex flex-row justify-content-start align-items-center mt-1 p-1">
-        <%= image_tag "train.png" if (@meet.directions.join.downcase.include? "train") %>
-        <%= image_tag "subway.png" if (@meet.directions.join.downcase.include? "subway") %>
-        <%= image_tag "bus.png" if @meet.directions.join.downcase.include? "bus" %>
+        <% @meet.modes.each do |mode| %>
+          <%= image_tag "#{mode.downcase}.png" %>
+        <% end %>
       </div>
       <div class="d-flex flex-column justify-content-center mt-2">
         <div class="container directions-container p-1 rounded">
