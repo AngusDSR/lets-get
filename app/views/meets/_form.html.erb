@@ -1,26 +1,21 @@
-<div class="container d-flex flex-column my-4">
+<div class="container d-flex flex-column my-4 p-0">
   <div class="align-items-center d-flex flex-column">
     <input required type="text"
       id=userlocation name="userlocation" aria-label="userlocation" placeholder="Where are you?"
-      class="input-location" required
+      class="location-input input-first m-0" required
       data-enter-locations-target="userlocation"
       data-action="input->enter-locations#userSuggestions"
     >
-    <%# 'LOCATE ME' icon hidden for now %>
-    <%# render "cross_icon" %>
-    <%# idea: make the input and the icon on a row, but force the icon to overlap then add right margin %>
-    <%# We could do the same with a search icon (🔎) also %>
 
-    <%# search suggestions appear below here %>
-    <div class="results-container" data-enter-locations-target="suggestionscontainer"></div>
     <input required type="text"
       id=friendlocation name="friendlocation" placeholder="Where's your friend?"
-      class="input-location" required
+      class="location-input input-second m-0" required
       data-enter-locations-target="friendlocation"
       data-action="input->enter-locations#friendSuggestions"
     >
-    <%# search suggestions appear below here %>
+    <div class="results-container" data-enter-locations-target="suggestionscontainer"></div>
     <div class="results-container" data-enter-locations-target="friendsuggestionscontainer"></div>
+
     <%= simple_form_for @meet, html: { class: "d-none", "data-enter-locations-target" => "hiddenform" } do |f| %>
       <%= f.input :name, input_html: { "data-enter-locations-target" => "meetname" }  %>
       <%= f.input :start_point_lat, input_html: { "data-enter-locations-target" => "startlat" } %>

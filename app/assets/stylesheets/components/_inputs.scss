@@ -1,36 +1,53 @@
-.input-location {
-  // How the inputs appear initially
+.location-input {
   width: 80%;
   margin-top: 5%;
   padding: 12px;
-  background-color: #C9C9C9;
   border: 0;
-  border-radius: 8px;
   outline: 0;
-  color: #484848;
+  color: $blue;
   text-align: left;
+  font-weight: bold;
   font-size: larger;
 
   // How the inputs appear on select
   &:focus {
-    color: rgba(0, 0, 0, 0.7);
-    box-shadow: 1px 2px 1px 1px #000000a6;
+    position: relative;
     transform: translate(15%, 15%);
-    transition: transform 0.8s;
+    transition: transform 0.4s;
     transform: scale(1.1);
+    // box-shadow: 1px 2px 1px 1px $thames-blue;
+    border: solid 2px $blue;
+    border-radius: 14px;
+    color: #000;
   }
   // once text is entered
   &:valid {
-    background-color: #fff;
     font-size:20px
   }
   // once text is entered and it's no longer selected
   &:valid:not(input[value=""]):not(:focus) {
     box-shadow: none;
     transition: transform 1s;
-    border: solid 3px #2D497B;
+    border: solid 3px $thames-blue;
     font-weight: 600;
-    color: #0e1626;
+    color: #000;
+  }
+}
+.input-first {
+  border-radius: 18px 18px 0 0;
+  border-bottom: 2.5px solid $blue;
+  &:focus {
+    top: 8px;
+  }
+}
+.input-second {
+  border-radius: 0 0 18px 18px;
+  &:focus {
+    bottom: 8px;
+  }
+  &:valid:not(input[value=""]):not(:focus) {
+    border-top: 0;
+    transition: 0.4s;
   }
 }
 

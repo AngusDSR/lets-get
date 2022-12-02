@@ -19,14 +19,17 @@
 
 // BUSINESS SHOW
 .map-bus-show {
-  width: 100vw;
-  height: 24vh;
+  border-radius: 0 0 18px 18px;
+  height: 20vh;
+  margin-top: 10px;
 }
 
 // MEET SHOW
-.map-container-meet-show {
-  // height: 10vh;
-}
+// .map-container-meet-show {
+//   height: 10vh;
+// }
 .map-meet-show {
   height: 24vh;
+  border-radius: 10px;
+  margin-bottom: 4px;
 }
