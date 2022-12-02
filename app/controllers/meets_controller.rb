@@ -13,8 +13,8 @@ class MeetsController < ApplicationController
     @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
     @directions_to_share = @meet.directions.dup
-    @name = "Directions to #{@meet.business.name}:"
-    @whatsapp_steps = @directions_to_share.unshift(@name).join("%0a▬ ")
+    @name = "Directions to #{@meet.business.name}"
+    @whatsapp_steps = @directions_to_share.unshift("*#{@name}:*").join("%0a▬ ")
     return unless @meet.directions.nil?
 
     @route = get_meet_navigation_steps(@start, @meet.business.street_address)
