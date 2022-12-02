@@ -12,16 +12,16 @@ class MeetsController < ApplicationController
   def show
     @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
+    if @meet.directions.nil?
+      @route = get_meet_navigation_steps(@start, @meet.business.street_address)
+      @meet.directions = create_directions(@route)
+      @meet.duration = @route.duration.text
+      @meet.modes = get_icons(@route)
+      @meet.save
+    end
     @directions_to_share = @meet.directions.dup
     @name = "Directions to #{@meet.business.name}"
     @whatsapp_steps = @directions_to_share.unshift("*#{@name}:*").join("%0a▬ ")
-    return unless @meet.directions.nil?
-
-    @route = get_meet_navigation_steps(@start, @meet.business.street_address)
-    @meet.directions = create_directions(@route)
-    @meet.duration = @route.duration.text
-    @meet.modes = get_icons(@route)
-    @meet.save
   end
 
   def new
