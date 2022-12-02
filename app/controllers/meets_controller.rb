@@ -2,7 +2,7 @@ require "uri"
 require "net/http"
 
 class MeetsController < ApplicationController
-  before_action :set_meet, only: %i[show update]
+  before_action :set_meet, only: %i[show update create_directions]
   before_action :set_business, only: %i[update]
 
   def index
@@ -13,9 +13,15 @@ class MeetsController < ApplicationController
     @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
     if @meet.directions.nil?
-      @meet.directions = get_meet_navigation_steps(@start, @meet.business.street_address).map { |step| step["html_instructions"] }.join(';')
+      @route = get_meet_navigation_steps(@start, @meet.business.street_address)
+      @meet.directions = create_directions(@route)
+      @meet.save
+      @duration = @route.duration.text
+      @whatsapp_steps = @meet.directions.split('%0a')
+
+      # OLD WAY OF DOING IT THAT HALF WORKS
+      # @meet.directions = get_meet_navigation_steps(@start, @meet.business.street_address).map { |step| step["html_instructions"] }.join(';')
     end
-    @whatsapp_steps = @meet.directions.split(';')
   end
 
   def new
@@ -41,7 +47,6 @@ class MeetsController < ApplicationController
       save_business_results(@businesses)
       sleep(1)
 
-      # pre-select the meet on the index
       redirect_to meet_businesses_path(@meet)
     else
       render :new, status: :unprocessable_entity
@@ -55,8 +60,6 @@ class MeetsController < ApplicationController
     @meet.save
     # REFACTOR
     redirect_to meet_path(@meet)
-
-    # do API call and add direcitons here
   end
 
   private
@@ -123,6 +126,21 @@ class MeetsController < ApplicationController
   end
 
   def get_meet_navigation_steps(user_location, meetpoint)
-    Google::Maps.route(user_location, meetpoint).steps
+    Google::Maps.route(user_location, meetpoint)
+  end
+
+  def create_directions(route)
+    # consider using .in_groups_of(2).to_h to show icons on each step
+    @directions = []
+    route.steps.each do |step|
+      # @directions << step.travel_mode # to be used for icons
+      if step.travel_mode == "TRANSIT"
+        @stops = step.transit_details.num_stops
+        @directions << "Take the #{step.transit_details.line.short_name} to #{step.transit_details.arrival_stop.name} (#{@stops} #{"stop".pluralize(@stops)})"
+      else
+        @directions << step.html_instructions
+      end
+    end
+    @directions
   end
 end

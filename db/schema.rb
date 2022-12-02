@@ -37,7 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_183558) do
     t.float "friend_long"
     t.float "midpoint_lat"
     t.float "midpoint_long"
-    t.text "directions"
+    t.text "directions", array: true
     t.integer "radius", default: 100
     t.boolean "active", default: true
     t.bigint "user_id", null: false
