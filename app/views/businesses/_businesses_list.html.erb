@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 col-sm-4">
+    <div class="col-12">
       <% @businesses.each do |business|  %>
         <%= link_to meet_business_path(Meet.find(params[:meet_id]), business), class: "text-decoration-none text-black" do %>
           <div class="business-card"

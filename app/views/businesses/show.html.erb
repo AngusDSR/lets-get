@@ -8,7 +8,7 @@
       <%= image_tag Business::PHOTO_ROUTE + @business.image_url + Business::SHOW_PARAMS, alt: @business.name, class: "mb-3 business-show-image" %>
       <div class="d-flex flex-row justify-content-between">
         <h2 class="mb-3 fw-bold"><%= @business.name %></h2>
-        <p class="category"><%= @business.category.gsub('_',' ') %></p>
+        <p class="category"><%= @business.category.gsub('_',' ').capitalize%></p>
       </div>
       <p>
         <%= icon('fa-solid', 'star', class: "m-0") * @business.rating.divmod(1)[0].round(0.5) %>
