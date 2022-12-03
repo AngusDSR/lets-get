@@ -5,7 +5,28 @@
     <div class="mt-2 px-2 py-3 card-directions">
       <h4 class="mb-3 fw-bold"><%= @name %></h4>
       <%= render "meet_show_map" %>
-
+      <div class="d-flex flex-row justify-content-between align-items-center mt-1 p-1">
+        <div>
+        <% @meet.modes.each do |mode| %>
+          <%= image_tag "#{mode.downcase}.png" %>
+        <% end %>
+        </div>
+        <p class="fw-bold btn btn-info rounded-pill py-0 disabled"><%= @meet.duration %></p>
+      </div>
+      <div class="d-flex flex-column justify-content-baseline mt-2">
+        <div class="container directions-container p-1 rounded">
+          <% @meet.directions.each do |step| %>
+            <p class="my-1 fs-4"><%= step %></p>
+            <hr class="m-0 mx-1 bg-dark">
+          <% end %>
+        </div>
+      </div>
+      <div class="d-flex flex-column align-items-center">
+        <%= link_to "whatsapp://send?text=#{@whatsapp_steps}", class: "btn-whatsapp btn btn-lg bg-black text-center fs-5 m-3" do %>
+          <p class="d-inline me-1 px-1">Share on WhatsApp</p>
+          <%= icon('fa-brands', 'whatsapp', class:"icon-whastsapp") %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
