@@ -1,4 +1,5 @@
-<%= simple_form_for @meet, defaults: { wrapper_html: { class: 'd-none m-0 p-0' } } do |f| %>
+<%= simple_form_for @meet, data: { turbo:false } do |f| %>
+<%# , defaults: { wrapper_html: { class: 'd-none m-0 p-0'  } ) %>
   <%= f.input :business_id, input_html: { value: @business.id } %>
   <%= f.button :button, class: "bg-black text-white rounded fs-3 mt-2" do %>
     <p class="d-inline me-2">Go here</p>
