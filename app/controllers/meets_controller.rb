@@ -10,6 +10,7 @@ class MeetsController < ApplicationController
   end
 
   def show
+    redirect_to root_path
     @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
     if @meet.directions.nil?
