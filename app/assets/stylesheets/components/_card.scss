@@ -3,6 +3,9 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
+  margin-top: 10px;
+  height: 86px;
+  border-radius: 5px;
 }
 
 .business-show-card {
@@ -23,6 +26,9 @@
 
 .business-images {
   object-fit: cover;
+  height: 86px;
+  width: 100px;
+  border-radius: 5px;
 }
 
 .business-show-image {
