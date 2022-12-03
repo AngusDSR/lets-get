@@ -19,9 +19,9 @@ class MeetsController < ApplicationController
       @meet.modes = get_icons(@route)
       @meet.save
     end
-    @directions_to_share = @meet.directions.dup
+    @directions_to_share = @meet.directions
     @name = "Directions to #{@meet.business.name}"
-    @whatsapp_steps = @directions_to_share.unshift("*#{@name}:*").join("%0a▬ ")
+    @whatsapp_steps = "test"
   end
 
   def new
