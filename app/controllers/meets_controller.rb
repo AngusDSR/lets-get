@@ -24,7 +24,7 @@ class MeetsController < ApplicationController
     end
     @directions_to_share = @meet.directions
     @name = "Directions to #{@meet.business.name}"
-    @whatsapp_steps = "test"
+    @whatsapp_steps = "Le Wagon For Lyf 💞💞💞"
   end
 
   def new
