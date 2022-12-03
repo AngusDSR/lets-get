@@ -12,6 +12,9 @@ class MeetsController < ApplicationController
   def show
     @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
+    # TEMPORARY PARSED VARIABLE TO ALLOW BETTER FORMATTING, NEED TO ADD TABLE
+
+    @directions_parsed = @meet.directions.to_s.gsub('[', '').gsub(']','').split('"').reject {|item| item == ", "}
     if @meet.directions.nil?
       @route = get_meet_navigation_steps(@start, @meet.business.street_address)
       @meet.directions = create_directions(@route)
