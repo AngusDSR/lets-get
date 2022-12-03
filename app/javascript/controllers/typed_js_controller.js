@@ -6,8 +6,8 @@ import Typed from "typed.js"
 export default class extends Controller {
   connect() {
     new Typed(this.element, {
-      strings: ["Hey there!", "Let's find some suggestions!", "Bars, Coffee Shops...",
-      "And many more available!", "Enter your locations above!"],
+      strings: ["Let's get a coffee", "Let's get a drink", "Let's get dinner",
+      "Let's make a plan - Enter locations above"],
       typeSpeed: 50,
       loop: false,
       backSpeed: 500,
@@ -15,7 +15,7 @@ export default class extends Controller {
       fadeOut: true,
       fadeOutClass: 'typed-fade-out',
       fadeOutDelay: 500,
-      showCursor: true,
+      showCursor: false,
     })
   }
 }
