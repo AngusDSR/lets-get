@@ -1,0 +1,76 @@
+.tiles-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tile-row {
+  display:flex;
+  flex-direction: row;
+  & > * {
+    background-color: #111B34;
+    animation-name: tile-grow;
+    animation-duration: 1s;
+  }
+}
+.tile-row-1 {
+  align-items: flex-end;
+  padding-left: 1rem;
+}
+
+.tile-row-2 {
+  align-items: flex-start;
+}
+
+.tile {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: difference;
+  p {
+    margin: 1rem;
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  &:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+    background-blend-mode: normal;
+    opacity: 0.8;
+  }
+}
+
+.tile-1 {
+  width: 140px;
+  height: 140px;
+  border-radius:24px 24px 0px 24px;
+  animation-delay:0.15s;
+}
+.tile-2 {
+  width: 150px;
+  height: 150px;
+  border-radius:24px 24px 24px 0px;
+  animation-delay:0.2s;
+}
+.tile-3 {
+  width: 150px;
+  height: 150px;
+  border-radius:24px 0px 24px 24px;
+  animation-delay:0.18s;
+}
+.tile-4 {
+  width: 140px;
+  height: 140px;
+  border-radius:0px 24px 24px 24px;
+  animation-delay: 0.1s;
+}
+
+
+@keyframes tile-grow {
+  0%   {transform: scale(0.0)}
+ 80%  {transform: scale(1.02, 1.05);}
+ 100%  {transform: scale(1)}
+}

@@ -5,7 +5,8 @@ export default class extends Controller {
     // hidden form inputs
     "hiddenform", "meetname", "startlat", "startlong", "friendlat", "friendlong",
     // visible inputs
-    "userlocation", "friendlocation", "locateicon", "cleartext", "suggestionscontainer", "friendsuggestionscontainer", "suggestedaddress", "friendsuggestedaddress"
+    "userlocation", "friendlocation", "locateicon", "cleartext", "suggestionscontainer", "friendsuggestionscontainer", "suggestedaddress", "friendsuggestedaddress",
+    "actiontext"
   ]
 
   connect() {
@@ -443,10 +444,21 @@ export default class extends Controller {
     }
 
     this.submitHiddenForm();
+    // DON'T SUBMIT:  CHANGE THE CLASS
+
   }
 
+  // MOVE TO OTHER CONTROLLER
   submitHiddenForm() {
     this.hiddenformTarget.submit();
+    this.actiontextTarget.classList.remove('call-to-action');
+    this.actiontextTarget.classList.add("call-to-action-button", "btn", "btn-lg");
+    this.actiontextTarget.innerHTML = "Click to search";
+    const suggestionsContainer = this.friendsuggestionscontainerTarget;
+    while (suggestionsContainer.firstChild) {
+      suggestionsContainer.removeChild(suggestionsContainer.firstChild);
+    }
+
   }
 
   updateMap(lat, lng) {

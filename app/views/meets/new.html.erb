@@ -2,10 +2,28 @@
 
   <%= render "form" %>
 
-  <div class="d-flex flex-column justify-content-center align-items-center">
-    <h4><button class="button-28" role="button" data-action="click->profile#click"><strong><p style="font-size:22px"><span data-controller="typed-js"></strong></span></p></button></h4>
+  <div class="d-flex flex-row justify-content-center call-to-action-container">
+    <button class="call-to-action" data-action="click->profile#click" data-enter-locations-target="actiontext">
+      <span data-controller="typed-js"></span>
+    </button>
   </div>
 
- <%= render "init_map" %>
+  <%= render "init_map" %>
+
+  <div class="tiles-container">
+    <div class="tile-row tile-row-1">
+      <div class="tile tile-1">
+        <p>Top-rated restaurants</p>
+        <p class="m-0 p-0 btn btn-sm rounded-pill bg-light text-info"><%= icon('fa-solid', 'star') * 5 %></p>
+      </div>
+      <div class="tile tile-2" style='background-image: url(<%= asset_path(Business::RESTAURANT_PHOTOS.sample) %>)'></div>
+    </div>
+    <div class="tile-row tile-row-2">
+      <div class="tile tile-3"style='background-image: url(<%= asset_path(Business::BAR_PHOTOS.sample) %>)'>
+        <p>The best pubs & bars</p>
+      </div>
+      <div class="tile tile-4"></div>
+    </div>
+  </div>
 
 </div>

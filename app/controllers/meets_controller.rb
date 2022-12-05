@@ -10,21 +10,22 @@ class MeetsController < ApplicationController
   end
 
   def show
-    @start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
+    @user_start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
+    @friend_start = "#{@meet.friend_lat}, #{@meet.friend_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
     # TEMPORARY PARSED VARIABLE TO ALLOW BETTER FORMATTING, NEED TO ADD TABLE
 
-    @directions_parsed = @meet.directions.to_s.gsub('[', '').gsub(']','').split('"').reject {|item| item == ", "}
     if @meet.directions.nil?
-      @route = get_meet_navigation_steps(@start, @meet.business.street_address)
-      @meet.directions = create_directions(@route)
+      @route = get_navigation_steps(@user_start, @meet.business.street_address)
+      @meet.directions = text_to_array(create_directions(@route))
       @meet.duration = @route.duration.text
-      @meet.modes = get_icons(@route)
+      @meet.modes = text_to_array(get_icons(@route))
+      @meet.friend_directions = create_directions(get_navigation_steps(@friend_start, @meet.business.street_address))
       @meet.save
     end
-    @directions_to_share = @meet.directions
+
+    @directions_parsed = text_to_array(@meet.directions)
     @name = "Directions to #{@meet.business.name}"
-    @whatsapp_steps = "Le Wagon For Lyf 💞💞💞"
   end
 
   def new
@@ -128,8 +129,8 @@ class MeetsController < ApplicationController
     end
   end
 
-  def get_meet_navigation_steps(user_location, meetpoint)
-    Google::Maps.route(user_location, meetpoint)
+  def get_navigation_steps(start_point, meet_point)
+    Google::Maps.route(start_point, meet_point)
   end
 
   def create_directions(route)
@@ -150,9 +151,12 @@ class MeetsController < ApplicationController
   def get_icons(route)
     modes = []
     route.steps.each do |step|
-      # mode =
       modes << step.transit_details.line.vehicle.name unless step.transit_details.nil?
     end
     modes
+  end
+
+  def text_to_array(text)
+    text.to_s.gsub('[', '').gsub(']','').split('"').reject { |item| item == ", " || item == "" }
   end
 end
