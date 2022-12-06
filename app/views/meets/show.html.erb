@@ -4,14 +4,16 @@
   <div class="container">
     <div class="mt-2 px-2 py-3 card-directions">
       <h4 class="mb-3 fw-bold"><%= @name %></h4>
-      <%= render "meet_show_map" %>
-      <div class="d-flex flex-row justify-content-between align-items-center mt-1 p-1">
-        <div>
-          <% @meet.modes.each do |mode| %>
-            <%= image_tag "#{mode.downcase}.png" unless mode.size == 0 %>
-          <% end %>
+      <div class="map-container-meet-show">
+        <%= render "meet_show_map" %>
+        <div class="d-flex flex-row justify-content-between align-items-baseline mt-1 p-1">
+          <div>
+            <% @meet.modes.each do |mode| %>
+              <%= image_tag "#{mode.downcase}.png", class: "travel-icon" unless mode.size == 0 %>
+            <% end %>
+          </div>
+          <p class="m-0 my-0 me-2 fs-5 fw-bold"><%= @meet.duration %></p>
         </div>
-        <p class="fw-bold btn btn-info rounded-pill py-0 disabled"><%= @meet.duration %></p>
       </div>
       <div class="d-flex flex-column justify-content-baseline mt-2">
         <div class="container directions-container p-1 rounded">
