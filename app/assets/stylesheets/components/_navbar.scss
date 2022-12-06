@@ -5,7 +5,7 @@
   font-family: "Righteous", "Helvetica", "sans-serif";
   font-weight: 400;
   font-size: 2.6rem;
-  color: $thames-blue;
+  color: #fff;
   background:
     linear-gradient(currentColor 0 0) 100% 100% /var(--p, 0%) 3px no-repeat,
     linear-gradient(currentColor 0 0) var(--d, -101%) 100% /50% 3px no-repeat;
@@ -21,7 +21,7 @@
   padding-left: 0;
   padding-right: 0.5rem;
   justify-content: flex-end;
-  background: #fff;
+  background: rgb(0, 0, 0);
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -34,16 +34,16 @@
 
 // change this
 .icon-nav:hover {
-  color: rgb(0, 0, 0) !important;
+  color: $light-gray !important;
 }
 .icon-login {
   font-size: 2.2rem;
-  color: $thames-blue !important;
+  color: #fff !important;
 }
 .icon-arrow {
   font-size: 2.4rem;
   max-width: 1rem;
-  color: $thames-blue !important;
+  color: #fff !important;
 }
 
 .btn-account {
