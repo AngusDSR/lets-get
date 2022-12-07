@@ -19,6 +19,7 @@
     border: solid 2px $blue;
     border-radius: 14px;
     color: #000;
+    font-weight: 600;
   }
   // once text is entered
   &:valid {
@@ -56,3 +57,5 @@ form {
   flex-direction: column;
   justify-content: center;
 }
+
+
