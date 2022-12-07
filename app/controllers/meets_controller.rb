@@ -10,12 +10,13 @@ class MeetsController < ApplicationController
   end
 
   def show
+    return (redirect_to meet_businesses_path(@meet)) if @meet.business.nil?
+
     @user_start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @friend_start = "#{@meet.friend_lat}, #{@meet.friend_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
-    # TEMPORARY PARSED VARIABLE TO ALLOW BETTER FORMATTING, NEED TO ADD TABLE
-
     if @meet.directions.nil?
+      # TEMPORARY PARSED VARIABLE TO ALLOW BETTER FORMATTING, NEED TO ADD TABLE
       @route = get_navigation_steps(@user_start, @meet.business.street_address)
       @meet.directions = text_to_array(create_directions(@route))
       @meet.duration = @route.duration.text
@@ -109,20 +110,20 @@ class MeetsController < ApplicationController
   def save_business_results(results)
     results.each do |bus|
       if Business.find_by(place_id: bus["place_id"]).nil?
-        @photos = bus["photos"][0]["photo_reference"] unless bus["photos"].nil?
-        @rating = bus["rating"].nil? ? 0 : bus["rating"]
-        Business.create(
-          name: bus["name"],
-          description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
-          category: bus["types"][0],
-          street_address: bus["vicinity"],
-          image_url: @photos,
-          # CONSIDER ONLY SHOWING HIGHLY RATED
-          rating: @rating,
-          latitude: bus["geometry"]["location"]["lat"],
-          longitude: bus["geometry"]["location"]["lng"],
-          place_id: bus["place_id"]
-        )
+        if bus["rating"].to_f >= 4.0
+          @photos = bus["photos"][0]["photo_reference"] unless bus["photos"].nil?
+          Business.create(
+            name: bus["name"],
+            description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
+            category: bus["types"][0],
+            street_address: bus["vicinity"],
+            image_url: @photos,
+            rating: bus["rating"],
+            latitude: bus["geometry"]["location"]["lat"],
+            longitude: bus["geometry"]["location"]["lng"],
+            place_id: bus["place_id"]
+          )
+        end
       else
         Business.update(place_id: bus["place_id"], current_search: true)
       end
