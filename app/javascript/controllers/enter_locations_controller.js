@@ -453,7 +453,7 @@ export default class extends Controller {
     this.hiddenformTarget.submit();
     this.actiontextTarget.classList.remove('call-to-action');
     this.actiontextTarget.classList.add("call-to-action-button", "btn", "btn-lg");
-    this.actiontextTarget.innerHTML = "Click to search";
+    this.actiontextTarget.innerHTML = "Click to Search";
     const suggestionsContainer = this.friendsuggestionscontainerTarget;
     while (suggestionsContainer.firstChild) {
       suggestionsContainer.removeChild(suggestionsContainer.firstChild);

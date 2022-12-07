@@ -28,15 +28,15 @@
   text-align: left;
   transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
   user-select: none;
-  text-decoration: none;
+  text-decoration:underline;
 }
 
 .call-to-action-button {
   padding: 5px 10px;
   background: #164cd1;
   border: none;
-  font-weight: bold;
-  border-radius: 40px;
+  font-weight: bolder;
+  border-radius: 20px;
   color: #fff;
   transition: 0.3s;
   &:hover {
