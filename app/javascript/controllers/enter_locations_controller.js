@@ -341,7 +341,6 @@ export default class extends Controller {
     });
   }
 
-  // should be applicable to both fields with one function
   clearInput() {
     console.log("clear field")
     this.userlocationTarget.value = null
@@ -360,12 +359,7 @@ export default class extends Controller {
   }
 
   userSuggestions(e){
-    // clear suggestions -> put into a function
-    const suggestionsContainer = this.suggestionscontainerTarget;
-    while (suggestionsContainer.firstChild) {
-      suggestionsContainer.removeChild(suggestionsContainer.firstChild);
-    }
-
+    this.clearSuggestions();
     const MAPBOX_API="pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2xhdmg0emczMDV2aTN4c2poN3h4Zmt4biJ9.cO_Bdy27d_tf2rhtLRFPFw"
     let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.userlocationTarget.value}.json?country=gb&limit=4&types=address%2Cpostcode%2Cneighborhood&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=${MAPBOX_API}`
     fetch(mapbox_call, {
@@ -381,37 +375,25 @@ export default class extends Controller {
         suggested_address.setAttribute("data-enter-locations-target", "suggestedaddress");
         suggested_address.setAttribute("data-coords", results.center);
         suggested_address.setAttribute("data-action", "click->enter-locations#selectUserAddress");
-        suggestionsContainer.append(suggested_address);
+        this.suggestionscontainerTarget.append(suggested_address);
       }
     });
   }
 
   selectUserAddress(e) {
-    // needs to be more stimulus - later
     const address =  this.suggestedaddressTarget.innerText;
     this.userlocationTarget.value = address
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
     this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
     this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
     this.updateMap(this.startlatTarget.value, this.startlongTarget.value );
-
-    // clear suggestions -> put into a function
-    const suggestionsContainer = document.querySelector(".results-container");
-    while (suggestionsContainer.firstChild) {
-      suggestionsContainer.removeChild(suggestionsContainer.firstChild);
-    }
+    this.activateButton();
   }
 
   friendSuggestions(e) {
-    // clear suggestions -> put into a function
-    const suggestionsContainer = this.friendsuggestionscontainerTarget;
-    while (suggestionsContainer.firstChild) {
-      suggestionsContainer.removeChild(suggestionsContainer.firstChild);
-    }
-
+    this.clearSuggestions();
     const MAPBOX_API="pk.eyJ1IjoiYW5ndXNkc3IiLCJhIjoiY2xhdmg0emczMDV2aTN4c2poN3h4Zmt4biJ9.cO_Bdy27d_tf2rhtLRFPFw"
     let mapbox_call = `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.friendlocationTarget.value}.json?country=gb&limit=4&proximity=ip&types=place%2Cpostcode%2Caddress&language=en&autocomplete=true&fuzzyMatch=true&routing=false&access_token=${MAPBOX_API}`
-
     fetch(mapbox_call, {
       method: "GET",
       headers: { "Accept": "application/json" }
@@ -425,7 +407,7 @@ export default class extends Controller {
         suggested_address.setAttribute("data-enter-locations-target", "friendsuggestedaddress");
         suggested_address.setAttribute("data-coords", results.center);
         suggested_address.setAttribute("data-action", "click->enter-locations#selectFriendAddress");
-        suggestionsContainer.append(suggested_address);
+        this.suggestionscontainerTarget.append(suggested_address);
       }
     });
   }
@@ -437,29 +419,31 @@ export default class extends Controller {
     this.friendlatTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[1];
     this.friendlongTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[0];
     this.updateMap(this.friendlatTarget.value, this.friendlongTarget.value);
-    // clear suggestions -> put into a function
-    const suggestionsContainer = this.friendsuggestionscontainerTarget;
-    while (suggestionsContainer.firstChild) {
-      suggestionsContainer.removeChild(suggestionsContainer.firstChild);
-    }
-
-    this.submitHiddenForm();
-    // DON'T SUBMIT:  CHANGE THE CLASS
-
+    this.activateButton();
   }
 
-  // MOVE TO OTHER CONTROLLER
-  submitHiddenForm() {
-    this.hiddenformTarget.submit();
-    this.actiontextTarget.classList.remove('call-to-action');
-    this.actiontextTarget.classList.add("call-to-action-button", "btn", "btn-lg");
-    this.actiontextTarget.innerHTML = "Click to search";
-    const suggestionsContainer = this.friendsuggestionscontainerTarget;
-    while (suggestionsContainer.firstChild) {
-      suggestionsContainer.removeChild(suggestionsContainer.firstChild);
+  clearSuggestions() {
+    let container = this.suggestionscontainerTarget
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
     }
-
   }
+
+  activateButton() {
+    this.clearSuggestions();
+    if (this.userlocationTarget.value.length > 0 && this.friendlocationTarget.value.length > 0) {
+      this.actiontextTarget.classList.remove('call-to-action');
+      this.actiontextTarget.classList.add("call-to-action-button", "btn", "btn-lg");
+      this.actiontextTarget.innerHTML = "Click to search";
+    } else {
+      return
+    }
+  }
+
+  submit() {
+    // Line 6 in meets/new view MUST include: data-action="click->enter-locations#submit"
+      this.hiddenformTarget.submit();
+    }
 
   updateMap(lat, lng) {
     const area = {
