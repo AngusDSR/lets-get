@@ -9,7 +9,7 @@
 
 <div class="container">
   <hr>
-  <h3 class="text-center text-dark">Enter your details</h3>
+  <h3 class="text-center text-light">Enter your details</h3>
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
     <div class="form-inputs">
       <%= f.input :email,
