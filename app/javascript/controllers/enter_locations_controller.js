@@ -441,7 +441,6 @@ export default class extends Controller {
   }
 
   submit() {
-    // Line 6 in meets/new view MUST include: data-action="click->enter-locations#submit"
       this.hiddenformTarget.submit();
     }
 
