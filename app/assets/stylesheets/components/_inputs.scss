@@ -36,7 +36,7 @@
 }
 .input-first {
   border-radius: 18px 18px 0 0;
-  border-bottom: 2.5px solid $blue;
+  border-bottom: 2.5px solid $dark-gray;
   &:focus {
     top: 8px;
   }
@@ -57,5 +57,3 @@ form {
   flex-direction: column;
   justify-content: center;
 }
-
-

@@ -1,11 +1,10 @@
-<div class="d-flex flex-column" data-controller="enter-locations">
+<div class="container" data-controller="enter-locations">
 
   <%= render "form" %>
 
   <div class="d-flex flex-row justify-content-center call-to-action-container">
-    <button class="call-to-action" data-action="click->enter-locations#submit" data-enter-locations-target="actiontext">
-      <span data-controller="typed-js"
-      <p style="color:white;"></span></p>
+    <button class="call-to-action d-flex align-items-baseline" data-action="click->enter-locations#submit" data-enter-locations-target="actiontext">
+      <p class="text-white"><span data-controller="typed-js"></span></p>
     </button>
   </div>
 
