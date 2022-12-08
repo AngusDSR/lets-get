@@ -33,14 +33,14 @@
 
 .call-to-action-button {
   padding: 5px 10px;
-  background: #164cd1;
+  background: $blue;
   border: none;
   font-weight: bolder;
   border-radius: 20px;
   color: #fff;
   transition: 0.3s;
   &:hover {
-    border: solid 2px #164cd1;
+    border: solid 2px $blue;
   }
 
 }

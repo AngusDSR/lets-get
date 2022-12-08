@@ -5,14 +5,13 @@
   align-items: center;
   color:#000;
   position: absolute;
-  top: 232px;
+  top: 208px;
   z-index: 1000;
   font-weight: 400;
-  // background: #ffffff6e;
+  background: #ffffff6e;
   border-radius: 18px;
   width: max-content;
-  background-color: rgb(255, 255, 255);
-  opacity: 0.88;
+  background-color: rgba(255, 255, 255, 0.733);
 }
 
 .suggested-address {
@@ -23,8 +22,9 @@
   font-size: 1rem;
   width: 345.83px;
   background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  opacity: 0.85;
-  // border: 1px solid $thames-blue
-  ;
+  color: #000;
+  &:hover {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
 }
