@@ -8,13 +8,21 @@
       <%= image_tag Business::PHOTO_ROUTE + @business.image_url + Business::SHOW_PARAMS, alt: @business.name, class: "mb-3 business-show-image" %>
       <div class="d-flex flex-row justify-content-between">
         <h2 class="mb-3 fw-bold"><%= @business.name %></h2>
-        <p class="category"><%= @business.category.gsub('_',' ').capitalize%></p>
+        <p class="category">
+          <% if @business.category == "meal_takeaway" %>
+            Casual dining
+          <% elsif @business.category == "gym" %>
+            Hotel
+          <% else %>
+            <%= @business.category.gsub('_',' ').capitalize %>
+          <% end %>
+        </p>
       </div>
       <p>
         <%= icon('fa-solid', 'star', class: "m-0") * @business.rating.divmod(1)[0].round(0.5) %>
         <%= icon('fa-solid', 'star-half', style: "margin-left:-4px;") * @business.rating.divmod(1)[1].round(0.5) %>
       </p>
-      <p><%= @business.description.gsub('_',' ') %>.</p>
+      <p><%= @business.description.gsub('_',' ') %></p>
       <%= render "hidden_show_form" %>
       <%= render "bus_show_map" %>
       <sup class="mt-4 text-center "><%= @business.street_address %></sup>
