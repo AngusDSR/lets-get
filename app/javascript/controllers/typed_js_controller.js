@@ -15,7 +15,7 @@ export default class extends Controller {
       backDelay: 1400,
       // fadeOutDelay: 1400,
       smartBackspace: true,
-      loop: true,
+      loop: false,
       // fadeOut: true,
       showCursor: false,
       fadeOutClass: 'typed-fade-out',
