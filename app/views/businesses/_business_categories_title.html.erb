@@ -5,6 +5,8 @@
         Casual dining
       <% elsif @businesses.first.category == "gym" %>
         Hotels
+      <% elsif @businesses.first.category == "liquor_store" %>
+        Delicatessens
       <% else %>
         <%= @businesses.first.category.capitalize.gsub('_', ' ') + "s" %>
       <% end %>

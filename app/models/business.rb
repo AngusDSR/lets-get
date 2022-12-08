@@ -4,7 +4,7 @@ class Business < ApplicationRecord
   INDEX_PARAMS = "&sensor=false&maxheight=100&maxwidth=100&key=#{ENV.fetch('GOOGLE_MAPS_API')}"
   SHOW_PARAMS = "&sensor=false&maxheight=300&maxwidth=300&key=#{ENV.fetch('GOOGLE_MAPS_API')}"
   BAR_PHOTOS = %w[prague.jpg bell.jpg travellerstavern.jpg blackfriar.jpg burdock.jpg found.jpg]
-  RESTAURANT_PHOTOS = %w[sketch.jpg samba.jpg dalloway.jpg amazonico.jpg bancone.jpg barbary.jpg flour.jpg padella.jpg]
+  RESTAURANT_PHOTOS = %w[sketch.jpg samba.jpg dalloway.jpg amazonico.jpg bancone.jpg barbary.jpg flour.jpg padella.jpg cheeze.jpg]
 
   geocoded_by :street_address
   after_validation :geocode, if: :will_save_change_to_street_address?
