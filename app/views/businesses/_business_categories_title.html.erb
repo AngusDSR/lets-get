@@ -1,9 +1,17 @@
 <div class="justify-content-center buttons-container-after m-2 ms-4 buttons-container-after">
   <% if params[:query].present? %>
-    <% @businesses.distinct.pluck(:category).each do |bus| %>
-      <h2 class="fw-bold text-start"><%= bus.capitalize.gsub('_', ' ') + "s" %></h3>
-    <% end %>
+    <h2 class="fs-1 pb-2">
+      <% if @businesses.first.category == "meal_takeaway" %>
+        Casual dining
+      <% elsif @businesses.first.category == "gym" %>
+        Hotels
+      <% elsif @businesses.first.category == "liquor_store" %>
+        Delicatessens
+      <% else %>
+        <%= @businesses.first.category.capitalize.gsub('_', ' ') + "s" %>
+      <% end %>
+    </h2>
   <% else %>
-    <h3 class="fs-1 pb-3">What kind of place?</h3>
+    <h2 class="fs-1 pb-2">What kind of place?</h2>
   <% end %>
 </div>

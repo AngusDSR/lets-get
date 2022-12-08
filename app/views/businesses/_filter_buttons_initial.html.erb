@@ -1,6 +1,32 @@
 <%# <div class="d-flex flex-column align-items-center buttons-container-initial m-2"> %>
 <div class="business-index-button-container">
- <% @businesses.distinct.pluck(:category).each do |category| %>
-      <%= button_to category.capitalize.gsub('_', ' ') + "s", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: "background-image: url(#{asset_path(Business::RESTAURANT_PHOTOS.sample)})" %>
+  <% @businesses.distinct.pluck(:category).each do |category| %>
+    <% case category %>
+    <% when "meal_takeaway" %>
+      <% image = "background-image: url(#{asset_path('meal_takeaway.jpg')})" %>
+    <% when "cafe" %>
+      <% image = "background-image: url(#{asset_path('cafe.jpg')})" %>
+    <% when "gym" %>
+      <% image = "background-image: url(#{asset_path('gym.jpg')})" %>
+    <% when "restaurant" %>
+      <% image = "background-image: url(#{asset_path('restaurant.jpg')})" %>
+    <% when "bar" %>
+      <% image = "background-image: url(#{asset_path('bar.jpg')})"%>
+    <% when "night_club" %>
+      <% image = "background-image: url(#{asset_path('night_club.jpg')})"%>
+    <% when "liquor_store" %>
+      <% image = "background-image: url(#{asset_path('liquor_store.jpg')})"%>
+    <% else %>
+      <% image = "background-image: url(#{asset_path('burdock.jpg')})"%>
+    <% end %>
+    <% if category == "meal_takeaway" %>
+      <%= button_to "Casual dining", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
+    <% elsif category == "gym" %>
+      <%= button_to "Hotels", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
+    <% elsif category == "liquor_store" %>
+      <%= button_to "Delis", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
+    <% else %>
+      <%= button_to category.capitalize.gsub('_', ' ') + "s", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
+    <% end %>
   <% end %>
 </div>

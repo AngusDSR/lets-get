@@ -4,14 +4,19 @@ class BusinessesController < ApplicationController
 
   def index
     if params[:query].present?
-      @businesses = Business.where(category: params[:query])
+      @businesses = Business.where(category: params[:query]).where(current_search: true)
     else
-      @businesses = Business.all
+      @businesses = Business.all.where(current_search: true)
     end
   end
 
   def show
     @business = Business.find(params[:id])
+    description = get_business_description(@business.place_id).first[1]["overview"]
+    unless description.nil? || description == "{}"
+       @business.update(description: description)
+    end
+    # raise
   end
 
   def create
@@ -40,5 +45,15 @@ class BusinessesController < ApplicationController
 
   def business_params
     params.require(:business).permit(:name, :description, :category, :street_address, :image_url)
+  end
+
+  def get_business_description(place_id)
+    url = URI("https://maps.googleapis.com/maps/api/place/details/json?key=#{ENV.fetch('GOOGLE_MAPS_API')}&place_id=#{place_id}&fields=editorial_summary")
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+    request = Net::HTTP::Get.new(url)
+    response = https.request(request)
+    response.read_body
+    JSON.parse(response.read_body)["result"]
   end
 end
