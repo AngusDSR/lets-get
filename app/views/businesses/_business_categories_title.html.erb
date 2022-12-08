@@ -1,7 +1,11 @@
 <div class="justify-content-center buttons-container-after m-2 ms-4 buttons-container-after">
   <% if params[:query].present? %>
-    <% @businesses.distinct.pluck(:category).each do |bus| %>
-      <h2 class="fw-bold text-start"><%= bus.capitalize.gsub('_', ' ') + "s" %></h3>
+    <% @businesses.distinct.pluck(:category).each do |category| %>
+      <% if category = "meal_takeaway" %>
+        <h2 class="fw-bold text-start">Casual dining</h3>
+      <% else %>
+      <h2 class="fw-bold text-start"><%= category.capitalize.gsub('_', ' ') + "s" %></h3>
+      <% end %>
     <% end %>
   <% else %>
     <h3 class="fs-1 pb-3">What kind of place?</h3>
