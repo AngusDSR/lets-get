@@ -3,8 +3,10 @@
 .map-container-init {
   margin-top: 5%;
   .map-init {
-    height: 55vh;
+    height: 0;
+    border-radius: 30px;
     overflow: inherit;
+    transition: 1s;
   }
 }
 

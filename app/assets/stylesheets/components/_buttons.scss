@@ -12,23 +12,23 @@
   background-color: #fff0;
 }
 
-.call-to-action-container {
-  min-height: 3rem;
-}
-
 .call-to-action {
   width: 100%;
+  height: fit-content;
   display: flex;
+  box-sizing: border-box;
   align-items: center;
   background-color: transparent;
   border: none;
-  box-sizing: border-box;
   font-size: 1.8rem;
   font-weight: 600;
   text-align: left;
   transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
   user-select: none;
-  text-decoration:underline;
+  text-decoration: none;
+  & > p {
+    min-height: 3rem;
+  }
 }
 
 .call-to-action-button {

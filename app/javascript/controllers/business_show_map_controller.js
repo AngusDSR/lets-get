@@ -5,10 +5,8 @@ export default class extends Controller {
   static targets = ["busshowmap", "business"]
 
   connect() {
-    console.log('connected to business-show-map controller')
-    console.log(JSON.parse(this.businessTarget.dataset.coords))
 
-
+    // console.log('connected to business-show-map controller')
 
     let map = new google.maps.Map(document.getElementById("map"), {
       zoom: 16,
