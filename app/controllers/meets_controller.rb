@@ -10,7 +10,7 @@ class MeetsController < ApplicationController
   end
 
   def show
-    return (redirect_to meet_businesses_path(@meet)) if @meet.business.nil?
+    # return (redirect_to meet_businesses_path(@meet)) if @meet.business.nil?
 
     @user_start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @friend_start = "#{@meet.friend_lat}, #{@meet.friend_long}"
