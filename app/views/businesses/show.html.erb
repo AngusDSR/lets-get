@@ -7,12 +7,14 @@
     >
       <%= image_tag Business::PHOTO_ROUTE + @business.image_url + Business::SHOW_PARAMS, alt: @business.name, class: "mb-3 business-show-image" %>
       <div class="d-flex flex-row justify-content-between">
-        <h2 class="mb-3 fw-bold"><%= @business.name %></h2>
+        <h2 class="mb-3 pe-2 fw-bold"><%= @business.name %></h2>
         <p class="category">
           <% if @business.category == "meal_takeaway" %>
             Casual dining
           <% elsif @business.category == "gym" %>
             Hotel
+          <% elsif @business.category == "liquor_store" %>
+            Deli
           <% else %>
             <%= @business.category.gsub('_',' ').capitalize %>
           <% end %>
@@ -21,6 +23,7 @@
       <p>
         <%= icon('fa-solid', 'star', class: "m-0") * @business.rating.divmod(1)[0].round(0.5) %>
         <%= icon('fa-solid', 'star-half', style: "margin-left:-4px;") * @business.rating.divmod(1)[1].round(0.5) %>
+        <%= @business.rating %>
       </p>
       <p><%= @business.description.gsub('_',' ') %></p>
       <%= render "hidden_show_form" %>

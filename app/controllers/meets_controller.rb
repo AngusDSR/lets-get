@@ -55,7 +55,7 @@ class MeetsController < ApplicationController
       redirect_to meet_businesses_path(@meet)
     else
       render :new, status: :unprocessable_entity
-      # as a pop up rather than simple form info
+      # Should be an alert rather than simple form info
     end
   end
 
@@ -114,7 +114,7 @@ class MeetsController < ApplicationController
           @photos = bus["photos"][0]["photo_reference"] unless bus["photos"].nil?
           Business.create(
             name: bus["name"],
-            description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
+            description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}.",
             category: bus["types"][0],
             street_address: bus["vicinity"],
             image_url: @photos,
