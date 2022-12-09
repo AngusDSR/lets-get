@@ -1,3 +1,7 @@
+.btn-font {
+  font-family: $body-font;
+}
+
 .buttons-container-initial {
   .button_to {
     display: flex;
@@ -73,8 +77,8 @@
     }
 }
 
-.btn-whatsapp {
+.btn-go {
   &:hover {
-    color: #25d366;
+    color: $green;
   }
 }

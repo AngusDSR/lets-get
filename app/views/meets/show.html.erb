@@ -23,10 +23,9 @@
           <% end %>
         </div>
       </div>
-      <%= @meet.friend_directions %>
       <div class="d-flex flex-column align-items-center">
-        <%= link_to "whatsapp://send?text=#{@meet.friend_directions}", class: "btn-whatsapp btn btn-lg bg-black text-center fs-5 m-3" do %>
-          <p class="d-inline me-1 px-1">Share friend's directions</p>
+        <%= link_to "whatsapp://send?text=#{@whatsapp_directions}", class: "btn-go btn btn-lg bg-black text-center m-3" do %>
+          <p class="d-inline me-1 px-1 fw-bold btn-font">Share friend's directions</p>
           <%= icon('fa-brands', 'whatsapp', class:"icon-whastsapp") %>
         <% end %>
       </div>
