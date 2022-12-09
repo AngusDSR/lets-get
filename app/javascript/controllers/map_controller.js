@@ -10,7 +10,7 @@ export default class extends Controller {
     // console.log('connected to map stimulus controller')
 
     let map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 14,
+      zoom: 15,
       center: this.centerValue,
       disableDefaultUI: true,
       // add this as an environment

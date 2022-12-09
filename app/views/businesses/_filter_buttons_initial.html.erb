@@ -16,6 +16,8 @@
       <% image = "background-image: url(#{asset_path('night_club.jpg')})"%>
     <% when "liquor_store" %>
       <% image = "background-image: url(#{asset_path('liquor_store.jpg')})"%>
+    <% when "convenience_store" %>
+      <% image = "background-image: url(#{asset_path('convenience_store.jpg')})"%>
     <% else %>
       <% image = "background-image: url(#{asset_path('burdock.jpg')})"%>
     <% end %>
@@ -25,6 +27,8 @@
       <%= button_to "Hotels", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
     <% elsif category == "liquor_store" %>
       <%= button_to "Delis", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
+    <% elsif category == "convenience_store" %>
+      <%= button_to "Tap rooms", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
     <% else %>
       <%= button_to category.capitalize.gsub('_', ' ') + "s", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
     <% end %>

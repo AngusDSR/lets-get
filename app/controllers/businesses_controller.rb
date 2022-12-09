@@ -12,11 +12,10 @@ class BusinessesController < ApplicationController
 
   def show
     @business = Business.find(params[:id])
-    description = get_business_description(@business.place_id).first[1]["overview"]
-    unless description.nil? || description == "{}"
-       @business.update(description: description)
-    end
-    # raise
+    description = get_business_description(@business.place_id)
+    return if description.nil? || description.empty?
+
+    @business.update(description: description.first[1]["overview"])
   end
 
   def create

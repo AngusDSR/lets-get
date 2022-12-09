@@ -10,13 +10,11 @@ class MeetsController < ApplicationController
   end
 
   def show
-    # return (redirect_to meet_businesses_path(@meet)) if @meet.business.nil?
-
+    return (redirect_to meet_businesses_path(@meet)) if @meet.business.nil?
     @user_start = "#{@meet.start_point_lat}, #{@meet.start_point_long}"
     @friend_start = "#{@meet.friend_lat}, #{@meet.friend_long}"
     @meetup = "#{@meet.midpoint_lat}, #{@meet.midpoint_long}"
     if @meet.directions.nil?
-      # TEMPORARY PARSED VARIABLE TO ALLOW BETTER FORMATTING, NEED TO ADD TABLE
       @route = get_navigation_steps(@user_start, @meet.business.street_address)
       @meet.directions = text_to_array(create_directions(@route))
       @meet.duration = @route.duration.text
@@ -27,6 +25,7 @@ class MeetsController < ApplicationController
 
     @directions_parsed = text_to_array(@meet.directions)
     @name = "Directions to #{@meet.business.name}"
+    @whatsapp_directions = "#{@name}%0a#{@meet.friend_directions.join('%0a ▬ ')}"
   end
 
   def new
@@ -55,7 +54,7 @@ class MeetsController < ApplicationController
       redirect_to meet_businesses_path(@meet)
     else
       render :new, status: :unprocessable_entity
-      # as a pop up rather than simple form info
+      # Should be an alert rather than simple form info
     end
   end
 
@@ -114,7 +113,7 @@ class MeetsController < ApplicationController
           @photos = bus["photos"][0]["photo_reference"] unless bus["photos"].nil?
           Business.create(
             name: bus["name"],
-            description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}",
+            description: "#{bus['name']} is a #{Faker::Adjective.positive} #{bus['types'][0]} in #{bus['vicinity'].gsub(/[^,]*$/).first.strip}.",
             category: bus["types"][0],
             street_address: bus["vicinity"],
             image_url: @photos,
@@ -135,7 +134,6 @@ class MeetsController < ApplicationController
   end
 
   def create_directions(route)
-    # consider using .in_groups_of(2).to_h to show icons on each step
     directions = []
     route.steps.each do |step|
       # directions << step.travel_mode # to be used for icons

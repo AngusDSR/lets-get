@@ -8,9 +8,8 @@
   border-radius: 5px;
 
   .business-card-titles  {
-    font-weight: 700;
     line-height: 1.5rem;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -22,7 +21,7 @@
 .category {
   width: auto;
   padding: 0 8px;
-  align-self: end;
+  align-self: baseline;
   border-radius: 8px;
   background-color: #000;
   font-size: 1.1rem;

@@ -7,6 +7,8 @@
         Hotels
       <% elsif @businesses.first.category == "liquor_store" %>
         Delicatessens
+      <% elsif @businesses.first.category == "convenience_store" %>
+        Tap rooms
       <% else %>
         <%= @businesses.first.category.capitalize.gsub('_', ' ') + "s" %>
       <% end %>

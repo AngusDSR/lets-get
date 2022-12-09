@@ -2,6 +2,8 @@
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
+  position: relative;
+  bottom: 30px;
   align-items: center;
 }
 .tile-row {
@@ -16,6 +18,7 @@
 .tile-row-1 {
   align-items: flex-end;
   padding-left: 1rem;
+  transform: 1s;
 }
 
 .tile-row-2 {
