@@ -2,9 +2,9 @@
 
   <%= render "form" %>
 
-  <div class="d-flex flex-row justify-content-center call-to-action-container">
+  <div class="d-flex flex-row justify-content-center">
     <button class="call-to-action d-flex align-items-baseline" data-action="click->enter-locations#submit" data-enter-locations-target="actiontext">
-      <p class="text-white"><span data-controller="typed-js"></span></p>
+      <p class="text-typed text-white"><span data-controller="typed-js"></span></p>
     </button>
   </div>
 
@@ -13,17 +13,18 @@
   <div class="tiles-container" data-enter-locations-target="tiles">
     <div class="tile-row tile-row-1">
       <div class="tile tile-1">
-        <p>Top-rated restaurants</p>
-        <p class="m-0 p-0 btn btn-sm rounded-pill bg-light text-info"><%= icon('fa-solid', 'star') * 5 %></p>
+        <p class="fs-5">Top-rated restaurants</p>
       </div>
       <div class="tile tile-2" style='background-image: url(<%= asset_path(Business::RESTAURANT_PHOTOS.sample) %>)'></div>
     </div>
     <div class="tile-row tile-row-2">
       <div class="tile tile-3"style='background-image: url(<%= asset_path(Business::BAR_PHOTOS.sample) %>)'>
-        <p>The best pubs & bars</p>
       </div>
-      <div class="tile tile-4"></div>
+      <div class="tile tile-4">
+        <p class="fs-5">The best pubs & bars</p>
+      </div>
     </div>
+      <p class="mt-1">Always at the <i class="fs-4"><u>easiest</u></i> place to meet.</p>
   </div>
 
 </div>

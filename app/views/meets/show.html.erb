@@ -17,13 +17,13 @@
       </div>
       <div class="d-flex flex-column justify-content-baseline mt-2">
         <div class="container directions-container p-1 rounded">
-        <%# TEMPORARY PARSED VARIABLE TO ALLOW BETTER FORMATTING, NEED TO ADD TABLE %>
           <% @directions_parsed.each do |step| %>
             <p class="m-1"><%= step %></p>
             <hr class="m-0 mx-1 bg-dark">
           <% end %>
         </div>
       </div>
+      <%= @meet.friend_directions %>
       <div class="d-flex flex-column align-items-center">
         <%= link_to "whatsapp://send?text=#{@meet.friend_directions}", class: "btn-whatsapp btn btn-lg bg-black text-center fs-5 m-3" do %>
           <p class="d-inline me-1 px-1">Share friend's directions</p>
