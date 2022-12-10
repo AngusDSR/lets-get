@@ -1,5 +1,6 @@
 <%# <div class="d-flex flex-column align-items-center buttons-container-initial m-2"> %>
-<div class="business-index-button-container">
+
+<div class="business-index-button-container <%= "button-business-index" if @businesses.distinct.pluck(:category).count == 1  %>">
   <% @businesses.distinct.pluck(:category).each do |category| %>
     <% case category %>
     <% when "meal_takeaway" %>
