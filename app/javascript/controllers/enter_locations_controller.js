@@ -6,8 +6,8 @@ export default class extends Controller {
     "hiddenform", "meetname", "startlat", "startlong", "friendlat", "friendlong",
     // visible inputs
     "userlocation", "friendlocation", "locateicon", "cleartext", "suggestionscontainer", "friendsuggestionscontainer", "suggestedaddress", "friendsuggestedaddress",
-    // text, map, tiles
-    "actiontext", "tiles", "map"
+    // text, map, tiles, loader
+    "actiontext", "tiles", "map", "loader"
   ]
 
   connect() {
@@ -61,7 +61,7 @@ export default class extends Controller {
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
     this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
     this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
-    this.updateMap(14, {lat: this.startlatTarget.value, lng: this.startlongTarget.value} );
+    this.updateMap(13, {lat: this.startlatTarget.value, lng: this.startlongTarget.value} );
     this.activateButton();
   }
 
@@ -94,7 +94,7 @@ export default class extends Controller {
     this.friendlatTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[1];
     this.friendlongTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[0];
     this.updateMap(
-      11,
+      15,
       {lat: this.startlatTarget.value, lng: this.startlongTarget.value},
       {lat: this.friendlatTarget.value, lng: this.friendlongTarget.value}
     );
@@ -121,6 +121,7 @@ export default class extends Controller {
 
   submit() {
       this.hiddenformTarget.submit();
+      this.loaderTarget.style = "display:flex";
     }
 
   updateMap(zoom, user, friend) {
@@ -437,6 +438,25 @@ export default class extends Controller {
 
   removeTiles() {
     this.tilesTarget.style.display = "none";
+  }
+
+  calculateDistance(lat1,lat2, lon1, lon2)
+  {
+  lon1 =  lon1 * Math.PI / 180;
+  lon2 = lon2 * Math.PI / 180;
+  lat1 = lat1 * Math.PI / 180;
+  lat2 = lat2 * Math.PI / 180;
+
+  // Haversine formula
+  let dlon = lon2 - lon1;
+  let dlat = lat2 - lat1;
+  let a = Math.pow(Math.sin(dlat / 2), 2)
+  + Math.cos(lat1) * Math.cos(lat2)
+  * Math.pow(Math.sin(dlon / 2),2);
+  let c = 2 * Math.asin(Math.sqrt(a));
+  let r = 6371;
+
+  return(c * r);
   }
 
 }
