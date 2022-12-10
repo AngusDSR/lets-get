@@ -1,10 +1,6 @@
 <div data-controller="map"
   data-map-center-value="<%= { lat: @meet.midpoint_lat, lng: @meet.midpoint_long }.to_json %>"
 >
-  <%# if @businesses.size == 0 %>
-  <%# TO BE CREATED %>
-    <%# render partial: "NO RESULTS, SOZ" %>
-  <%# end %>
   <% if params[:query].present? %>
     <%= render partial: "business_categories_title" %>
     <%= render "index_map" %>
