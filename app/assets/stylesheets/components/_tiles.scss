@@ -36,6 +36,7 @@
   p {
     margin: 1rem;
     font-size: 1.2rem;
+    font-weight: bold;
     color: #fff;
   }
   &:hover {
@@ -69,6 +70,10 @@
   height: 140px;
   border-radius:0px 24px 24px 24px;
   animation-delay: 0.1s;
+  background-color: #F08522;
+  & > p {
+    color: #000;
+  }
 }
 
 

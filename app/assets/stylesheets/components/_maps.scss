@@ -29,11 +29,12 @@
 // MEET SHOW
 .map-container-meet-show {
   border-radius: 10px;
-  border: solid lightgray 2px;
+  border: solid #b1b1b1 2px;
   background-color: #d3d3d39c;
 }
 .map-meet-show {
   height: 24vh;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
   margin-bottom: 4px;
+  border-bottom: 2px #1d2c4d solid;
 }

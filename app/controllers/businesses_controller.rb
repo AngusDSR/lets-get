@@ -4,9 +4,9 @@ class BusinessesController < ApplicationController
 
   def index
     if params[:query].present?
-      @businesses = Business.where(category: params[:query]).where(current_search: true)
+      @businesses = Business.where(category: params[:query]).where(current_search: true).order(rating: :desc)
     else
-      @businesses = Business.all.where(current_search: true)
+      @businesses = Business.where(current_search: true)
     end
   end
 
