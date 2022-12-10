@@ -11,7 +11,8 @@
               <%= image_tag Business::PHOTO_ROUTE + business.image_url + Business::INDEX_PARAMS, alt: business.name, class: "business-images" %>
             <% end %>
             <div class="ms-2 d-flex flex-column">
-              <h6 class="business-card-titles m-1 pt-2"><%= business.name %></h6>
+              <h6 class=" m-1 pt-2 <%= "business-card-titles" unless business.name.size > 16 %>">
+                <%= business.name %></h6>
               <div class="d-flex d-row ms-1">
               <p><%= icon('fa-solid', 'star') * business.rating.divmod(1)[0].round(0.5) %></p>
               <p><%= icon('fa-solid', 'star-half') * business.rating.divmod(1)[1].round(0.5) %></p>
