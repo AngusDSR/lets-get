@@ -1,0 +1,32 @@
+div.loader-container {
+  display: none;
+  width: 110vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: -4px;
+  // display: flex;
+  flex-direction: column;
+  align-content: space-around !important;
+  justify-content: center;
+  align-items: center !important;
+  background-color: #40353557;
+  z-index: 100;
+  transition: 1s;
+}
+
+div.loader {
+  width: 120px;
+  height: 120px;
+  border: 16px solid #000000;
+  border-top: 16px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 1px 4px #000;
+  animation: spin 2s linear infinite;
+  z-index: 100;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

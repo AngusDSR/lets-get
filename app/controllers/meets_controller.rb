@@ -49,8 +49,6 @@ class MeetsController < ApplicationController
         @meet.midpoint_long
       )
       save_business_results(@businesses)
-      sleep(1)
-
       redirect_to meet_businesses_path(@meet)
     else
       render :new, status: :unprocessable_entity
