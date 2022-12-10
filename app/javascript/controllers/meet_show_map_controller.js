@@ -265,7 +265,7 @@ export default class extends Controller {
       ]
     });
 
-    const image = "http://maps.google.com/mapfiles/kml/shapes/star.png";
+    const image = "http://maps.google.com/mapfiles/kml/shapes/donut.png";
       const marker = new google.maps.Marker({
         position: this.businessValue,
         map: map,
