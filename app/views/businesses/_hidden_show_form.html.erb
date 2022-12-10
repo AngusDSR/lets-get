@@ -1,6 +1,6 @@
 <%= simple_form_for @meet, data: { turbo:false }, defaults: { wrapper_html: { class: 'd-none m-0 p-0' } } do |f| %>
   <%= f.input :business_id, input_html: { value: @business.id } %>
-  <%= f.button :button, class: "btn-go btn btn-lg bg-black text-center m-3" do %>
+  <%= f.button :button, class: "btn-go btn btn-lg bg-black text-center mt-3" do %>
     <p class="d-inline me-1 px-1 fw-bold btn-font">Go here</p>
     <%= icon('fa-solid', 'location-arrow') %>
   <% end %>
