@@ -94,7 +94,7 @@ export default class extends Controller {
     this.friendlatTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[1];
     this.friendlongTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[0];
     this.updateMap(
-      15,
+      13,
       {lat: this.startlatTarget.value, lng: this.startlongTarget.value},
       {lat: this.friendlatTarget.value, lng: this.friendlongTarget.value}
     );
