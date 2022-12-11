@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="enter-locations"
 export default class extends Controller {
+  // CHANGE TO camelCase
   static targets = [
     // hidden form inputs
     "hiddenform", "meetname", "startlat", "startlong", "friendlat", "friendlong",
@@ -58,7 +59,7 @@ export default class extends Controller {
   }
 
   selectUserAddress(e) {
-    const address =  this.suggestedaddressTarget.innerText;
+    const address = e.target.innerText;
     this.userlocationTarget.value = address
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
     this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
@@ -66,8 +67,6 @@ export default class extends Controller {
     this.updateMap(17, {lat: this.startlatTarget.value, lng: this.startlongTarget.value} );
     this.activateButton();
     this.friendlocationTarget.focus();
-    console.log(this.userlocationTargets);
-    // console.log(this.userlocationTarget.value);
   }
 
   friendSuggestions(e) {
@@ -93,7 +92,7 @@ export default class extends Controller {
   }
 
   selectFriendAddress(e) {
-    const address =  this.friendsuggestedaddressTarget.innerText;
+    const address = e.target.innerText;
     this.friendlocationTarget.value = address
     this.meetnameTarget.value += ` ▬ ${address.substring(0,address.search(',')).trim()}`;
     this.friendlatTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[1];
