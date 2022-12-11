@@ -6,8 +6,12 @@
     <%= render "index_map" %>
     <%= render partial: "businesses_list" %>
   <% else %>
+    <% if @businesses.size > 0 %>
     <%= render partial: "business_categories_title" %>
-    <%= render partial: "filter_buttons_initial" %>
+      <%= render partial: "filter_buttons_initial" %>
+    <% else %>
+      <%= render partial: "no_bussinesses" %>
+    <% end %>
   <% end %>
 
 </div>

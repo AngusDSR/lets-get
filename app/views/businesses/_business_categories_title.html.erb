@@ -1,6 +1,6 @@
 <div class="justify-content-center buttons-container-after m-2 ms-4 buttons-container-after">
   <% if params[:query].present? %>
-    <h2 class="fs-1 pb-2">
+    <h1 class="fs-1 pb-2">
       <% if @businesses.first.category == "meal_delivery" %>
         Casual dining
       <% elsif @businesses.first.category == "gym" %>
@@ -12,8 +12,8 @@
       <% else %>
         <%= @businesses.first.category.capitalize.gsub('_', ' ') + "s" %>
       <% end %>
-    </h2>
+    </h1>
   <% else %>
-    <h2 class="fs-1 pb-2">What kind of place?</h2>
+    <h1 class="fs-1 pb-2">What kind of place?</h1>
   <% end %>
 </div>

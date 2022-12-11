@@ -94,14 +94,18 @@ class MeetsController < ApplicationController
   end
 
   def indentify_midpoint(user_location, friend_location)
-    # Generate route
     route_steps = Google::Maps.route(user_location, friend_location).steps
-    # How many steps?
-    midpoint = route_steps[route_steps.size / 2]
+    route_steps.select! { |step| step.travel_mode == "TRANSIT" }
+    if route_steps.size == 1
+      midpoint = route_steps.first
+    else
+      midpoint = route_steps[route_steps.size / 2]
+    end
     [
       midpoint["end_location"]["lat"],
       midpoint["end_location"]["lng"]
     ]
+    # NEED TO TEST THIS AGAIN
   end
 
   def save_business_results(results)
