@@ -5,6 +5,8 @@
     <% case category %>
     <% when "meal_delivery" %>
       <% image = "background-image: url(#{asset_path('meal_delivery.jpg')})" %>
+    <% when "meal_takeaway" %>
+      <% image = "background-image: url(#{asset_path('mercato.jpg')})" %>
     <% when "cafe" %>
       <% image = "background-image: url(#{asset_path('cafe.jpg')})" %>
     <% when "gym" %>
@@ -24,6 +26,8 @@
     <% end %>
     <% if category == "meal_delivery" %>
       <%= button_to "Casual dining", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
+    <% elsif category == "meal_takeaway" %>
+      <%= button_to "Pop-ups", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
     <% elsif category == "gym" %>
       <%= button_to "Hotels", meet_businesses_path(params[:meet_id]), method: :get, params: { query: category }, class:"button-business-index", style: image %>
     <% elsif category == "liquor_store" %>

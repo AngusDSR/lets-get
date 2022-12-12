@@ -11,6 +11,8 @@
         <p class="category">
           <% if @business.category == "meal_delivery" %>
             Casual dining
+          <% if @business.category == "meal_takeaway" %>
+            Pop-ups
           <% elsif @business.category == "gym" %>
             Hotel
           <% elsif @business.category == "liquor_store" %>

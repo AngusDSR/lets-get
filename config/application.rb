@@ -25,7 +25,7 @@ module LetsGet
       config.default_params = {
         directions_service: {
           mode: 'transit',
-          transit_routing_preference: 'less_walking' # this can be changed by user 'less_walking' OR 'fewer_transfers'
+          transit_routing_preference: 'fewer_transfers' # 'less_walking' / 'fewer_transfers'
         }
       }
       config.default_language = :en

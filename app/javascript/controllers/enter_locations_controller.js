@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="enter-locations"
 export default class extends Controller {
+  // CHANGE TO camelCase
   static targets = [
     // hidden form inputs
     "hiddenform", "meetname", "startlat", "startlong", "friendlat", "friendlong",
@@ -11,13 +12,15 @@ export default class extends Controller {
   ]
 
   connect() {
-
     // console.log("enter-locations controller connected");
-
   }
-  // Not currently in use
+
+  removeTiles() {
+    this.tilesTarget.style.display = "none";
+  }
+
+  // Not  in use
   clearInput() {
-    // console.log("clear field")
     this.userlocationTarget.value = null
   }
 
@@ -56,13 +59,14 @@ export default class extends Controller {
   }
 
   selectUserAddress(e) {
-    const address =  this.suggestedaddressTarget.innerText;
+    const address = e.target.innerText;
     this.userlocationTarget.value = address
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
     this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
     this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
-    this.updateMap(13, {lat: this.startlatTarget.value, lng: this.startlongTarget.value} );
+    this.updateMap(17, {lat: this.startlatTarget.value, lng: this.startlongTarget.value} );
     this.activateButton();
+    this.friendlocationTarget.focus();
   }
 
   friendSuggestions(e) {
@@ -88,13 +92,13 @@ export default class extends Controller {
   }
 
   selectFriendAddress(e) {
-    const address =  this.friendsuggestedaddressTarget.innerText;
+    const address = e.target.innerText;
     this.friendlocationTarget.value = address
     this.meetnameTarget.value += ` ▬ ${address.substring(0,address.search(',')).trim()}`;
     this.friendlatTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[1];
     this.friendlongTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[0];
     this.updateMap(
-      13,
+      this.calculateZoom(),
       {lat: this.startlatTarget.value, lng: this.startlongTarget.value},
       {lat: this.friendlatTarget.value, lng: this.friendlongTarget.value}
     );
@@ -108,21 +112,51 @@ export default class extends Controller {
     }
   }
 
-  activateButton() {
-    this.clearSuggestions();
-    if (this.userlocationTarget.value.length > 0 && this.friendlocationTarget.value.length > 0) {
-      this.actiontextTarget.classList.remove('call-to-action');
-      this.actiontextTarget.classList.add("call-to-action-button", "btn", "btn-lg");
-      this.actiontextTarget.innerHTML = "Click to search";
-    } else {
-      return
+  calculateZoom() {
+    let lat1 = this.startlatTarget.value;
+    let lat2 = this.friendlatTarget.value;
+    let lon1 = this.startlongTarget.value;
+    let lon2 = this.friendlongTarget.value
+
+    lon1 =  lon1 * Math.PI / 180;
+    lon2 = lon2 * Math.PI / 180;
+    lat1 = lat1 * Math.PI / 180;
+    lat2 = lat2 * Math.PI / 180;
+    let dlon = lon2 - lon1;
+    let dlat = lat2 - lat1;
+    let a = Math.pow(Math.sin(dlat / 2), 2)
+    + Math.cos(lat1) * Math.cos(lat2)
+    * Math.pow(Math.sin(dlon / 2),2);
+    let c = 2 * Math.asin(Math.sqrt(a));
+    let r = 6371;
+    let distance = (c * r);
+    switch (true) {
+      case (distance <= 0.24):
+        return 17;
+      case (distance <= 0.5):
+        return 16;
+      case (distance <= 1):
+        return 15;
+      case (distance <= 2):
+        return 14;
+      case (distance <= 4):
+        return 13;
+      case (distance <= 7):
+        return 12;
+      case (distance <= 14.5):
+        return 11;
+      case (distance <= 30):
+        return 10;
+      case (distance <= 60):
+        return 9;
+      case (distance <= 150):
+        return 8;
+      case (distance <= 250):
+        return 7;
+      default:
+        return 6;
     }
   }
-
-  submit() {
-      this.hiddenformTarget.submit();
-      this.loaderTarget.style = "display:flex";
-    }
 
   updateMap(zoom, user, friend) {
     this.removeTiles();
@@ -436,27 +470,19 @@ export default class extends Controller {
     this.mapTarget.style.height = "55vh";
   }
 
-  removeTiles() {
-    this.tilesTarget.style.display = "none";
+  activateButton() {
+    this.clearSuggestions();
+    if (this.userlocationTarget.value.length > 0 && this.friendlocationTarget.value.length > 0) {
+      this.actiontextTarget.classList.remove('call-to-action');
+      this.actiontextTarget.classList.add("call-to-action-button", "btn", "btn-lg");
+      this.actiontextTarget.innerHTML = "Click to search";
+    } else {
+      return
+    }
   }
 
-  calculateDistance(lat1,lat2, lon1, lon2)
-  {
-  lon1 =  lon1 * Math.PI / 180;
-  lon2 = lon2 * Math.PI / 180;
-  lat1 = lat1 * Math.PI / 180;
-  lat2 = lat2 * Math.PI / 180;
-
-  // Haversine formula
-  let dlon = lon2 - lon1;
-  let dlat = lat2 - lat1;
-  let a = Math.pow(Math.sin(dlat / 2), 2)
-  + Math.cos(lat1) * Math.cos(lat2)
-  * Math.pow(Math.sin(dlon / 2),2);
-  let c = 2 * Math.asin(Math.sqrt(a));
-  let r = 6371;
-
-  return(c * r);
+  submit() {
+    this.hiddenformTarget.submit();
+    this.loaderTarget.style = "display:flex";
   }
-
 }
