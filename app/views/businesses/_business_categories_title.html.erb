@@ -3,6 +3,8 @@
     <h1 class="fs-1 pb-2">
       <% if @businesses.first.category == "meal_delivery" %>
         Casual dining
+      <% elsif @businesses.first.category == "meal_takeaway" %>
+        Pop-ups
       <% elsif @businesses.first.category == "gym" %>
         Hotels
       <% elsif @businesses.first.category == "liquor_store" %>

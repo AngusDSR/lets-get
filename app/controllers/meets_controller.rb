@@ -99,13 +99,12 @@ class MeetsController < ApplicationController
     if route_steps.size == 1
       midpoint = route_steps.first
     else
-      midpoint = route_steps[route_steps.size / 2]
+      midpoint = route_steps[(route_steps.size / 2) - 1]
     end
     [
       midpoint["end_location"]["lat"],
       midpoint["end_location"]["lng"]
     ]
-    # NEED TO TEST THIS AGAIN
   end
 
   def save_business_results(results)
