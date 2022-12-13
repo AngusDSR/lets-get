@@ -12,7 +12,7 @@ export default class extends Controller {
   ]
 
   connect() {
-    // console.log("enter-locations controller connected");
+    console.log("enter-locations controller connected");
   }
 
   removeTiles() {
@@ -62,8 +62,8 @@ export default class extends Controller {
     const address = e.target.innerText;
     this.userlocationTarget.value = address
     this.meetnameTarget.value = `${address.substring(0,address.search(',')).trim()} ▬ `;
-    this.startlatTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[1];
-    this.startlongTarget.value = this.suggestedaddressTarget.dataset.coords.split(',')[0];
+    this.startlatTarget.value = e.target.dataset.coords.split(',')[1];
+    this.startlongTarget.value = e.target.dataset.coords.split(',')[0];
     this.updateMap(17, {lat: this.startlatTarget.value, lng: this.startlongTarget.value} );
     this.activateButton();
     this.friendlocationTarget.focus();
@@ -95,8 +95,8 @@ export default class extends Controller {
     const address = e.target.innerText;
     this.friendlocationTarget.value = address
     this.meetnameTarget.value += ` ▬ ${address.substring(0,address.search(',')).trim()}`;
-    this.friendlatTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[1];
-    this.friendlongTarget.value = this.friendsuggestedaddressTarget.dataset.coords.split(',')[0];
+    this.friendlatTarget.value = e.target.dataset.coords.split(',')[1];
+    this.friendlongTarget.value = e.target.dataset.coords.split(',')[0];
     this.updateMap(
       this.calculateZoom(),
       {lat: this.startlatTarget.value, lng: this.startlongTarget.value},
