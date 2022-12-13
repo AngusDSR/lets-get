@@ -1,5 +1,4 @@
 <div data-controller="business-show-map">
-
   <div class="mt-2 container flex-column rounded">
     <div class="d-flex flex-column p-3 business-show-card"
       data-business-show-map-target="business"
@@ -11,7 +10,7 @@
         <p class="category">
           <% if @business.category == "meal_delivery" %>
             Casual dining
-          <% if @business.category == "meal_takeaway" %>
+          <% elsif @business.category == "meal_takeaway" %>
             Pop-ups
           <% elsif @business.category == "gym" %>
             Hotel
@@ -19,7 +18,7 @@
             Deli
           <% elsif @business.category == "convenience_store" %>
             Tap room
-          <% else %>
+          <% elsif %>
             <%= @business.category.gsub('_',' ').capitalize %>
           <% end %>
         </p>
