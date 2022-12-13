@@ -15,6 +15,7 @@ class BusinessesController < ApplicationController
     description = get_business_description(@business.place_id)
     return if description.nil? || description.empty?
     @business.update(description: description.first[1]["overview"])
+    Business.update_all(current_search: false)
   end
 
   def create

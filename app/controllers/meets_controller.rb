@@ -109,7 +109,9 @@ class MeetsController < ApplicationController
 
   def save_business_results(results)
     results.each do |bus|
-      if Business.find_by(place_id: bus["place_id"]).nil?
+      # TESTING
+      if Business.find_by(place_id: bus["place_id"]).nil? && Business.find_by(name: bus["name"]).nil?
+      # TESTING
         if bus["rating"].to_f >= 4.0
           @photos = bus["photos"][0]["photo_reference"] unless bus["photos"].nil?
           Business.create(
