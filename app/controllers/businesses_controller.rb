@@ -14,6 +14,7 @@ class BusinessesController < ApplicationController
     @business = Business.find(params[:id])
     description = get_business_description(@business.place_id)
     return if description.nil? || description.empty?
+
     @business.update(description: description.first[1]["overview"])
     Business.update_all(current_search: false)
   end
