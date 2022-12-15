@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: lets_get_production
-  username: lets_get
-  password: <%= ENV["LETS_GET_DATABASE_PASSWORD"] %>
+  database: d32avem9b9rugo
+  username: acgjndxkpnwbvq
+  password: 30c81d4e88be723b24e62391987dc3877d42061155d2ca3ccb4817531618666c
