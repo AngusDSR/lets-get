@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <% @businesses.where(current_search: true).each do |business|  %>
+      <% @businesses.each do |business|  %>
         <%= link_to meet_business_path(Meet.find(params[:meet_id]), business), class: "text-decoration-none text-white" do %>
           <div class="business-card"
             data-map-target="business"
