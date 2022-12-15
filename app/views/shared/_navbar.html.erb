@@ -2,7 +2,8 @@
   <div class="container-fluid container-nav">
     <% if controller_name == 'meets' && action_name == 'new' %>
       <span><%= link_to icon('fa-solid', 'arrow-left', class:"icon-nav opacity-0"), url_for(:back) %></span>
-    <% elsif controller_name == 'business' && action_name == 'show' %>
+    <% elsif controller_name == 'meet' && action_name == 'show' %>
+      <%# this one should be different: needs to go back to the meet/businesses %>
       <span><%= link_to icon('fa-solid', 'arrow-left', class:"icon-nav opacity-0"), url_for(:back) %></span>
     <% else %>
       <span><%= link_to icon('fa-solid', 'arrow-left', class:"icon-nav icon-arrow text-black"), url_for(:back) %></span>
