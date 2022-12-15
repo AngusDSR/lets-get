@@ -26,6 +26,7 @@ class MeetsController < ApplicationController
     @directions_parsed = text_to_array(@meet.directions)
     @name = "Directions to #{@meet.business.name}"
     @whatsapp_directions = "#{@name}%0a#{@meet.friend_directions.join('%0a ▬ ')}"
+    Business.update_all(current_search: false)
   end
 
   def new
